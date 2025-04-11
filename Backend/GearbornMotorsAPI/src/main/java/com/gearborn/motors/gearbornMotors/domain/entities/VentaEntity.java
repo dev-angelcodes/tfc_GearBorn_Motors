@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "empleados")
+@Table(name = "ventas")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,4 +32,6 @@ public class VentaEntity {
     private LocalDateTime garantia = LocalDateTime.now().plusYears(2); //2 año de garantia, por defecto
 
     //FK
+
+
 }
