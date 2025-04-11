@@ -1,0 +1,19 @@
+OK, me vas a ayudar a montar la app para el escritorio.
+Lo primero que vamos a hacer va a ser el proyecto para el api, y una vez que la tengamos implementaremos(en otro proyecto diferente) una app de JavaFx que hara referencia a la base de datos y al api del otro proyecto.
+Pero antes de esto vamos a definir la arquitectura y planificación del trabajo.
+Los requisitos técnicos y demás ok?
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+ARQUITECTURA Y PLANIFICACIÓN(LIBRETA%PDFS)
+
+Esquema de la arquitectura del software
+El flujo del esquema
+La división de responsabilidades 
+Un esquema E_R de la base de datos
+Los casos de uso.
+
+
+REQUISITOS TÉCNICOS
+Servicio para desplegar el api -> Railway 
