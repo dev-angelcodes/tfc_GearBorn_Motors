@@ -1,6 +1,6 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.ClienteDTO;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.domain.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
