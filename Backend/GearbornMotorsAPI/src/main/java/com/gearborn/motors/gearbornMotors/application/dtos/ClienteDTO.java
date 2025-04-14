@@ -1,13 +1,14 @@
 package com.gearborn.motors.gearbornMotors.application.dtos;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClienteDTO {
-
-    private String email;
+    private int id;
     private String nombre;
-
+    private String apellidos;
+    private String email;
 }
