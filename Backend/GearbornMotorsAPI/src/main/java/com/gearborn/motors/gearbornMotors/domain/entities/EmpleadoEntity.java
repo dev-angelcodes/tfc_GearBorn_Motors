@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "empleados")
@@ -42,4 +43,14 @@ public class EmpleadoEntity {
 
     @Column(name = "numero_telefono", nullable = false, length = 9)
     private int numeroTelefono;
+
+    //FK
+
+    //Un empleado -> muchos gastos (OneToMany)
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    private List<VentaEntity> ventas;
+
+    //Un empleado -> muchos gastos (OneToMany)
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    private List<GastoEntity> gastos;
 }

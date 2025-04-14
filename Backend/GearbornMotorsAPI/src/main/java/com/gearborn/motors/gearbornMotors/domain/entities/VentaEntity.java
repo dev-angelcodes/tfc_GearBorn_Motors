@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class VentaEntity {
 
     @Id
-    @Column(name = "id_vehiculo", nullable = false)
+    @Column(name = "id_venta", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -25,13 +25,23 @@ public class VentaEntity {
     @Column(nullable = false, columnDefinition = "DATETIME")
     private LocalDateTime fecha;
 
-    @Column(name = "compra_vehiculo", nullable = false)
-    private boolean venta;
-
     @Column(columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime garantia = LocalDateTime.now().plusYears(2); //2 año de garantia, por defecto
 
     //FK
 
+    //Muchas ventas -> un cliente (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente", nullable = false)
+    private ClienteEntity cliente;
 
+    //Muchas ventas -> Un empleado (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
+    private EmpleadoEntity empleado;
+
+    //Muchas ventas -> Un vehiculo (ManyToOne) -> El vehiculo puede revenderse
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo", referencedColumnName = "id_vehiculo", nullable = false)
+    private VehiculoEntity vehiculo;
 }

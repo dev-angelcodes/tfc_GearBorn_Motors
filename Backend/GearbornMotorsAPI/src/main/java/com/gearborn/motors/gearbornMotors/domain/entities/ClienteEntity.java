@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "clientes")
@@ -34,6 +35,11 @@ public class ClienteEntity {
     @Column(name = "fecha_nacimiento", columnDefinition = "DATETIME", nullable = false)
     private LocalDateTime fechaNacimiento;
 
-
     private String direccion;
+
+    //FK
+
+    //Un cliente -> muchas ventas (OneToMany)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<VentaEntity> ventas;
 }

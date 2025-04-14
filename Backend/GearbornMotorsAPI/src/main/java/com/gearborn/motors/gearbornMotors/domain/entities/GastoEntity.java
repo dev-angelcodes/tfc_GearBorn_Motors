@@ -32,4 +32,19 @@ public class GastoEntity {
     private String descripcion;
 
     //FK
+
+    //Muchos gastos -> un empleado (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor ", nullable = false)
+    private ProveedorEntity proveedor;
+
+    //Muchos gastos -> Un empleado (ManyToOne)
+    @ManyToOne
+    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado", nullable = false)
+    private EmpleadoEntity empleado;
+
+    //Muchos gastos -> Un vehiculo (ManyToOne) -> El vehiculo puede revenderse
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo", referencedColumnName = "id_vehiculo", nullable = false)
+    private VehiculoEntity vehiculo;
 }

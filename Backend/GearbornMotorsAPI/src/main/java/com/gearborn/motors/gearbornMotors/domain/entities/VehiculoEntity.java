@@ -3,6 +3,8 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "vehiculos")
@@ -47,6 +49,12 @@ public class VehiculoEntity {
     @Column(nullable = false, length = 7)
     private String color;
 
-    @Column(nullable = false, length = 7)
-    private String combustible;
+    //FK
+    //Un vehiculo -> muchas ventas (OneToMany)
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    private List<VentaEntity> ventas;
+
+    //Un vehiculo -> muchos gastos (OneToMany)
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
+    private List<GastoEntity> gastos;
 }

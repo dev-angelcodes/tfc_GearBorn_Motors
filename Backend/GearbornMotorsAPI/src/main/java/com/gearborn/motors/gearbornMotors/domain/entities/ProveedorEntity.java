@@ -3,6 +3,8 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "proveedores")
@@ -28,4 +30,9 @@ public class ProveedorEntity {
 
     @Column(name = "numero_telefono", nullable = false, length = 9)
     private int numTelefono;
+
+    //FK
+    //Un Proveedor -> muchos gastos (OneToMany)
+    @OneToMany(mappedBy = "proveedor", cascade = CascadeType.ALL)
+    private List<GastoEntity> gastos;
 }
