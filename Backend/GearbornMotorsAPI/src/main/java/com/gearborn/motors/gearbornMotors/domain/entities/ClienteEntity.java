@@ -3,7 +3,7 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -23,6 +23,9 @@ public class ClienteEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(name = "contrasenha",nullable = false)
+    private String contrasena;
+
     @Column(nullable = false, length = 75)
     private String nombre;
 
@@ -33,7 +36,7 @@ public class ClienteEntity {
     private int numTelefono;
 
     @Column(name = "fecha_nacimiento", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     private String direccion;
 

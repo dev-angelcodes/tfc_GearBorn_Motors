@@ -15,7 +15,10 @@ public class EmpleadoEntity {
     @Id
     @Column(name = "id_empleado", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idEmpleado;
+    private Integer id;
+
+    @Column(name = "contrasena",nullable = false)
+    private String contrasena;
 
     @Column(name = "dni", nullable = false, length = 9, unique = true)
     private String dni;
