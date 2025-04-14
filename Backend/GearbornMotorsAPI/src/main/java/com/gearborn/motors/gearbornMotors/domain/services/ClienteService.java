@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.ClienteDTO;
+import com.gearborn.motors.gearbornMotors.application.ClienteMapper;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +17,9 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    //Consulta para saber un cliente por su id, para saber si existe o no en la base de datos
+    /*Consulta para saber un cliente por su email.*/
     public Optional<ClienteDTO> getByEmail(String email) {
         return clienteRepository.findByEmail(email)
-                .map(cliente -> new ClienteDTO(cliente.getId(), cliente.getNombre(),
-                                                cliente.getApellidos(), cliente.getEmail()));
+                .map(ClienteMapper::toDto);
     }
 }
