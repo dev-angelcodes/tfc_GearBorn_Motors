@@ -16,7 +16,9 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    //Consulta para saber un cliente por su id, para saber si existe o no en la base de datos
+    /*Consulta para saber un cliente por su email, para saber si existe o no en la base de datos, en caso de que
+    si exista, se transforma a un DTO,y se devuelve(asi no le pasamos tds los datos al frontend, solo le pasamos
+    los datos que tiene el DTO*/
     public Optional<ClienteDTO> getByEmail(String email) {
         return clienteRepository.findByEmail(email)
                 .map(cliente -> new ClienteDTO(cliente.getId(), cliente.getNombre(),
