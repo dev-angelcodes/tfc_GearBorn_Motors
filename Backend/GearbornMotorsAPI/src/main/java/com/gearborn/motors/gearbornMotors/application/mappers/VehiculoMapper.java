@@ -18,6 +18,7 @@ public class VehiculoMapper {
         vehiculoDto.setTipoCombustible(vehiculo.getTipoCombustible());
         vehiculoDto.setTipoCambio(vehiculo.getTipoCambio());
         vehiculoDto.setColor(vehiculo.getColor());
+        vehiculoDto.setImg(vehiculo.getImg());
 
         return vehiculoDto;
     }
@@ -36,6 +37,7 @@ public class VehiculoMapper {
         vehiculoEntity.setTipoCombustible(vehiculo.getTipoCombustible());
         vehiculoEntity.setTipoCambio(vehiculo.getTipoCambio());
         vehiculoEntity.setColor(vehiculo.getColor());
+        vehiculoEntity.setImg(vehiculo.getImg());
 
         return vehiculoEntity;
     }

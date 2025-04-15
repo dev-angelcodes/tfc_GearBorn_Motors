@@ -20,4 +20,5 @@ public class VehiculoDto {
     private String tipoCombustible;
     private String tipoCambio;
     private String color;
+    private String img;
 }

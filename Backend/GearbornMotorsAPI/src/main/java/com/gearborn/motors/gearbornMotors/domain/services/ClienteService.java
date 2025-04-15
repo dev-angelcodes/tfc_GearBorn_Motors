@@ -30,7 +30,7 @@ public class ClienteService {
     public ClienteEntity save(GetClienteDTO dto){
 
         if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {  //Primero validamos que el Email no esta repetido
-            throw new RuntimeException("El email ya existe en la base de datos");
+            throw new RuntimeException("Ya existe un usuario registrado con ese email");
         }else
         { //Si el email no existe, guardamos el cliente
             return clienteRepository.save(ClienteMapper.toEntity(dto));
