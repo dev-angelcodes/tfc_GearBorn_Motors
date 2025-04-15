@@ -1,8 +1,8 @@
-package gearbornmotors.frontgearborn;
+package gearbornmotors.frontgearborn.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import gearbornmotors.frontgearborn.Dto.VehiculoDto;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 import java.io.BufferedReader;

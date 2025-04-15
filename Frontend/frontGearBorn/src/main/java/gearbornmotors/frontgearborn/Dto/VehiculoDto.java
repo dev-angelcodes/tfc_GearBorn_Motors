@@ -1,4 +1,4 @@
-package gearbornmotors.frontgearborn;
+package gearbornmotors.frontgearborn.Dto;
 
 public class VehiculoDto {
     private String matricula;

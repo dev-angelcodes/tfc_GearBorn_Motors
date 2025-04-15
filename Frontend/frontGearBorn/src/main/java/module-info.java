@@ -6,4 +6,8 @@ module gearbornmotors.frontgearborn {
 
     opens gearbornmotors.frontgearborn to javafx.fxml;
     exports gearbornmotors.frontgearborn;
+    exports gearbornmotors.frontgearborn.Dto;
+    opens gearbornmotors.frontgearborn.Dto to javafx.fxml;
+    exports gearbornmotors.frontgearborn.controller;
+    opens gearbornmotors.frontgearborn.controller to javafx.fxml;
 }
