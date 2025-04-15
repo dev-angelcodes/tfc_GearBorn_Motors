@@ -1,6 +1,6 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
-import com.gearborn.motors.gearbornMotors.application.ClienteMapper;
+import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

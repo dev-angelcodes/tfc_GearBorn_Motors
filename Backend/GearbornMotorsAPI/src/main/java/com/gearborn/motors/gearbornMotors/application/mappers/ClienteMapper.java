@@ -1,4 +1,4 @@
-package com.gearborn.motors.gearbornMotors.application;
+package com.gearborn.motors.gearbornMotors.application.mappers;
 
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;

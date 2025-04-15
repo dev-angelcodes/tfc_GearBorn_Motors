@@ -11,8 +11,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class VehiculoEntity {
     @Id
     @Column(name = "id_vehiculo", nullable = false)
@@ -57,4 +55,20 @@ public class VehiculoEntity {
     //Un vehiculo -> muchos gastos (OneToMany)
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
     private List<GastoEntity> gastos;
+
+
+    //CONSTRUCTOR SIN ID
+
+    public VehiculoEntity(String matricula, String tipo, String marca, String modelo, int anio, Double km, String estado, String tipoCombustible, String tipoCambio, String color) {
+        this.matricula = matricula;
+        this.tipo = tipo;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.km = km;
+        this.estado = estado;
+        this.tipoCombustible = tipoCombustible;
+        this.tipoCambio = tipoCambio;
+        this.color = color;
+    }
 }
