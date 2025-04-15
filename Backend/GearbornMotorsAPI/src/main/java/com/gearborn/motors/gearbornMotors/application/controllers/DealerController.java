@@ -3,9 +3,7 @@ package com.gearborn.motors.gearbornMotors.application.controllers;
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.domain.services.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
