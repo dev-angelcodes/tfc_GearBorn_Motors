@@ -47,6 +47,8 @@ public class VehiculoEntity {
     @Column(nullable = false, length = 7)
     private String color;
 
+    private String img;
+
     //FK
     //Un vehiculo -> muchas ventas (OneToMany)
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.ALL)
@@ -59,7 +61,7 @@ public class VehiculoEntity {
 
     //CONSTRUCTOR SIN ID
 
-    public VehiculoEntity(String matricula, String tipo, String marca, String modelo, int anio, Double km, String estado, String tipoCombustible, String tipoCambio, String color) {
+    public VehiculoEntity(String matricula, String tipo, String marca, String modelo, int anio, Double km, String estado, String tipoCombustible, String tipoCambio, String color, String img) {
         this.matricula = matricula;
         this.tipo = tipo;
         this.marca = marca;
@@ -70,5 +72,6 @@ public class VehiculoEntity {
         this.tipoCombustible = tipoCombustible;
         this.tipoCambio = tipoCambio;
         this.color = color;
+        this.img = img;
     }
 }
