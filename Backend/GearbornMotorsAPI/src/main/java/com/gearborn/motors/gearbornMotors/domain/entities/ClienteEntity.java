@@ -2,6 +2,7 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnTransformer;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,6 +25,7 @@ public class ClienteEntity {
     private String email;
 
     @Column(name = "contrasenha",nullable = false)
+    @ColumnTransformer(write = "MD5(?)")//Enciptamos la contraseña
     private String contrasena;
 
     @Column(nullable = false, length = 75)
