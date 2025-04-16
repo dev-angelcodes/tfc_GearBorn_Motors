@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.MenuController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.shape.Rectangle?>
+<VBox alignment="CENTER" spacing="70.0" xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@../css/login.css"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.LoginController">
 
-</AnchorPane>
+    <padding>
+        <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
+    </padding>
+
+    <Label text="Registro"/>
+
+    <HBox alignment="CENTER">
+        <StackPane maxWidth="400" maxHeight="300"
+                   AnchorPane.leftAnchor="200" AnchorPane.topAnchor="100">
+
+            <Rectangle width="400" height="275" styleClass="fondoLogeo"/>
+
+            <VBox alignment="CENTER" spacing="40"  maxWidth="380">
+                <Label text="GearBorn Motors" styleClass="label0"/>
+
+                <VBox spacing="20">
+                    <VBox spacing="10">
+                        <HBox spacing="5" alignment="CENTER">
+                            <Label text="👤Email ➤" styleClass="labelBlanco"/>
+                            <TextField fx:id="usuario" promptText="Introduzca el email"  styleClass="TextField"/>
+                        </HBox>
+
+                        <HBox spacing="5" alignment="CENTER">
+                            <Label text="🔒 Contraseña ➤" styleClass="labelBlanco"/>
+                            <PasswordField fx:id="contrasena" promptText="Contraseña" styleClass="PasswordField"/>
+                        </HBox>
+                    </VBox>
+                    <HBox alignment="CENTER">
+                        <Button text="Inicio de sesión ➤"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+        </StackPane>
+    </HBox>
+
+    <Pane VBox.vgrow="ALWAYS"/>
+    <VBox alignment="CENTER" spacing="25">
+        <Label text="¿Todavia no tienes cuenta?"/>
+        <Button text="Registrarse"/>
+    </VBox>
+</VBox>
