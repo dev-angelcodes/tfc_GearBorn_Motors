@@ -1,0 +1,49 @@
+.background {
+    -fx-background-image: url("../img/fondoLogin.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+
+.labelBlanco {
+    -fx-text-fill: #FFFFFF;
+}
+
+.labelInicioSes{
+    -fx-text-fill: #9d00ff;
+    -fx-font-size: 15px;
+}
+.labelRegistro {
+    -fx-text-fill: #00ffc7;
+    -fx-font-family: 'Rajdhani';
+    -fx-font-size: 50px;
+}
+
+.label0 {
+    -fx-font-family: 'Rajdhani';
+    -fx-font-size: 35px;
+    -fx-text-fill: #f0f0f0;
+}
+
+.fondoLogeo {
+    -fx-arc-width: 20;
+    -fx-arc-height: 20;
+    -fx-fill: rgba(240, 240, 240, 0.3); /* gris claro con opacidad del 40% */
+}
+
+.TextField {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: gray;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: transparent;
+}
+
+.PasswordField {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: gray;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+    -fx-border-color: transparent;
+}
