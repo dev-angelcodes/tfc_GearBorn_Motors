@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetClienteDTO {
+public class    GetClienteDTO {
     private String nombre;
     private String apellidos;
     private String dni;
