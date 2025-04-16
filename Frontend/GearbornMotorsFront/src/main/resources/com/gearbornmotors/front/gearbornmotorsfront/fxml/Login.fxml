@@ -34,7 +34,7 @@
                         </HBox>
                     </VBox>
                     <HBox alignment="CENTER">
-                        <Button text="Inicio de sesión ➤" />
+                        <Button text="Inicio de sesión ➤"/>
                     </HBox>
                 </VBox>
             </VBox>
