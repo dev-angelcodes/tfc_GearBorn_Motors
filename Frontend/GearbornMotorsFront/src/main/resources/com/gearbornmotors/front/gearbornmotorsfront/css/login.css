@@ -1,11 +1,21 @@
 .background {
-    -fx-background-image: url("/com/gearborn/motors/api/imgs/fondoLogin.png");
+    -fx-background-image: url("../img/fondoLogin.png");
     -fx-background-size: cover;
     -fx-background-repeat: no-repeat;
 }
 
 .labelBlanco {
     -fx-text-fill: #FFFFFF;
+}
+
+.labelInicioSes{
+    -fx-text-fill: #9d00ff;
+    -fx-font-size: 15px;
+}
+.labelRegistro {
+    -fx-text-fill: #00ffc7;
+    -fx-font-family: 'Rajdhani';
+    -fx-font-size: 50px;
 }
 
 .label0 {
@@ -17,7 +27,7 @@
 .fondoLogeo {
     -fx-arc-width: 20;
     -fx-arc-height: 20;
-    -fx-fill: rgba(0, 0, 0, 0.4);
+    -fx-fill: rgba(240, 240, 240, 0.3); /* gris claro con opacidad del 40% */
 }
 
 .TextField {
