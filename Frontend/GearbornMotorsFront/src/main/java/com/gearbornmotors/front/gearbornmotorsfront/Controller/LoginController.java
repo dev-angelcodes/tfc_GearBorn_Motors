@@ -21,7 +21,6 @@ public class LoginController {
     @FXML public javafx.scene.control.TextArea respuestaJson;
 
 
-
     public void VerificarEmail(ActionEvent event) {
         String email = this.usuario.getText();
         String contrasena = md5(this.contrasena.getText());
