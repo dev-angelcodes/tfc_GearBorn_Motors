@@ -3,6 +3,7 @@ package com.gearbornmotors.front.gearbornmotorsfront.Dto;
 import java.time.LocalDate;
 
 public class ClienteDto {
+    private Integer id;
     private String nombre;
     private String apellidos;
     private String dni;
@@ -91,4 +92,6 @@ public class ClienteDto {
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public Integer getId() {return id;}
 }
