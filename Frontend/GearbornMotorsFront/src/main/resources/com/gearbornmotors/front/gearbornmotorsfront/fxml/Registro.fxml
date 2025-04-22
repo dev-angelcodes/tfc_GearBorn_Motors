@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="70.0"
+      styleClass="background"
+      stylesheets="@../css/concesionario.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroController">
+
+
+    <VBox>
+        <HBox>
+            <Label text="🔸Email ►" />
+            <TextField fx:id="email" promptText="ej: Pepito@gmail.com" />
+        </HBox>
+        <VBox spacing="70">
+            <HBox>
+                <Label text="🔸Nombre ►" />
+                <TextField fx:id="nombre" promptText="ej: Pepito" />
+            </HBox>
+            <HBox>
+                <Label text="🔸DNI ►" />
+                <TextField fx:id="dni" promptText="ej: 12345678A" />
+
+            </HBox>
+        </VBox>
+
+        <VBox spacing="70">
+            <HBox>
+                <Label text="Direccion ►" />
+                <TextField fx:id="direccion" promptText="ej: calleEjemplo" />
+            </HBox>
+            <HBox>
+                <Label text="🔸telefono ►" />
+                <TextField fx:id="telefono" promptText="ej: 123456789" />
+            </HBox>
+            <HBox>
+                <Label text="🔸apellidos ►" />
+                <TextField fx:id="apellidos" promptText="ej: 123456789" />
+            </HBox>
+            <HBox>
+                <Label text="🔸fechaNacimiento ►" />
+                <TextField fx:id="fechaNacimiento" promptText="ej: 123456789" />
+            </HBox>
+        </VBox>
+    </VBox>
+    <HBox>
+        <Label text="🔸contraseña ►" />
+        <PasswordField fx:id="contrasena" promptText="ej: Abc12%R" />
+    </HBox>
+
+    <Button text="Registrarse" onAction="#ValidarRegistro"/>
+    <Button text="⟵" onAction="#Volver"/>
+</VBox>
