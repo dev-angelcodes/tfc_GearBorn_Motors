@@ -2,6 +2,7 @@ package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.application.dtos.LoginRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 import com.gearborn.motors.gearbornMotors.domain.services.ClienteService;
@@ -22,7 +23,7 @@ public class ClientController {
 
     //Registramos un nuevo cliente
     @PostMapping("/registrarCliente")
-    public ResponseEntity<?> saveCliente(@RequestBody ClienteDTO dto) {
+    public ResponseEntity<?> saveCliente(@RequestBody RegisterRequestDto dto) {
         try{
             //Se pasa el cliente a la clase ClienteService para que lo guarde
             ClienteEntity cliente = clienteService.save(dto);

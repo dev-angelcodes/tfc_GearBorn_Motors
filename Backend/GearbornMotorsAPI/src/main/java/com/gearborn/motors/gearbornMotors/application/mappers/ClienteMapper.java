@@ -2,12 +2,15 @@ package com.gearborn.motors.gearbornMotors.application.mappers;
 
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
+import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
+
+import java.time.LocalDate;
 
 public class ClienteMapper {
 
     //Mapeamos de un DTO a ClienteEntity
-    public static ClienteEntity toEntity(ClienteDTO cliente) {
+    public static ClienteEntity toEntity(RegisterRequestDto cliente) {
         ClienteEntity clienteEntity = new ClienteEntity();
         clienteEntity.setDni(cliente.getDni());
         clienteEntity.setEmail(cliente.getEmail());
@@ -15,7 +18,7 @@ public class ClienteMapper {
         clienteEntity.setNombre(cliente.getNombre());
         clienteEntity.setApellidos(cliente.getApellidos());
         clienteEntity.setNumTelefono(cliente.getNumTelefono());
-        clienteEntity.setFechaNacimiento(cliente.getFechaNacimiento());
+        clienteEntity.setFechaNacimiento(LocalDate.parse(cliente.getFechaNacimiento()));
         clienteEntity.setDireccion(cliente.getDireccion());
         return clienteEntity;
     }

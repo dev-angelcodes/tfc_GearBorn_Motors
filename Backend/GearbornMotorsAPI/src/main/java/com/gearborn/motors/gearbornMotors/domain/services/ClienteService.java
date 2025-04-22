@@ -1,5 +1,6 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
@@ -19,7 +20,7 @@ public class ClienteService {
     }
 
     //Guardamos un cliente en la base de datos
-    public ClienteEntity save(ClienteDTO dto){
+    public ClienteEntity save(RegisterRequestDto dto){
 
         if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new RuntimeException("Ya existe un usuario registrado con ese email");

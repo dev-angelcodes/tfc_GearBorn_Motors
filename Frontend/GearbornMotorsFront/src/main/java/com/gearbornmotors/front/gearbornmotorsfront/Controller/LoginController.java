@@ -102,4 +102,9 @@ public class LoginController {
         Scenes escena = new Scenes();
         escena.goMenu(event);
     }
+
+    public void IrRegistro(ActionEvent event) {
+        Scenes scenes = new Scenes();
+        scenes.goRegister(event);
+    }
 }
