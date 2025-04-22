@@ -43,6 +43,6 @@
 
     <VBox alignment="BOTTOM_CENTER" spacing="15">
         <Label styleClass="labelInicioSes" text="¿Todavia sin cuenta?"/>
-        <Button text="Registrarse" />
+        <Button text="Registrarse" onAction="#VerificarEmail"/>
     </VBox>
 </VBox>

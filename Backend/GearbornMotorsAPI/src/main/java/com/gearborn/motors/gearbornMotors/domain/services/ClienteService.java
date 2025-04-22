@@ -1,6 +1,5 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.GetClienteDTO;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
@@ -19,21 +18,26 @@ public class ClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-    /*Consulta para saber un cliente por su email.*/
-    public Optional<ClienteDTO> getByEmail(String email) {
-        return clienteRepository.findByEmail(email)
-                .map(ClienteMapper::toDto);
-    }
+    //Guardamos un cliente en la base de datos
+    public ClienteEntity save(ClienteDTO dto){
 
-
-    /*Guardar un nuevo Cliente, a través de un JSON*/
-    public ClienteEntity save(GetClienteDTO dto){
-
-        if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {  //Primero validamos que el Email no esta repetido
+        if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new RuntimeException("Ya existe un usuario registrado con ese email");
         }else
         { //Si el email no existe, guardamos el cliente
             return clienteRepository.save(ClienteMapper.toEntity(dto));
         }
     }
+
+    //Comprobamos si el cliente existe en la base de datos
+    public Optional<ClienteDTO> login(String email, String contrasenaHasheada) {
+        return clienteRepository.findByEmail(email)
+                .filter(cliente -> cliente.getContrasena().equals(contrasenaHasheada))
+                .map(cliente -> {
+                    ClienteDTO dto = ClienteMapper.toDto(cliente);
+                    dto.setContrasena(null);
+                    return dto;
+                });
+    }
+
 }
