@@ -1,5 +1,8 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.ClienteDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -20,10 +23,12 @@ public class LoginController {
     @FXML public PasswordField contrasena;
     @FXML public javafx.scene.control.TextArea respuestaJson;
 
+    private ClienteDto clienteLogueado;
+
 
     public void VerificarEmail(ActionEvent event) {
         String email = this.usuario.getText();
-        String contrasena = md5(this.contrasena.getText());
+        String contrasena = this.contrasena.getText();  //md5(this.contrasena.getText());
 
         try {
             URL url = new URL("http://localhost:8080/gearBorn/api/cliente/verificarLogin");
@@ -54,10 +59,18 @@ public class LoginController {
                 }
                 in.close();
 
-                // Mostrar JSON en el TextArea
-                respuestaJson.setText(content.toString());
+                // Parsear JSON a ClienteDto
+                Gson gson = new Gson();
+                clienteLogueado = gson.fromJson(content.toString(), ClienteDto.class);
 
-                System.out.println("Login correcto");
+                System.out.println("Login correcto: " + clienteLogueado.getNombre());
+
+                respuestaJson.setText(clienteLogueado.toString());
+
+                /*// Cambiar de escena
+                Scenes escena = new Scenes();
+                escena.goConcesionario(event);*/
+
             } else if (status == 401) {
                 respuestaJson.setText("Email o contraseña incorrectos");
             } else {

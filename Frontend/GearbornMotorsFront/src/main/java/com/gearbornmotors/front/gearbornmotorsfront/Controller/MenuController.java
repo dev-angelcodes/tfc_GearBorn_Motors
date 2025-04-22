@@ -13,7 +13,8 @@ public class MenuController {
 
     public void initialize() {
         presentation.setText("En GearBorn Motors no solo vendemos vehículos, conectamos personas con su próximo destino. " +
-                "Te acompañamos en cada paso: ya sea que estés comprando tu primer coche, vendiendo uno de confianza o buscando una nueva experiencia al volante.");
+                "Te acompañamos en cada paso: ya sea que estés comprando tu primer coche, " +
+                "vendiendo uno de confianza o buscando una nueva experiencia al volante.");
     }
 
 

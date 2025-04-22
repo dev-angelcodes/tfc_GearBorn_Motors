@@ -3,24 +3,22 @@ package com.gearbornmotors.front.gearbornmotorsfront.Dto;
 import java.time.LocalDate;
 
 public class ClienteDto {
-    private String nombre;
-    private String apellidos;
-    private String dni;
-    private String email;
-    private String contrasena;
-    private String direccion;
-    private int numTelefono;
-    private LocalDate fechaNacimiento;
+    public String email;
+    public String dni;
+    public String nombre;
+    public String apellidos;
+    public int numTelefono;
+    public String direccion;
+    public String fechaNacimiento;
 
 
     //Constructor
 
-    public ClienteDto(String nombre, String apellidos, String dni, String email, String contrasena, String direccion, int numTelefono, LocalDate fechaNacimiento) {
+    public ClienteDto(String nombre, String apellidos, String dni, String email, String contrasena, String direccion, int numTelefono, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
         this.email = email;
-        this.contrasena = contrasena;
         this.direccion = direccion;
         this.numTelefono = numTelefono;
         this.fechaNacimiento = fechaNacimiento;
@@ -60,14 +58,6 @@ public class ClienteDto {
         this.email = email;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
     public String getDireccion() {
         return direccion;
     }
@@ -84,11 +74,24 @@ public class ClienteDto {
         this.numTelefono = numTelefono;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteDto{" +
+                "email='" + email + '\'' +
+                ", dni='" + dni + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", numTelefono=" + numTelefono +
+                ", direccion='" + direccion + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                '}';
     }
 }
