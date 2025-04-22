@@ -35,7 +35,6 @@ public class ClienteService {
                 .filter(cliente -> cliente.getContrasena().equals(contrasenaHasheada))
                 .map(cliente -> {
                     ClienteDTO dto = ClienteMapper.toDto(cliente);
-                    dto.setContrasena(null);
                     return dto;
                 });
     }

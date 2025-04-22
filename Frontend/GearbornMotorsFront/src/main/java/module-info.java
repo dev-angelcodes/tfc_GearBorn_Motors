@@ -3,10 +3,14 @@ module com.gearbornmotors.front.gearbornmotorsfront {
     requires javafx.fxml;
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
+    requires com.google.gson;
 
 
     opens com.gearbornmotors.front.gearbornmotorsfront to javafx.fxml;
     exports com.gearbornmotors.front.gearbornmotorsfront;
     exports com.gearbornmotors.front.gearbornmotorsfront.Controller;
     opens com.gearbornmotors.front.gearbornmotorsfront.Controller to javafx.fxml;
+
+    opens com.gearbornmotors.front.gearbornmotorsfront.Dto to com.google.gson;
+
 }

@@ -24,7 +24,6 @@ public class ClienteMapper {
     public static ClienteDTO toDto(ClienteEntity cliente) {
         ClienteDTO clienteDTO = new ClienteDTO();
         clienteDTO.setDni(cliente.getDni());
-        clienteDTO.setContrasena(cliente.getContrasena());
         clienteDTO.setNombre(cliente.getNombre());
         clienteDTO.setApellidos(cliente.getApellidos());
         clienteDTO.setEmail(cliente.getEmail());
