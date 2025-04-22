@@ -97,4 +97,9 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
+
+    public void IrMenu(ActionEvent event) {
+        Scenes escena = new Scenes();
+        escena.goMenu(event);
+    }
 }

@@ -52,4 +52,8 @@
         <Label styleClass="labelInicioSes" text="¿Todavia sin cuenta?"/>
         <Button text="Registrarse"/>
     </VBox>
+
+    <VBox alignment="BOTTOM_CENTER">
+            <Button text="Volver" onAction="#IrMenu"/>
+    </VBox>
 </VBox>
