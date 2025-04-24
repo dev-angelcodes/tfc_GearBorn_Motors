@@ -31,11 +31,14 @@ public class ClienteService {
 
     //Comprobamos si el cliente existe en la base de datos
     public Optional<ClienteDTO> login(String email, String contrasenaHasheada) {
-        return clienteRepository.findByEmail(email)
-                .filter(cliente -> cliente.getContrasena().equals(contrasenaHasheada))
-                .map(cliente -> {
-                    ClienteDTO dto = ClienteMapper.toDto(cliente);
-                    return dto;
-                });
+        Optional<ClienteEntity> cliente = clienteRepository.findByEmail(email);
+
+        if (cliente.isPresent() && cliente.get().getContrasena().equals(contrasenaHasheada)) {
+            ClienteDTO dto = ClienteMapper.toDto(cliente.get());
+            return Optional.of(dto);
+        } else {
+            return Optional.empty();
+        }
     }
+
 }

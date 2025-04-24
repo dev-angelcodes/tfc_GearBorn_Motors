@@ -20,7 +20,6 @@ public class LoginController {
 
     @FXML public TextField usuario;
     @FXML public PasswordField contrasena;
-    @FXML public javafx.scene.control.TextArea respuestaJson;
     @FXML public MenuButton rolLogin;
     @FXML public MenuItem clienteItem;
     @FXML public MenuItem empleadoItem;
@@ -54,57 +53,40 @@ public class LoginController {
         String contrasena = md5(this.contrasena.getText());
 
         try {
-            URL url = new URL("http://localhost:8080/gearBorn/api/cliente/verificarLogin");
+            URL url = new URL("http://localhost:8080/gearBorn/api/cliente/login");
 
-            // Crear conexión HTTP
+
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setDoOutput(true);
 
-            // Crear cuerpo JSON
-            String jsonInput = String.format("{\"email\":\"%s\",\"contrasena\":\"%s\"}", email, contrasena);
+            String jsonInput = String.format("{\"email\":\"%s\",\"contrasenaHasheada\":\"%s\"}", email, contrasena);
 
-            // Enviar JSON al backend
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInput.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
-            // Leer respuesta
             int status = con.getResponseCode();
+            con.disconnect();
+
             if (status == 200) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                }
-                in.close();
-
-                // Parsear JSON a ClienteDto
-                Gson gson = new Gson();
-                clienteLogueado = gson.fromJson(content.toString(), ClienteDto.class);
-
-                System.out.println("Login correcto: " + clienteLogueado.getNombre());
-
-                respuestaJson.setText(clienteLogueado.toString());
-
-                /* Cambiar de escena
+                // Solo si el login fue exitoso (200), se cambia la escena
                 Scenes escena = new Scenes();
-                escena.goConcesionario(event);*/
-
+                escena.goConcesionario(event);
             } else if (status == 401) {
-                respuestaJson.setText("Email o contraseña incorrectos");
+                System.out.println("Email o contraseña incorrectos");
+                // Mostrar alerta si querés
             } else {
-                respuestaJson.setText("Error al conectar con el servidor");
+                System.out.println("Error al conectar con el servidor");
             }
 
-            con.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 
     public void InicioEmpleado(ActionEvent event) {
     }

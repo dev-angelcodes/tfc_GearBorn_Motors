@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClientController {
@@ -38,10 +40,15 @@ public class ClientController {
         }
     }
 
-    @PostMapping("/verificarLogin")
-    public ResponseEntity<?> verificarLogin(@RequestBody RClientDto dto){
-        return clienteService.login(dto.getEmail(), dto.getContrasena())
-                .<ResponseEntity<?>>map(ResponseEntity::ok)
-                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o contraseña incorrectos"));
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody RClientDto dto){
+
+        Optional<ClienteDTO> cliente = clienteService.login(dto.getEmail(), dto.getContrasenaHasheada());
+
+        if(cliente.isPresent()){
+            return ResponseEntity.ok("LoginExistoso");
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
+        }
     }
 }
