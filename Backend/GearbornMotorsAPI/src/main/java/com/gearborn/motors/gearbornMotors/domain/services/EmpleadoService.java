@@ -5,6 +5,8 @@ import com.gearborn.motors.gearbornMotors.infrastructure.repositories.EmpleadoRe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class EmpleadoService {
 
@@ -22,6 +24,18 @@ public class EmpleadoService {
             throw new RuntimeException("Ya existe un usuario registrado con ese email");
         }else{
             empleadoRepository.save(empleado);
+        }
+    }
+
+    //Obtener un Empleado por ID y verificar contraseña
+    public Optional<EmpleadoEntity> login(int id, String contrasenaHasheada) {
+
+        Optional<EmpleadoEntity> empleado = empleadoRepository.findById(id);
+
+        if(empleado.isPresent() && empleado.get().getContrasena().equals(contrasenaHasheada)){
+            return empleado;
+        }else{
+            return Optional.empty();
         }
     }
 }
