@@ -28,7 +28,7 @@ public class LoginController {
 
     public void VerificarEmail(ActionEvent event) {
         String email = this.usuario.getText();
-        String contrasena = this.contrasena.getText();  //md5(this.contrasena.getText());
+        String contrasena = md5(this.contrasena.getText());
 
         try {
             URL url = new URL("http://localhost:8080/gearBorn/api/cliente/verificarLogin");

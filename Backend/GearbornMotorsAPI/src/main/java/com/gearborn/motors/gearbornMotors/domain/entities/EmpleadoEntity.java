@@ -17,20 +17,20 @@ public class EmpleadoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "contrasena",nullable = false)
+    @Column(nullable = false)
     private String contrasena;
 
-    @Column(name = "dni", nullable = false, length = 9, unique = true)
-    private String dni;
+    @Column(name = "tipo_empleado", nullable = false, length = 25)
+    private String tipo;
 
     @Column(nullable = false )
     private boolean suspendido = false;
 
+    @Column(name = "dni", nullable = false, length = 9, unique = true)
+    private String dni;
+
     @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false, length = 20)
-    private String puesto;
 
     @Column(nullable = false, length = 75)
     private String nombre;
@@ -49,7 +49,7 @@ public class EmpleadoEntity {
 
     //FK
 
-    //Un empleado -> muchos gastos (OneToMany)
+    //Un empleado -> muchas ventas (OneToMany)
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private List<VentaEntity> ventas;
 
