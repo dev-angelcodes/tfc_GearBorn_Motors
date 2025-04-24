@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnTransformer;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -21,7 +20,7 @@ public class ClienteEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "contrasenha",nullable = false)
+    @Column(nullable = false)
     @ColumnTransformer(write = "MD5(?)")//Enciptamos la contraseña
     private String contrasena;
 

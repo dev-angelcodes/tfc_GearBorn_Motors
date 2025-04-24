@@ -5,7 +5,6 @@ import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 
-import java.time.LocalDate;
 
 public class ClienteMapper {
 
@@ -18,7 +17,6 @@ public class ClienteMapper {
         clienteEntity.setNombre(cliente.getNombre());
         clienteEntity.setApellidos(cliente.getApellidos());
         clienteEntity.setNumTelefono(cliente.getNumTelefono());
-        clienteEntity.setFechaNacimiento(LocalDate.parse(cliente.getFechaNacimiento()));
         clienteEntity.setDireccion(cliente.getDireccion());
         return clienteEntity;
     }
@@ -32,7 +30,6 @@ public class ClienteMapper {
         clienteDTO.setEmail(cliente.getEmail());
         clienteDTO.setDireccion(cliente.getDireccion());
         clienteDTO.setNumTelefono(cliente.getNumTelefono());
-        clienteDTO.setFechaNacimiento(cliente.getFechaNacimiento());
         return clienteDTO;
     }
 }

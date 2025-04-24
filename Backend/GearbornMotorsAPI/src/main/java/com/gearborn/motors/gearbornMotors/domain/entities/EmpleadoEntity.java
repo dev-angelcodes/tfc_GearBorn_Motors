@@ -2,8 +2,9 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnTransformer;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class EmpleadoEntity {
     private Integer id;
 
     @Column(nullable = false)
+    @ColumnTransformer(write = "MD5(?)")//Enciptamos la contraseña
     private String contrasena;
 
     @Column(name = "tipo_empleado", nullable = false, length = 25)
@@ -39,10 +41,10 @@ public class EmpleadoEntity {
     private String apellidos;
 
     @Column(name = "fecha_nacimiento", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name = "fecha_contrato", columnDefinition = "DATETIME", nullable = false)
-    private LocalDateTime fechaContrato;
+    private LocalDate fechaContrato;
 
     @Column(name = "numero_telefono", nullable = false, length = 9)
     private int numeroTelefono;

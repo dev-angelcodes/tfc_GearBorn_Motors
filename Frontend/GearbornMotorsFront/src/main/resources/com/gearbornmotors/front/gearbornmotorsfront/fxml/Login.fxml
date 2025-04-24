@@ -21,26 +21,36 @@
     <HBox alignment="CENTER">
         <StackPane maxHeight="300" maxWidth="400" AnchorPane.leftAnchor="200" AnchorPane.topAnchor="100">
 
-            <Rectangle height="275" styleClass="fondoLogeo" width="400" />
+            <Rectangle height="350" styleClass="fondoLogeo" width="400" />
 
             <VBox alignment="CENTER" maxWidth="380" spacing="40">
                 <Label styleClass="label0" text="GearBorn Motors" />
 
                 <VBox spacing="20">
-                    <VBox spacing="10">
-                        <HBox alignment="CENTER" spacing="5">
-                            <Label styleClass="labelBlanco" text="👤Email ➤" />
-                            <TextField fx:id="usuario" promptText="Introduzca el email" styleClass="TextField" />
-                        </HBox>
-
-                        <HBox alignment="CENTER" spacing="5">
-                            <Label styleClass="labelBlanco" text="🔒 Contraseña ➤" />
-                            <PasswordField fx:id="contrasena" promptText="Contraseña" styleClass="PasswordField" />
-                        </HBox>
-                    </VBox>
                     <HBox alignment="CENTER">
-                        <Button text="Inicio de sesión ➤" onAction="#VerificarEmail"/>
+                        <MenuButton fx:id="rolLogin" text="Tipo de usuario">
+                            <items>
+                                <MenuItem fx:id="clienteItem" text="Cliente" />
+                                <MenuItem fx:id="empleadoItem" text="Empleado" />
+                            </items>
+                        </MenuButton>
                     </HBox>
+                    <HBox alignment="CENTER" spacing="10">
+                        <VBox alignment="CENTER_LEFT" spacing="5">
+                            <Label fx:id="labelUsuario" styleClass="labelBlanco" text="👤Email ➤" />
+                            <Label styleClass="labelBlanco" text="🔒 Contraseña ➤" />
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5">
+                            <TextField fx:id="usuario" promptText="Introduzca el email" styleClass="TextField" />
+                            <PasswordField fx:id="contrasena" promptText="Contraseña" styleClass="PasswordField" />
+                        </VBox>
+                    </HBox>
+                    <VBox spacing="15" alignment="CENTER">
+                        <Button fx:id="botonCliente" text="Inicio de sesión como cliente ➤" onAction="#InicioCliente"/>
+                        <Button fx:id="botonEmpleado" text="Inicio de sesión como empleado ➤"
+                                onAction="#InicioEmpleado" visible="false" managed="false"/>
+                    </VBox>
                 </VBox>
             </VBox>
         </StackPane>
