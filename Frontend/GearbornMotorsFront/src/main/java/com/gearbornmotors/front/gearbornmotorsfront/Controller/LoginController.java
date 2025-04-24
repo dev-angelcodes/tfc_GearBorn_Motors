@@ -5,8 +5,7 @@ import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,11 +21,35 @@ public class LoginController {
     @FXML public TextField usuario;
     @FXML public PasswordField contrasena;
     @FXML public javafx.scene.control.TextArea respuestaJson;
+    @FXML public MenuButton rolLogin;
+    @FXML public MenuItem clienteItem;
+    @FXML public MenuItem empleadoItem;
+    @FXML public Label labelUsuario;
+    @FXML public Button botonEmpleado;
+    @FXML public Button botonCliente;
 
     private ClienteDto clienteLogueado;
 
 
-    public void VerificarEmail(ActionEvent event) {
+    public void initialize() {
+        clienteItem.setOnAction(event -> {
+            rolLogin.setText("Tipo de Usuario: Cliente");
+            labelUsuario.setText("\uD83D\uDC64Email ➤");
+            botonEmpleado.setVisible(false); botonEmpleado.setManaged(false);
+            botonCliente.setVisible(true); botonCliente.setManaged(true);
+
+        });
+
+        empleadoItem.setOnAction(event -> {
+            rolLogin.setText("Tipo de Usuario: Empleado");
+            labelUsuario.setText("\uD83D\uDC64ID ➤");
+            botonCliente.setVisible(false); botonCliente.setManaged(false);
+            botonEmpleado.setVisible(true); botonEmpleado.setManaged(true);
+
+        });
+    }
+
+    public void InicioCliente(ActionEvent event) {
         String email = this.usuario.getText();
         String contrasena = md5(this.contrasena.getText());
 
@@ -83,6 +106,9 @@ public class LoginController {
         }
     }
 
+    public void InicioEmpleado(ActionEvent event) {
+    }
+
 
     public static String md5(String texto) {
         try {
@@ -107,4 +133,6 @@ public class LoginController {
         Scenes scenes = new Scenes();
         scenes.goRegister(event);
     }
+
+
 }
