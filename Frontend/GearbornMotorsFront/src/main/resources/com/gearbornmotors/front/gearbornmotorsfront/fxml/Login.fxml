@@ -56,8 +56,6 @@
         </StackPane>
     </HBox>
 
-    <TextArea fx:id="respuestaJson" layoutX="50" layoutY="220" prefWidth="300" prefHeight="150" editable="false"/>
-
     <VBox alignment="BOTTOM_CENTER" spacing="15">
         <Label styleClass="labelInicioSes" text="¿Todavia sin cuenta?"/>
         <Button text="Registrarse" onAction="#IrRegistro"/>
