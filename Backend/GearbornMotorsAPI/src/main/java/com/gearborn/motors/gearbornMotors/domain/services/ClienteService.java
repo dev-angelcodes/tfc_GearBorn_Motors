@@ -21,7 +21,6 @@ public class ClienteService {
 
     //Guardamos un cliente en la base de datos
     public ClienteEntity save(RegisterRequestDto dto){
-
         if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new RuntimeException("Ya existe un usuario registrado con ese email");
         }else

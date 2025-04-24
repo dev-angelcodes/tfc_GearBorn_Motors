@@ -5,7 +5,6 @@ import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
 import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 
-import java.time.LocalDate;
 
 public class ClienteMapper {
 

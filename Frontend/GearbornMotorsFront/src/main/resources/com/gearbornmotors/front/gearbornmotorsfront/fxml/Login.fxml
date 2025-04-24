@@ -35,17 +35,17 @@
                             </items>
                         </MenuButton>
                     </HBox>
-                    <VBox spacing="10">
-                        <HBox alignment="CENTER" spacing="5">
+                    <HBox alignment="CENTER" spacing="10">
+                        <VBox alignment="CENTER_LEFT" spacing="5">
                             <Label fx:id="labelUsuario" styleClass="labelBlanco" text="👤Email ➤" />
-                            <TextField fx:id="usuario" promptText="Introduzca el email" styleClass="TextField" />
-                        </HBox>
-
-                        <HBox alignment="CENTER" spacing="5">
                             <Label styleClass="labelBlanco" text="🔒 Contraseña ➤" />
+                        </VBox>
+
+                        <VBox alignment="CENTER" spacing="5">
+                            <TextField fx:id="usuario" promptText="Introduzca el email" styleClass="TextField" />
                             <PasswordField fx:id="contrasena" promptText="Contraseña" styleClass="PasswordField" />
-                        </HBox>
-                    </VBox>
+                        </VBox>
+                    </HBox>
                     <VBox spacing="15" alignment="CENTER">
                         <Button fx:id="botonCliente" text="Inicio de sesión como cliente ➤" onAction="#InicioCliente"/>
                         <Button fx:id="botonEmpleado" text="Inicio de sesión como empleado ➤"

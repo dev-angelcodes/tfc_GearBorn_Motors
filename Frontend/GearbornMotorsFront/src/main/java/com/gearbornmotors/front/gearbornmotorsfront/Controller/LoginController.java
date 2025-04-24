@@ -37,7 +37,7 @@ public class LoginController {
             labelUsuario.setText("\uD83D\uDC64Email ➤");
             botonEmpleado.setVisible(false); botonEmpleado.setManaged(false);
             botonCliente.setVisible(true); botonCliente.setManaged(true);
-
+            usuario.setPromptText("Introduzca el email");
         });
 
         empleadoItem.setOnAction(event -> {
@@ -45,7 +45,7 @@ public class LoginController {
             labelUsuario.setText("\uD83D\uDC64ID ➤");
             botonCliente.setVisible(false); botonCliente.setManaged(false);
             botonEmpleado.setVisible(true); botonEmpleado.setManaged(true);
-
+            usuario.setPromptText("Introduzca el ID");
         });
     }
 
@@ -90,7 +90,7 @@ public class LoginController {
 
                 respuestaJson.setText(clienteLogueado.toString());
 
-                /*// Cambiar de escena
+                /* Cambiar de escena
                 Scenes escena = new Scenes();
                 escena.goConcesionario(event);*/
 
@@ -133,6 +133,4 @@ public class LoginController {
         Scenes scenes = new Scenes();
         scenes.goRegister(event);
     }
-
-
 }
