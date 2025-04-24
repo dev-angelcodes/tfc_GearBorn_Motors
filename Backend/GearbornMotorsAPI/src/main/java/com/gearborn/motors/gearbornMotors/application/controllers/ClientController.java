@@ -1,7 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
-import com.gearborn.motors.gearbornMotors.application.dtos.LoginRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.login.RClientDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
@@ -39,7 +39,7 @@ public class ClientController {
     }
 
     @PostMapping("/verificarLogin")
-    public ResponseEntity<?> verificarLogin(@RequestBody LoginRequestDto dto){
+    public ResponseEntity<?> verificarLogin(@RequestBody RClientDto dto){
         return clienteService.login(dto.getEmail(), dto.getContrasena())
                 .<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email o contraseña incorrectos"));

@@ -1,6 +1,6 @@
-package com.gearborn.motors.gearbornMotors.application.dtos;
+package com.gearborn.motors.gearbornMotors.application.dtos.login;
 
-public class LoginRequestDto {
+public class RClientDto {
     String email;
     String contrasena;
 
