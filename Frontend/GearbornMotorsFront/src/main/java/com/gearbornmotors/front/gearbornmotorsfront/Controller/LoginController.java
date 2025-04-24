@@ -89,7 +89,45 @@ public class LoginController {
 
 
     public void InicioEmpleado(ActionEvent event) {
+        try {
+            int id = Integer.parseInt(this.usuario.getText().trim());
+            String contrasena = md5(this.contrasena.getText().trim());
+
+            URL url = new URL("http://localhost:8080/gearBorn/api/empleado/login");
+
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+
+            String jsonInput = String.format("{\"id\":%d,\"contrasenaHasheada\":\"%s\"}", id, contrasena);
+
+            try (OutputStream os = con.getOutputStream()) {
+                byte[] input = jsonInput.getBytes("utf-8");
+                os.write(input, 0, input.length);
+            }
+
+            int status = con.getResponseCode();
+            con.disconnect();
+
+            if (status == 200) {
+                // Login exitoso → cambiar de escena
+                Scenes escena = new Scenes();
+                escena.goPanelControl(event);
+            } else if (status == 401) {
+                System.out.println("ID o contraseña incorrectos");
+                // Acá podrías mostrar una alerta
+            } else {
+                System.out.println("Error al conectar con el servidor. Código: " + status);
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("ID inválido: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     public static String md5(String texto) {
