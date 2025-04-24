@@ -20,7 +20,7 @@ public class VehiculoEntity {
     @Column(nullable = false, length = 7)
     private String matricula;
 
-    @Column(nullable = false, length = 7)
+    @Column(name = "tipo_vehiculo", nullable = false, length = 7)
     private String tipo;
 
     @Column(nullable = false, length = 50)
@@ -32,7 +32,7 @@ public class VehiculoEntity {
     @Column(nullable = false, length = 4)
     private int anio;
 
-    @Column(name = "Kilometros", nullable = false)
+    @Column(nullable = false)
     private Double km;
 
     @Column(length = 25, nullable = false) //Disponible o vendido o reservado

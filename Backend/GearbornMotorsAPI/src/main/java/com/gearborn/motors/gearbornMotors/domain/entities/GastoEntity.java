@@ -3,8 +3,7 @@ package com.gearborn.motors.gearbornMotors.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 @Entity
 @Table(name = "gastos")
 @Getter
@@ -23,20 +22,18 @@ public class GastoEntity {
     private Double importe;
 
     @Column(nullable = false, columnDefinition = "DATETIME")
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     @Column(name = "compra_vehiculo", nullable = false)
-    private boolean venta;
+    private boolean compra;
+
+    @Column(name = "nombre_proveedor", nullable = false, length = 50)
+    private String nombreProv;
 
     @Column(length = 250)
     private String descripcion;
 
     //FK
-
-    //Muchos gastos -> un empleado (ManyToOne)
-    @ManyToOne
-    @JoinColumn(name = "id_proveedor", referencedColumnName = "id_proveedor ", nullable = false)
-    private ProveedorEntity proveedor;
 
     //Muchos gastos -> Un empleado (ManyToOne)
     @ManyToOne

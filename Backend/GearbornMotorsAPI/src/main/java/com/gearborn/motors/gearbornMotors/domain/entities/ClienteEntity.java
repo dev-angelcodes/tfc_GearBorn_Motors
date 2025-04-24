@@ -31,14 +31,11 @@ public class ClienteEntity {
     @Column(nullable = false, length = 75)
     private String nombre;
 
-    @Column(nullable = false, length = 75)
+    @Column(length = 75)
     private String apellidos;
 
     @Column(name = "numero_telefono", nullable = false, length = 9)
     private int numTelefono;
-
-    @Column(name = "fecha_nacimiento", columnDefinition = "DATETIME", nullable = false)
-    private LocalDate fechaNacimiento;
 
     private String direccion;
 
