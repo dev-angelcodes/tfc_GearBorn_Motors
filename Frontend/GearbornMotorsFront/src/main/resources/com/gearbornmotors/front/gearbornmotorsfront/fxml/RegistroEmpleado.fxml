@@ -2,10 +2,83 @@
 
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="70.0"
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Button?>
+<VBox spacing="90.0"
       stylesheets="@../css/panelControl.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroEmpleadosController">
+
+    <padding>
+        <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
+    </padding>
+
+    <StackPane alignment="TOP_CENTER">
+        <Label text="Registro de un nuevo empleado!" styleClass="labelPrincipal"/>
+    </StackPane>
+
+    <VBox spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+        <HBox spacing="200" alignment="TOP_CENTER">
+            <VBox spacing="50" alignment="TOP_CENTER">
+                <HBox spacing="20">
+                    <Label text="Introduzca el tipo de empleado: " />
+                    <MenuButton text="Tipos empleado" styleClass="cursorMano">
+                        <items>
+                            <MenuItem text="Administrador" styleClass="cursorMano"/>
+                            <MenuItem text="Comercial de ventas" styleClass="cursorMano"/>
+                        </items>
+                    </MenuButton>
+                </HBox>
+                <HBox spacing="20">
+                    <Label text="Introduzca el dni del nuevo empleado: "/>
+                    <TextField promptText="Dni ejemplo: 12345678A "/>
+                </HBox>
+
+                <HBox spacing="20">
+                    <Label text="Introduzca el email del nuevo empleado: "/>
+                    <TextField promptText="email ejemplo: empleado1@gmail.com "/>
+                </HBox>
+
+                <HBox spacing="20">
+                    <Label text="Introduzca la fecha de nacimiento del empleado: "/>
+                    <TextField promptText="formato: año-mes-dia"/>
+                </HBox>
+            </VBox>
+            <VBox spacing="50" alignment="TOP_CENTER">
+                <HBox spacing="20">
+                    <Label text="Introduzca el nombre: "/>
+                    <TextField promptText="Nombre ejemplo: Empleado1"/>
+                </HBox>
+
+                <HBox spacing="20">
+                    <Label text="Introduzca los apellidos: "/>
+                    <TextField promptText="Apellidos ejemplo: apellido1 apellido2"/>
+                </HBox>
+
+                <HBox spacing="20">
+                    <Label text="Introduzca el número de teléfono del empleado: "/>
+                    <TextField promptText="Numero de ejemplo: 123456789"/>
+                </HBox>
+
+                <HBox spacing="20">
+                    <Label text="Introduzca la fecha de creacion de contrato: "/>
+                    <TextField promptText="formato: año-mes-dia"/>
+                </HBox>
+            </VBox>
+        </HBox>
+        <HBox spacing="20" alignment="CENTER">
+            <Label text="Introduzca la contraseña para el nuevo empleado"/>
+            <PasswordField/>
+        </HBox>
+    </VBox>
+    <StackPane alignment="BOTTOM_CENTER">
+        <Button text="Registrar Empleado" styleClass="cursorMano"/>
+    </StackPane>
 
 </VBox>

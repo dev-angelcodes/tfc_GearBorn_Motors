@@ -20,7 +20,7 @@
             <Pane styleClass="imgLogo" prefWidth="200" prefHeight="100" minWidth="200" minHeight="100"/>
             <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
                 <VBox spacing="15" alignment="TOP_CENTER" styleClass="bordeVBox, fondoSolido">
-                    <Button text="Registrar un nuevo empleado" styleClass="boton-sidebar"/>
+                    <Button text="Registrar un nuevo empleado" onAction="#mostrarRegistro" styleClass="boton-sidebar"/>
                     <Button text="Guardar la compra de un vehiculo" styleClass="boton-sidebar"/>
                     <Button text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
                     <Button text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
@@ -32,9 +32,9 @@
             </ScrollPane>
             <Button text="Volver al menú principal" styleClass="boton-sidebar"/>
         </VBox>
-        <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+        <StackPane fx:id="contenidoControl" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 
-        </VBox>
+        </StackPane>
     </HBox>
 
 </VBox>
