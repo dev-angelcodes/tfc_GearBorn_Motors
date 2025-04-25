@@ -1,6 +1,6 @@
-package com.gearborn.motors.gearbornMotors.application.dtos;
+package com.gearborn.motors.gearbornMotors.application.dtos.Cliente;
 
-public class RegisterRequestDto {
+public class RegisterRequestClientDto {
     String email;
     String contrasena;
     String dni;

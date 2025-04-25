@@ -12,7 +12,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class RegistroController {
+public class RegistroClienteController {
 
     @FXML public TextField email;
     @FXML public TextField dni;

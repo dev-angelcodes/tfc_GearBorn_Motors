@@ -104,7 +104,7 @@ public class Scenes {
 
     public void goRegister(ActionEvent event){
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(LauncherApp.class.getResource("fxml/Registro.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(LauncherApp.class.getResource("fxml/RegistroCliente.fxml"));
             Parent newRoot = fxmlLoader.load();
 
             // Obtener tamaño de pantalla

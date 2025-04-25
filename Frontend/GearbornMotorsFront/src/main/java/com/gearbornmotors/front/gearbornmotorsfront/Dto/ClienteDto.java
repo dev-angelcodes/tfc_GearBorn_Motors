@@ -14,6 +14,7 @@ public class ClienteDto {
 
     //Constructor
 
+
     public ClienteDto(String nombre, String apellidos, String dni, String email, String contrasena, String direccion, int numTelefono, String fechaNacimiento) {
         this.nombre = nombre;
         this.apellidos = apellidos;
