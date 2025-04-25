@@ -47,3 +47,7 @@
     -fx-border-radius: 5;
     -fx-border-color: transparent;
 }
+
+.cursorMano{
+    -fx-cursor: hand;
+}

@@ -28,10 +28,10 @@
 
                 <VBox spacing="20">
                     <HBox alignment="CENTER">
-                        <MenuButton fx:id="rolLogin" text="Tipo de usuario">
+                        <MenuButton fx:id="rolLogin" text="Tipo de usuario" styleClass="cursorMano">
                             <items>
-                                <MenuItem fx:id="clienteItem" text="Cliente" />
-                                <MenuItem fx:id="empleadoItem" text="Empleado" />
+                                <MenuItem fx:id="clienteItem" text="Cliente" styleClass="cursorMano"/>
+                                <MenuItem fx:id="empleadoItem" text="Empleado" styleClass="cursorMano"/>
                             </items>
                         </MenuButton>
                     </HBox>
@@ -47,9 +47,10 @@
                         </VBox>
                     </HBox>
                     <VBox spacing="15" alignment="CENTER">
-                        <Button fx:id="botonCliente" text="Inicio de sesión como cliente ➤" onAction="#InicioCliente"/>
+                        <Button fx:id="botonCliente" text="Inicio de sesión como cliente ➤"
+                                onAction="#InicioCliente" styleClass="cursorMano"/>
                         <Button fx:id="botonEmpleado" text="Inicio de sesión como empleado ➤"
-                                onAction="#InicioEmpleado" visible="false" managed="false"/>
+                                onAction="#InicioEmpleado" visible="false" managed="false" styleClass="cursorMano"/>
                     </VBox>
                 </VBox>
             </VBox>
@@ -58,10 +59,10 @@
 
     <VBox alignment="BOTTOM_CENTER" spacing="15">
         <Label styleClass="labelInicioSes" text="¿Todavia sin cuenta?"/>
-        <Button text="Registrarse" onAction="#IrRegistro"/>
+        <Button text="Registrarse" onAction="#IrRegistro" styleClass="cursorMano"/>
     </VBox>
 
     <VBox alignment="BOTTOM_CENTER">
-            <Button text="Volver" onAction="#IrMenu"/>
+            <Button text="Volver" onAction="#IrMenu" styleClass="cursorMano"/>
     </VBox>
 </VBox>

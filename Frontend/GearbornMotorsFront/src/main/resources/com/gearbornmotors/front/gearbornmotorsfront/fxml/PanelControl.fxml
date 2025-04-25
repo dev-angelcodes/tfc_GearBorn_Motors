@@ -3,11 +3,37 @@
 
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="70.0"
-      styleClass="background"
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Button?>
+<VBox spacing="70.0"
       stylesheets="@../css/panelControl.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.PanelControlController">
+
+    <HBox>
+        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" minWidth="630">
+            <padding>
+                <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
+            </padding>
+            <Pane styleClass="imgLogo" prefWidth="200" prefHeight="100" />
+            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox spacing="15" alignment="TOP_CENTER" styleClass="bordeVBox, fondoSolido">
+                    <Button fx:id="registroEmpleado" text="Registrar un nuevo empleado" styleClass="boton-sidebar"/>
+                    <Button fx:id="compraVehiculo" text="Guardar en la Base de datos una compra de un vehiculo" styleClass="boton-sidebar"/>
+                    <Button fx:id="solicitudesCompra" text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
+                    <Button fx:id="solicitudesVenta" text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
+                    <Button fx:id="gastoVehiculo" text="Registrar nuevo gasto de un vehículo" styleClass="boton-sidebar"/>
+                    <Button fx:id="historialVentas" text="Consultar el historial de ventas" styleClass="boton-sidebar"/>
+                    <Button fx:id="historialGastos" text="Consultar historial de gastos de un vehículo" styleClass="boton-sidebar"/>
+                    <Button fx:id="suspenderEmpleado" text="Suspender un empleado" styleClass="boton-sidebar"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+        <VBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+
+        </VBox>
+    </HBox>
 
 </VBox>
