@@ -1,4 +1,4 @@
-package com.gearbornmotors.front.gearbornmotorsfront.Dto;
+package com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente;
 
 public class ClientRegisterRequestDto {
     private String nombre;

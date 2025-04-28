@@ -1,6 +1,4 @@
-package com.gearbornmotors.front.gearbornmotorsfront.Dto;
-
-import java.time.LocalDate;
+package com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente;
 
 public class ClienteDto {
     public String email;

@@ -1,6 +1,6 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
-import com.gearbornmotors.front.gearbornmotorsfront.Dto.ClientRegisterRequestDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClientRegisterRequestDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;

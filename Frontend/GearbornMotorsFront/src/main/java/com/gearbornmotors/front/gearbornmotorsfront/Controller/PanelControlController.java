@@ -1,5 +1,6 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,5 +24,11 @@ public class PanelControlController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void cargarMenu(ActionEvent event) {
+        Scenes scenes = new Scenes();
+        scenes.goMenu(event);
     }
 }

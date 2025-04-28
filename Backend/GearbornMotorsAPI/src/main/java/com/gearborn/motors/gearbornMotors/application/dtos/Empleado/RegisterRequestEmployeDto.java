@@ -20,6 +20,4 @@ public class RegisterRequestEmployeDto {
     String fechaNacimiento;
     String fechaContrato;
     int numeroTelefono;
-
-
 }
