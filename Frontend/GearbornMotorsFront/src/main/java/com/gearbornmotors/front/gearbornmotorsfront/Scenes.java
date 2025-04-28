@@ -191,26 +191,15 @@ public class Scenes {
             FXMLLoader fxmlLoader = new FXMLLoader(LauncherApp.class.getResource("fxml/PanelControl.fxml"));
             Parent newRoot = fxmlLoader.load();
 
-            // Obtener tamaño de pantalla
-            Rectangle2D limitePantalla = Screen.getPrimary().getVisualBounds();
-            double ancho = limitePantalla.getWidth() * 0.8;
-            double alto = limitePantalla.getHeight() * 0.7;
-
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Centrar la ventana
-            stage.setX(limitePantalla.getMinX() + (limitePantalla.getWidth() - ancho) / 2);
-            stage.setY(limitePantalla.getMinY() + (limitePantalla.getHeight() - alto) / 2);
-
-            // Crear la transición de desvanecimiento
+            // Crear la transición de desvanecimiento (fade-out)
             FadeTransition fadeOut = new FadeTransition(Duration.seconds(0.15), stage.getScene().getRoot());
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
             fadeOut.setOnFinished(e -> {
-                // Crear la nueva escena
-                Scene newScene = new Scene(newRoot, ancho, alto);
-
-                // Aplicar efecto fade-in a la nueva escena
+                // Crear nueva escena
+                Scene newScene = new Scene(newRoot);
                 newRoot.setOpacity(0);
                 stage.setScene(newScene);
 
@@ -218,12 +207,15 @@ public class Scenes {
                 fadeIn.setFromValue(0.0);
                 fadeIn.setToValue(1.0);
                 fadeIn.play();
+
+                // ✅ Maximizar la ventana (no fullscreen)
+                stage.setMaximized(true);
             });
 
             fadeOut.play();
 
         } catch (IOException e) {
-            System.err.println("Error al cambiar de escena:\n " + e.getMessage());
+            System.err.println("Error al cambiar de escena:\n" + e.getMessage());
             e.printStackTrace();
         }
     }
