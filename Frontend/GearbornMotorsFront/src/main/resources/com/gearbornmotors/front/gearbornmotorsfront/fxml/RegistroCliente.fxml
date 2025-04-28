@@ -12,7 +12,7 @@
       stylesheets="@../css/concesionario.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroController">
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroClienteController">
 
 
     <VBox>

@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.login.REmployeDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.REmployeDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
 import com.gearborn.motors.gearbornMotors.domain.services.EmpleadoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class EmpleadoController {
     }
 
     @PostMapping("/registrarEmpleado")
-    public ResponseEntity<?> saveEmpleado(@RequestBody EmpleadoEntity empleado) {
+    public ResponseEntity<?> saveEmpleado(@RequestBody RegisterRequestEmployeDto empleado) {
         try {
             empleadoService.save(empleado);
 

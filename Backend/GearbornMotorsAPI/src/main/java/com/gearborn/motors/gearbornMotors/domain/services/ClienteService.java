@@ -1,8 +1,8 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.RegisterRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.RegisterRequestClientDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
-import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDTO;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class ClienteService {
     }
 
     //Guardamos un cliente en la base de datos
-    public ClienteEntity save(RegisterRequestDto dto){
+    public ClienteEntity save(RegisterRequestClientDto dto){
         if(clienteRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new RuntimeException("Ya existe un usuario registrado con ese email");
         }else
@@ -30,11 +30,11 @@ public class ClienteService {
     }
 
     //Comprobamos si el cliente existe en la base de datos
-    public Optional<ClienteDTO> login(String email, String contrasenaHasheada) {
+    public Optional<ClienteDto> login(String email, String contrasenaHasheada) {
         Optional<ClienteEntity> cliente = clienteRepository.findByEmail(email);
 
         if (cliente.isPresent() && cliente.get().getContrasena().equals(contrasenaHasheada)) {
-            ClienteDTO dto = ClienteMapper.toDto(cliente.get());
+            ClienteDto dto = ClienteMapper.toDto(cliente.get());
             return Optional.of(dto);
         } else {
             return Optional.empty();

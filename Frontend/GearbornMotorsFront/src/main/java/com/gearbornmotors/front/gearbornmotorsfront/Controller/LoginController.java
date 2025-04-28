@@ -1,14 +1,11 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
-import com.gearbornmotors.front.gearbornmotorsfront.Dto.ClienteDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
-import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;

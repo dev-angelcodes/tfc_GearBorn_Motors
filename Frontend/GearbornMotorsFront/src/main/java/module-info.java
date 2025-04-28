@@ -11,6 +11,7 @@ module com.gearbornmotors.front.gearbornmotorsfront {
     exports com.gearbornmotors.front.gearbornmotorsfront.Controller;
     opens com.gearbornmotors.front.gearbornmotorsfront.Controller to javafx.fxml;
 
-    opens com.gearbornmotors.front.gearbornmotorsfront.Dto to com.google.gson;
+    opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente to com.google.gson;
+    opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado to com.google.gson;
 
 }

@@ -1,4 +1,4 @@
-package com.gearborn.motors.gearbornMotors.application.dtos.login;
+package com.gearborn.motors.gearbornMotors.application.dtos.Cliente;
 
 import lombok.Getter;
 import lombok.Setter;

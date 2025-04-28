@@ -1,6 +1,4 @@
-package com.gearbornmotors.front.gearbornmotorsfront.Dto;
-
-import java.time.LocalDate;
+package com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente;
 
 public class ClienteDto {
     public String email;
@@ -13,6 +11,7 @@ public class ClienteDto {
 
 
     //Constructor
+
 
     public ClienteDto(String nombre, String apellidos, String dni, String email, String contrasena, String direccion, int numTelefono, String fechaNacimiento) {
         this.nombre = nombre;
