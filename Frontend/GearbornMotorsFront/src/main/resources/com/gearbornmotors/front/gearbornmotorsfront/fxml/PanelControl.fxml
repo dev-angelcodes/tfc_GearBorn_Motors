@@ -22,7 +22,7 @@
                 <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
                     <VBox spacing="15" alignment="TOP_CENTER" styleClass="bordeVBox, fondoSolido">
                         <Button text="Registrar un nuevo empleado" onAction="#mostrarRegistro" styleClass="boton-sidebar"/>
-                        <Button text="Guardar la compra de un vehiculo" styleClass="boton-sidebar"/>
+                        <Button text="Guardar la compra de un vehiculo" onAction="#registrarCompra" styleClass="boton-sidebar"/>
                         <Button text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
                         <Button text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
                         <Button text="Registrar nuevo gasto de un vehículo" styleClass="boton-sidebar"/>

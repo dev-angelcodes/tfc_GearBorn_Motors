@@ -4,6 +4,7 @@ module com.gearbornmotors.front.gearbornmotorsfront {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires com.google.gson;
+    requires java.desktop;
 
 
     opens com.gearbornmotors.front.gearbornmotorsfront to javafx.fxml;
