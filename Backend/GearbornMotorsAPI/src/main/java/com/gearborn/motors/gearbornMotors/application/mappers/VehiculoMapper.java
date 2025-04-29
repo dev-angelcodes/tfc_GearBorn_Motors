@@ -1,5 +1,6 @@
 package com.gearborn.motors.gearbornMotors.application.mappers;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.CompraVehiculoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
 
@@ -25,7 +26,7 @@ public class VehiculoMapper {
 
 
     //Mapeamos de un VehiculoDto a un VehiculoEntity
-    public static VehiculoEntity toEntity(VehiculoDto vehiculo){
+    public static VehiculoEntity vehiculoDtoToEntity(VehiculoDto vehiculo){
         VehiculoEntity vehiculoEntity = new VehiculoEntity();
         vehiculoEntity.setMatricula(vehiculo.getMatricula());
         vehiculoEntity.setTipo(vehiculo.getTipo());
@@ -39,6 +40,23 @@ public class VehiculoMapper {
         vehiculoEntity.setColor(vehiculo.getColor());
         vehiculoEntity.setImg(vehiculo.getImg());
 
+        return vehiculoEntity;
+    }
+
+    //Mapeamos de un CompraVehiculoRequestDto a un VehiculoEntity
+    public static VehiculoEntity registerRequestToEntity(CompraVehiculoRequestDto compraVehiculoRequestDto) {
+        VehiculoEntity vehiculoEntity = new VehiculoEntity();
+        vehiculoEntity.setMatricula(compraVehiculoRequestDto.getMatricula());
+        vehiculoEntity.setTipo(compraVehiculoRequestDto.getTipo());
+        vehiculoEntity.setMarca(compraVehiculoRequestDto.getMarca());
+        vehiculoEntity.setModelo(compraVehiculoRequestDto.getModelo());
+        vehiculoEntity.setAnio(compraVehiculoRequestDto.getAnoFabricacion());
+        vehiculoEntity.setKm(compraVehiculoRequestDto.getKm());
+        vehiculoEntity.setEstado(compraVehiculoRequestDto.getEstado());
+        vehiculoEntity.setTipoCombustible(compraVehiculoRequestDto.getTipoCombustible());
+        vehiculoEntity.setTipoCambio(compraVehiculoRequestDto.getTipoCambio());
+        vehiculoEntity.setColor(compraVehiculoRequestDto.getColor());
+        vehiculoEntity.setImg(compraVehiculoRequestDto.getImg());
         return vehiculoEntity;
     }
 }

@@ -13,11 +13,11 @@ import java.util.List;
 @NoArgsConstructor
 public class VehiculoEntity {
     @Id
-    @Column(name = "id_vehiculo", nullable = false)
+    @Column(name = "id_vehiculo", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 7)
+    @Column(nullable = false, length = 7, unique = true)
     private String matricula;
 
     @Column(name = "tipo_vehiculo", nullable = false, length = 7)
