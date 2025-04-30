@@ -54,6 +54,7 @@ public class CompraController {
     private File imagenSeleccionada;
 
 
+    @FXML
     public void initialize() {
         seleccionVehiculo();
         seleccionEstado();
@@ -84,7 +85,7 @@ public class CompraController {
     public void registrarVehiculo(ActionEvent event) {
         if(camposComprobados()){
             CompraVehiculoRequestDto vehiculo = vehiculoGuardado();
-            enviarVehiculoAlServidor(vehiculo);
+            enviarVehiculoAlApi(vehiculo);
             guardarImg(imagenSeleccionada);
 
         }else{
@@ -92,7 +93,7 @@ public class CompraController {
         }
     }
 
-    private void enviarVehiculoAlServidor(CompraVehiculoRequestDto vehiculo) {
+    private void enviarVehiculoAlApi(CompraVehiculoRequestDto vehiculo) {
         Gson gson = new Gson();
         String json = gson.toJson(vehiculo);
 
