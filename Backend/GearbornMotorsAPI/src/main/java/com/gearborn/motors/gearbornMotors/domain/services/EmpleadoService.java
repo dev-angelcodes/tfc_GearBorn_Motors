@@ -1,5 +1,6 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.EmpleadoMappper;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
@@ -39,5 +40,11 @@ public class EmpleadoService {
         }else{
             return Optional.empty();
         }
+    }
+
+    public Optional<EmpleadoDto> getEmpleadoById(int idEmpleado) {
+        Optional<EmpleadoEntity> empleado = empleadoRepository.findById(idEmpleado);
+
+        return Optional.ofNullable(EmpleadoMappper.entityToDto(empleado));
     }
 }

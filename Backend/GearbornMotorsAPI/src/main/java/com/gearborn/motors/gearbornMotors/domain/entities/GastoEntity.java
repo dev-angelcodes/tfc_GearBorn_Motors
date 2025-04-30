@@ -30,7 +30,7 @@ public class GastoEntity {
     @Column(name = "nombre_proveedor", nullable = false, length = 50)
     private String nombreProv;
 
-    @Column(length = 250)
+    @Column(length = 300)
     private String descripcion;
 
     //FK

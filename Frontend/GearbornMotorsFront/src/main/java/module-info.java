@@ -15,5 +15,11 @@ module com.gearbornmotors.front.gearbornmotorsfront {
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente to com.google.gson;
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado to com.google.gson;
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo to com.google.gson;
+    opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos to com.google.gson;
+
+
+    exports com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente;
+    exports com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado;
+    exports com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo;
 
 }
