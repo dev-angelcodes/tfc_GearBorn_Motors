@@ -29,7 +29,6 @@ public class EmpleadoMappper {
         if(empleado.isPresent()){
             EmpleadoDto empleadoDto = new EmpleadoDto();
             empleadoDto.setId(empleado.get().getId());
-            empleadoDto.setTipo(empleado.get().getTipo());
             empleadoDto.setEmail(empleado.get().getEmail());
             empleadoDto.setNombre(empleado.get().getNombre());
             return empleadoDto;

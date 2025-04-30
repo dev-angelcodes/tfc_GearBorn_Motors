@@ -1,24 +1,33 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
+import com.gearbornmotors.front.gearbornmotorsfront.Session;
+import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class PanelControlController {
 
-    private final LoginController loginController = new LoginController();
+    protected final LoginController loginController = new LoginController();
 
     @FXML  public StackPane contenidoControl;
 
 
-    public void initialize(){
-        int idEmpleado = loginController.getIdUsuarioLogueado();
+    @FXML
+    public void initialize() throws IOException {
+        datosEmpleadoLogueado();
     }
 
 
@@ -47,6 +56,31 @@ public class PanelControlController {
             contenidoControl.getChildren().setAll(registroEmpleado);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+
+    protected EmpleadoDto datosEmpleadoLogueado() throws IOException {
+        int idEmpleado = Session.getInstance().getEmpleadoId();
+
+        String url = "http://localhost:8080/gearBorn/api/empleado/getEmpleadoById/" + idEmpleado;
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Accept", "application/json");
+
+        int responseCode = connection.getResponseCode();
+
+        if (responseCode == 200) {
+            try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                String response = in.lines().collect(Collectors.joining());
+
+                // Deserializar a DTO
+                EmpleadoDto empleado = new Gson().fromJson(response, EmpleadoDto.class);
+                return empleado;
+            }
+        } else {
+            System.out.println("Error al obtener el empleado: código " + responseCode);
+            return null;
         }
     }
 }

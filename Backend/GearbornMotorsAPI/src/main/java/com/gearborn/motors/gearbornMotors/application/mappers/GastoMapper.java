@@ -23,7 +23,7 @@ public class GastoMapper {
         empleado.setId(gasto.getIdEmpleado());
         gastoEntity.setEmpleado(empleado);
 
-        //realacion con vehiculo
+        //relación con vehiculo
         VehiculoEntity vehiculo = new VehiculoEntity();
         vehiculo.setId(gasto.getIdVehiculo());
         gastoEntity.setVehiculo(vehiculo);

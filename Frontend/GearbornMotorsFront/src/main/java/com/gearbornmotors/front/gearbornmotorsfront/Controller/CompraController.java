@@ -1,6 +1,8 @@
 
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.CompraGastoRequestDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.CompraVehiculoRequestDto;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
@@ -12,9 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -22,7 +28,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
-public class CompraController {
+public class CompraController extends PanelControlController {
 
     @FXML public ColorPicker colorPicker;
     @FXML public MenuButton tipoVehiculo;
@@ -108,7 +114,12 @@ public class CompraController {
                 .thenAccept(response -> {
                     if (response.statusCode() == 201) {
                         System.out.println("Vehículo registrado correctamente.");
-                        /*enviarGastoApi();*/
+                        try {
+                            CompraGastoRequestDto gasto = registrarGasto();
+                            enviarGastoApi(gasto);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     } else {
                         System.err.println("Error: " + response.statusCode() + " - " + response.body());
                     }
@@ -118,6 +129,72 @@ public class CompraController {
                     return null;
                 });
     }
+
+    private CompraGastoRequestDto registrarGasto() throws IOException {
+        EmpleadoDto empleadoDto = datosEmpleadoLogueado();
+        int idVehiculo = obtenerIdVehiculo();
+        
+        CompraGastoRequestDto gasto = new CompraGastoRequestDto();
+        gasto.setImporte(Double.parseDouble(precio.getText().trim()));
+        gasto.setNombreProv(proveedor.getText().trim());
+        gasto.setIdEmpleado(empleadoDto.getId());
+        gasto.setIdVehiculo(idVehiculo);
+        return gasto;
+    }
+
+    private int obtenerIdVehiculo() {
+        try {
+            String matriculaStr = matricula.getText().trim();
+            String url = "http://localhost:8080/gearBorn/api/vehiculo/getIdByMatricula/" + matriculaStr;
+
+            HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            int responseCode = connection.getResponseCode();
+
+            if (responseCode == 200) {
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+                    String idString = in.readLine();
+                    return Integer.parseInt(idString);
+                }
+            } else {
+                System.out.println("Error al obtener ID del vehículo. Código: " + responseCode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+
+    private void enviarGastoApi(CompraGastoRequestDto gasto) throws IOException {
+        Gson gson = new Gson();
+        String json = gson.toJson(gasto);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/gearBorn/api/gasto/registrarGasto"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    if (response.statusCode() == 201) {
+                        System.out.println("Gasto registrado correctamente.");
+                    } else {
+                        System.err.println("Error al registrar gasto. Código: " + response.statusCode());
+                        System.err.println("Mensaje: " + response.body());
+                    }
+                })
+                .exceptionally(e -> {
+                    e.printStackTrace();
+                    return null;
+                });
+    }
+
 
     private CompraVehiculoRequestDto vehiculoGuardado() {
         try{

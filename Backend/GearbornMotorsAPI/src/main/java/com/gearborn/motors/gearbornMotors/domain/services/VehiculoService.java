@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehiculoService {
@@ -42,9 +43,13 @@ public class VehiculoService {
     public void save (CompraVehiculoRequestDto compraVehiculoRequestDto) {
         VehiculoEntity vehiculo = VehiculoMapper.registerRequestToEntity(compraVehiculoRequestDto);
         if(vehiculo.getMatricula() != null && vehiculoRepository.findByMatricula(vehiculo.getMatricula()).isPresent()) {
-            throw new RuntimeException("Ya existe un vehiculo registrado con esa matricula");
+            throw new RuntimeException("Ya existe un vehículo registrado con esa matricula");
         }else{
             vehiculoRepository.save(vehiculo);
         }
+    }
+
+    public Optional<Integer> getIdByMatricula(String matricula) {
+        return vehiculoRepository.findByMatricula(matricula).map(VehiculoEntity::getId);
     }
 }

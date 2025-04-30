@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.Optional;
+
+@RestController
 @RequestMapping("/vehiculo")
 public class VehiculoController {
     private final VehiculoService vehiculoService;
@@ -28,5 +28,10 @@ public class VehiculoController {
         }catch (RuntimeException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/getIdByMatricula/{matricula}")
+    public Optional<Integer> getIdByMatricula(@PathVariable String matricula) {
+        return vehiculoService.getIdByMatricula(matricula);
     }
 }
