@@ -13,7 +13,8 @@
       stylesheets="@../css/panelControl.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroEmpleadosController">
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroEmpleadosController"
+      VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
 
     <padding>
         <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
@@ -26,7 +27,7 @@
     <VBox spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
         <HBox spacing="200" alignment="TOP_CENTER">
             <VBox spacing="50" alignment="TOP_CENTER">
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca el tipo de empleado: " />
                     <MenuButton fx:id="tipoEmpleado" text="Tipos empleado" styleClass="cursorMano">
                         <items>
@@ -34,51 +35,52 @@
                             <MenuItem fx:id="comercial" text="Comercial de ventas" styleClass="cursorMano"/>
                         </items>
                     </MenuButton>
-                </HBox>
-                <HBox spacing="20">
+                </VBox>
+                <VBox spacing="20">
                     <Label text="Introduzca el dni del nuevo empleado: "/>
                     <TextField fx:id="dni" promptText="Dni ejemplo: 12345678A "/>
-                </HBox>
+                </VBox>
 
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca el email del nuevo empleado: "/>
                     <TextField fx:id="correo" promptText="email ejemplo: empleado1@gmail.com "/>
-                </HBox>
+                </VBox>
 
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca la fecha de nacimiento del empleado (formato: año-mes-dia): "/>
                     <TextField fx:id="fechaNacimiento" promptText="año-mes-dia"/>
-                </HBox>
+                </VBox>
             </VBox>
             <VBox spacing="50" alignment="TOP_CENTER">
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca el nombre: "/>
                     <TextField fx:id="nombre" promptText="Nombre ejemplo: Empleado1"/>
-                </HBox>
+                </VBox>
 
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca los apellidos: "/>
                     <TextField fx:id="apellidos" promptText="Apellidos ejemplo: apellido1 apellido2"/>
-                </HBox>
+                </VBox>
 
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca el número de teléfono del empleado: "/>
                     <TextField fx:id="numeroTelefono" promptText="Numero de ejemplo: 123456789"/>
-                </HBox>
+                </VBox>
 
-                <HBox spacing="20">
+                <VBox spacing="20">
                     <Label text="Introduzca la fecha de creacion de contrato (formato: año-mes-dia): "/>
                     <TextField fx:id="fechaCreacionContrato" promptText="año-mes-dia"/>
-                </HBox>
+                </VBox>
             </VBox>
         </HBox>
-        <HBox spacing="20" alignment="CENTER">
-            <Label text="Introduzca la contraseña para el nuevo empleado"/>
-            <PasswordField fx:id="contrasenha"/>
-        </HBox>
+        <VBox spacing="40">
+            <HBox spacing="20" alignment="CENTER">
+                <Label text="Introduzca la contraseña para el nuevo empleado"/>
+                <PasswordField fx:id="contrasenha" maxWidth="200" />
+            </HBox>
+            <StackPane alignment="BOTTOM_CENTER">
+                <Button text="Registrar Empleado" onAction="#Registro" styleClass="cursorMano"/>
+            </StackPane>
+        </VBox>
     </VBox>
-    <StackPane alignment="BOTTOM_CENTER">
-        <Button text="Registrar Empleado" onAction="#Registro" styleClass="cursorMano"/>
-    </StackPane>
-
 </VBox>

@@ -31,4 +31,15 @@ public class PanelControlController {
         Scenes scenes = new Scenes();
         scenes.goMenu(event);
     }
+
+    @FXML
+    public void registrarCompra(ActionEvent event) {
+        try {
+            Parent registroEmpleado = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/CompraVehiculo.fxml")));
+            contenidoControl.getChildren().setAll(registroEmpleado);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

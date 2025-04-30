@@ -12,29 +12,30 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.PanelControlController">
 
-    <HBox VBox.vgrow="ALWAYS">
-        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" minWidth="630">
+    <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" maxWidth="500 " minWidth="100">
             <padding>
                 <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
             </padding>
             <Pane styleClass="imgLogo" prefWidth="200" prefHeight="100" minWidth="200" minHeight="100"/>
-            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-                <VBox spacing="15" alignment="TOP_CENTER" styleClass="bordeVBox, fondoSolido">
-                    <Button text="Registrar un nuevo empleado" onAction="#mostrarRegistro" styleClass="boton-sidebar"/>
-                    <Button text="Guardar la compra de un vehiculo" styleClass="boton-sidebar"/>
-                    <Button text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
-                    <Button text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
-                    <Button text="Registrar nuevo gasto de un vehículo" styleClass="boton-sidebar"/>
-                    <Button text="Consultar el historial de ventas" styleClass="boton-sidebar"/>
-                    <Button text="Consultar historial de gastos de un vehículo" styleClass="boton-sidebar"/>
-                    <Button text="Suspender un empleado" styleClass="boton-sidebar"/>
-                </VBox>
-            </ScrollPane>
-            <Button text="Volver al menú principal" onAction="#cargarMenu" styleClass="boton-sidebar"/>
+            <VBox spacing="20" alignment="TOP_CENTER">
+                <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
+                    <VBox spacing="15" alignment="TOP_CENTER" styleClass="bordeVBox, fondoSolido">
+                        <Button text="Registrar un nuevo empleado" onAction="#mostrarRegistro" styleClass="boton-sidebar"/>
+                        <Button text="Guardar la compra de un vehiculo" onAction="#registrarCompra" styleClass="boton-sidebar"/>
+                        <Button text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
+                        <Button text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
+                        <Button text="Registrar nuevo gasto de un vehículo" styleClass="boton-sidebar"/>
+                        <Button text="Consultar el historial de ventas" styleClass="boton-sidebar"/>
+                        <Button text="Consultar historial de gastos de un vehículo" styleClass="boton-sidebar"/>
+                        <Button text="Suspender un empleado" styleClass="boton-sidebar"/>
+                    </VBox>
+                </ScrollPane>
+                <Button text="Volver al menú principal" onAction="#cargarMenu" VBox.vgrow="ALWAYS" styleClass="boton-sidebar"/>
+            </VBox>
         </VBox>
         <StackPane fx:id="contenidoControl" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 
         </StackPane>
     </HBox>
-
 </VBox>
