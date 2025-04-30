@@ -18,7 +18,7 @@
 
 .stackPaneTransparente {
      -fx-border-color: transparent;
-     -fx-border-width: 0px;
+     -fx-border-width: 2px;
 }
 
 .boton-sidebar {

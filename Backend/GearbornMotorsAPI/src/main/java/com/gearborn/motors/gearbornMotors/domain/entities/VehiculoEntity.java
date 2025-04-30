@@ -44,7 +44,7 @@ public class VehiculoEntity {
     @Column(name = "tipo_cambio", nullable = false, length = 25)
     private String tipoCambio;
 
-    @Column(nullable = false, length = 7)
+    @Column(nullable = false)
     private String color;
 
     private String img;

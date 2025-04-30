@@ -82,6 +82,10 @@
                         <Label text="Seleccione el color del vehículo"/>
                         <ColorPicker fx:id="colorPicker"/>
                     </VBox>
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Introduca el total de kilometros que tiene el vehículo"/>
+                        <TextField fx:id="km"/>
+                    </VBox>
                 </VBox>
                 <VBox spacing="70" alignment="TOP_CENTER">
                     <VBox spacing="10" alignment="TOP_CENTER">
@@ -119,5 +123,4 @@
     <StackPane alignment="TOP_CENTER" styleClass="stackPaneTransparente">
         <Button text="Registrar compra del vehículo" onAction="#registrarVehiculo" />
     </StackPane>
-
 </VBox>
