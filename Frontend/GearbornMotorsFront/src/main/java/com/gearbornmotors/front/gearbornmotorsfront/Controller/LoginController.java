@@ -1,6 +1,6 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
-import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
+
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class LoginController {
     @FXML public Button botonEmpleado;
     @FXML public Button botonCliente;
 
-    private ClienteDto clienteLogueado;
+    public int idUsuarioLogueado;
 
 
     public void initialize() {
@@ -108,6 +108,7 @@ public class LoginController {
             con.disconnect();
 
             if (status == 200) {
+                idUsuarioLogueado = id;
                 // Login exitoso → cambiar de escena
                 Scenes escena = new Scenes();
                 escena.goPanelControl(event);
@@ -149,5 +150,13 @@ public class LoginController {
     public void IrRegistro(ActionEvent event) {
         Scenes scenes = new Scenes();
         scenes.goRegister(event);
+    }
+
+    public int getIdUsuarioLogueado() {
+        return idUsuarioLogueado;
+    }
+
+    public void setIdUsuarioLogueado(int idUsuarioLogueado) {
+        this.idUsuarioLogueado = idUsuarioLogueado;
     }
 }

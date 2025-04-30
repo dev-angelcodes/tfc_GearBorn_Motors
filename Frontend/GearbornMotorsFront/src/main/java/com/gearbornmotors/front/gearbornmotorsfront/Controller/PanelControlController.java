@@ -12,7 +12,14 @@ import java.util.Objects;
 
 public class PanelControlController {
 
+    private final LoginController loginController = new LoginController();
+
     @FXML  public StackPane contenidoControl;
+
+
+    public void initialize(){
+        int idEmpleado = loginController.getIdUsuarioLogueado();
+    }
 
 
     @FXML

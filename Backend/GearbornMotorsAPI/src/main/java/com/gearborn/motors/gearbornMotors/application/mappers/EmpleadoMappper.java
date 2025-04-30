@@ -1,9 +1,11 @@
 package com.gearborn.motors.gearbornMotors.application.mappers;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class EmpleadoMappper {
 
@@ -21,5 +23,18 @@ public class EmpleadoMappper {
         empleadoEntity.setFechaContrato(LocalDate.parse(empleado.getFechaContrato()));
         empleadoEntity.setNumeroTelefono(empleado.getNumeroTelefono());
         return empleadoEntity;
+    }
+
+    public static EmpleadoDto entityToDto(Optional<EmpleadoEntity> empleado){
+        if(empleado.isPresent()){
+            EmpleadoDto empleadoDto = new EmpleadoDto();
+            empleadoDto.setId(empleado.get().getId());
+            empleadoDto.setTipo(empleado.get().getTipo());
+            empleadoDto.setEmail(empleado.get().getEmail());
+            empleadoDto.setNombre(empleado.get().getNombre());
+            return empleadoDto;
+        }else{
+            return null;
+        }
     }
 }

@@ -10,14 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpleadoDto {
-    private String contrasena;
+    private int id;
     private String tipo;
-    private boolean suspendido;
-    private String dni;
     private String email;
     private String nombre;
-    private String apellidos;
-    private String fechaNacimiento;
-    private String fechaContrato;
-    private int numeroTelefono;
 }

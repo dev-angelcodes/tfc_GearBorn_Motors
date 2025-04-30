@@ -85,7 +85,7 @@ public class CompraController {
     public void registrarVehiculo(ActionEvent event) {
         if(camposComprobados()){
             CompraVehiculoRequestDto vehiculo = vehiculoGuardado();
-            enviarVehiculoAlApi(vehiculo);
+            enviarVehiculoApi(vehiculo);
             guardarImg(imagenSeleccionada);
 
         }else{
@@ -93,7 +93,7 @@ public class CompraController {
         }
     }
 
-    private void enviarVehiculoAlApi(CompraVehiculoRequestDto vehiculo) {
+    private void enviarVehiculoApi(CompraVehiculoRequestDto vehiculo) {
         Gson gson = new Gson();
         String json = gson.toJson(vehiculo);
 
@@ -108,6 +108,7 @@ public class CompraController {
                 .thenAccept(response -> {
                     if (response.statusCode() == 201) {
                         System.out.println("Vehículo registrado correctamente.");
+                        /*enviarGastoApi();*/
                     } else {
                         System.err.println("Error: " + response.statusCode() + " - " + response.body());
                     }

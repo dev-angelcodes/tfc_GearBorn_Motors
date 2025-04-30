@@ -1,5 +1,6 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.REmployeDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
@@ -42,5 +43,10 @@ public class EmpleadoController {
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }
+    }
+
+    @GetMapping("/getEmpleadoById/{idEmpleado}")
+    public Optional<EmpleadoDto> getEmpleadoById(@PathVariable int idEmpleado){
+        return empleadoService.getEmpleadoById(idEmpleado);
     }
 }
