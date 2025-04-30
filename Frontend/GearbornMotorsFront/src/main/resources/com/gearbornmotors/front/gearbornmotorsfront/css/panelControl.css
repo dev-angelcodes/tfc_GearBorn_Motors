@@ -16,6 +16,10 @@
     -fx-padding: 10;
 }
 
+.stackPaneTransparente {
+     -fx-border-color: transparent;
+     -fx-border-width: 0px;
+}
 
 .boton-sidebar {
     -fx-background-color: transparent;

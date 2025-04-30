@@ -1,5 +1,7 @@
+
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -8,7 +10,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,8 +40,16 @@ public class CompraController {
     @FXML public Button botonSeleccionarImg;
     @FXML public Label nombreArchivoLabel;
     @FXML public ImageView previewImagen;
+    public TextField precio;
+    public TextField proveedor;
 
 
+    public void initialize() {
+        seleccionVehiculo();
+        seleccionEstado();
+        seleccionCambio();
+        seleccionCombustible();
+    }
 
 
     @FXML
@@ -63,6 +72,15 @@ public class CompraController {
         }
     }
 
+    @FXML
+    public void registrarVehiculo(ActionEvent event) {
+        if(camposComprobados()){
+            System.out.println("Todos los campos están completos.");
+        }else{
+            System.out.println("Faltan campos por completar.");
+        }
+    }
+
     private void mostrarImagen(File archivo, String nombreArchivo) {
 
         nombreArchivoLabel.setVisible(true); nombreArchivoLabel.setManaged(true);
@@ -75,10 +93,60 @@ public class CompraController {
 
     private void guardarImg(File archivoSeleccionado) {
         try {
-            Path destino = Path.of("src/main/resources/com/gearbornmotors/front/gearbornmotorsfront/img/" + archivoSeleccionado.getName());
+            Path destino = Path.of("src/main/resources/com/gearbornmotors/front/gearbornmotorsfront/img/"
+                    + archivoSeleccionado.getName());
             Files.copy(archivoSeleccionado.toPath(), destino, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean camposComprobados() {
+        return !tipoVehiculo.getText().equals("Tipos de vehículos") && !matricula.getText().trim().isEmpty() && !marca.getText().trim().isEmpty()
+                && !precio.getText().trim().isEmpty() && !estadoVehiculo.getText().equals("Estado") && !tipoCambio.getText().equals("Tipos de cambio")
+                && !combustible.getText().equals("Tipos de combustible") && !anho.getText().trim().isEmpty()
+                && !modelo.getText().trim().isEmpty() && !proveedor.getText().trim().isEmpty();
+    }
+
+    private void seleccionVehiculo() {
+        coche.setOnAction(event -> {
+            tipoVehiculo.setText("Coche");
+        });
+        moto.setOnAction(event -> {
+            tipoVehiculo.setText("Moto");
+        });
+    }
+
+    private void seleccionCombustible() {
+        gasolina.setOnAction(event -> {
+            combustible.setText("Gasolina");
+        });
+        diesel.setOnAction(event -> {
+            combustible.setText("Diesel");
+        });
+        electrico.setOnAction(event -> {
+            combustible.setText("Eléctrico");
+        });
+    }
+
+    private void seleccionCambio() {
+        manual.setOnAction(event -> {
+            tipoCambio.setText("Manual");
+        });
+        automatico.setOnAction(event -> {
+            tipoCambio.setText("Automático");
+        });
+    }
+
+    private void seleccionEstado() {
+        disponible.setOnAction(event -> {
+            estadoVehiculo.setText("Disponible");
+        });
+        reservado.setOnAction(event -> {
+            estadoVehiculo.setText("Reservado");
+        });
+        vendido.setOnAction(event -> {
+            estadoVehiculo.setText("Vendido");
+        });
     }
 }

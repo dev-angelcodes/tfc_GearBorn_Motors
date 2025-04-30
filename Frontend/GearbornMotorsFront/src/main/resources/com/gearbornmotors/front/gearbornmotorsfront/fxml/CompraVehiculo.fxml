@@ -11,6 +11,7 @@
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <VBox spacing="70.0"
       styleClass="background"
       stylesheets="@../css/panelControl.css"
@@ -22,81 +23,101 @@
         <Insets bottom="50.0" left="20.0" right="20.0" top="50.0"/>
     </padding>
 
-    <StackPane alignment="TOP_CENTER">
+    <StackPane alignment="TOP_CENTER" styleClass="stackPaneTransparente">
         <Label text="Registrar la compra de un vehículo" styleClass="labelPrincipal"/>
     </StackPane>
 
+    <ScrollPane fitToHeight="true" fitToWidth="true">
 
-    <HBox spacing="150" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
-        <VBox spacing="70" alignment="TOP_CENTER">
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label text="Introduzca el tipo de vehículo"/>
-                <MenuButton fx:id="tipoVehiculo" text="Tipos de vehículos" styleClass="cursorMano">
-                    <items>
-                        <MenuItem fx:id="coche" text="Coche" styleClass="cursorMano"/>
-                        <MenuItem fx:id="moto" text="Moto" styleClass="cursorMano"/>
-                    </items>
-                </MenuButton>
-            </VBox>
-            <VBox spacing="10">
-                <Label text="Introduzca la matrícula del vehículo"/>
-                <TextField fx:id="matricula"/>
-            </VBox>
-            <VBox spacing="10">
-                <Label text="Introduzca la marca del vehículo"/>
-                <TextField fx:id="marca" promptText="ej: Toyota"/>
-            </VBox>
+        <padding>
+            <Insets bottom="25.0" top="25.0"/>
+        </padding>
+
+        <VBox spacing="70">
+            <HBox spacing="150" alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+                <VBox spacing="70" alignment="TOP_CENTER">
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Introduzca el tipo de vehículo"/>
+                        <MenuButton fx:id="tipoVehiculo" text="Tipos de vehículos" styleClass="cursorMano">
+                            <items>
+                                <MenuItem fx:id="coche" text="Coche" styleClass="cursorMano"/>
+                                <MenuItem fx:id="moto" text="Moto" styleClass="cursorMano"/>
+                            </items>
+                        </MenuButton>
+                    </VBox>
+                    <VBox spacing="10">
+                        <Label text="Introduzca la matrícula del vehículo"/>
+                        <TextField fx:id="matricula"/>
+                    </VBox>
+                    <VBox spacing="10">
+                        <Label text="Introduzca la marca del vehículo"/>
+                        <TextField fx:id="marca" />
+                    </VBox>
+                    <VBox>
+                        <Label text="Introduzca el precio de compra del vehículo"/>
+                        <TextField fx:id="precio" />
+                    </VBox>
+                </VBox>
+                <VBox spacing="70" alignment="TOP_CENTER">
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Introduzca el estado del vehiculo"/>
+                        <MenuButton fx:id="estadoVehiculo" text="Estado" styleClass="cursorMano">
+                            <items>
+                                <MenuItem fx:id="disponible" text="Disponible" styleClass="cursorMano"/>
+                                <MenuItem fx:id="reservado" text="Reservado" styleClass="cursorMano"/>
+                                <MenuItem fx:id="vendido" text="Vendido" styleClass="cursorMano"/>
+                            </items>
+                        </MenuButton>
+                    </VBox>
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Introduzca el tipo de cambio"/>
+                        <MenuButton fx:id="tipoCambio" text="Tipos de cambio" styleClass="cursorMano">
+                            <items>
+                                <MenuItem fx:id="manual" text="Manual" styleClass="cursorMano"/>
+                                <MenuItem fx:id="automatico" text="Automatico" styleClass="cursorMano"/>
+                            </items>
+                        </MenuButton>
+                    </VBox>
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Seleccione el color del vehículo"/>
+                        <ColorPicker fx:id="colorPicker"/>
+                    </VBox>
+                </VBox>
+                <VBox spacing="70" alignment="TOP_CENTER">
+                    <VBox spacing="10" alignment="TOP_CENTER">
+                        <Label text="Introduzca el tipo del vehículo"/>
+                        <MenuButton fx:id="combustible" text="Tipo de combustible" styleClass="cursorMano">
+                            <items>
+                                <MenuItem fx:id="gasolina" text="Gasolina" styleClass="cursorMano"/>
+                                <MenuItem fx:id="diesel" text="Diesel" styleClass="cursorMano"/>
+                                <MenuItem fx:id="electrico" text="Eléctrico" styleClass="cursorMano"/>
+                            </items>
+                        </MenuButton>
+                    </VBox>
+                    <VBox spacing="10">
+                        <Label text="Introduzca el año de fabricación del vehículo"/>
+                        <TextField fx:id="anho" />
+                    </VBox>
+                    <VBox spacing="10">
+                        <Label text="Introduzcca el modelo del vehículo"/>
+                        <TextField fx:id="modelo" />
+                    </VBox>
+                    <VBox>
+                        <Label text="Introduzca el nombre del proveedor del vehículo"/>
+                        <TextField fx:id="proveedor"/>
+                    </VBox>
+                </VBox>
+            </HBox>
+            <HBox spacing="50" alignment="CENTER">
+                <Button fx:id="botonSeleccionarImg" text="Seleccionar imagen del vehículo"
+                        onAction="#seleccionarImagen"/>
+                <Label fx:id="nombreArchivoLabel" text="Sin imagen seleccionada" visible="false" managed="false" />
+                <ImageView fx:id="previewImagen" fitWidth="200" preserveRatio="true" visible="false" managed="false"/>
+            </HBox>
         </VBox>
-        <VBox spacing="70" alignment="TOP_CENTER">
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label text="Introduzca el estado del vehiculo"/>
-                <MenuButton fx:id="estadoVehiculo" text="Estado" styleClass="cursorMano">
-                    <items>
-                        <MenuItem fx:id="disponible" text="Disponible" styleClass="cursorMano"/>
-                        <MenuItem fx:id="reservado" text="Reservado" styleClass="cursorMano"/>
-                        <MenuItem fx:id="vendido" text="Vendido" styleClass="cursorMano"/>
-                    </items>
-                </MenuButton>
-            </VBox>
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label text="Introduzca el tipo de cambio"/>
-                <MenuButton fx:id="tipoCambio" text="Tipos de cambio" styleClass="cursorMano">
-                    <items>
-                        <MenuItem fx:id="manual" text="Coche" styleClass="cursorMano"/>
-                        <MenuItem fx:id="automatico" text="Moto" styleClass="cursorMano"/>
-                    </items>
-                </MenuButton>
-            </VBox>
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label text="Seleccione el color del vehículo"/>
-                <ColorPicker fx:id="colorPicker"/>
-            </VBox>
-        </VBox>
-        <VBox spacing="70" alignment="TOP_CENTER">
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label text="Introduzca el tipo del vehículo"/>
-                <MenuButton fx:id="combustible" text="Tipo de combustible" styleClass="cursorMano">
-                    <items>
-                        <MenuItem fx:id="gasolina" text="Gasolina" styleClass="cursorMano"/>
-                        <MenuItem fx:id="diesel" text="Diesel" styleClass="cursorMano"/>
-                        <MenuItem fx:id="electrico" text="Eléctrico" styleClass="cursorMano"/>
-                    </items>
-                </MenuButton>
-            </VBox>
-            <VBox spacing="10">
-                <Label text="Introduzca el año de fabricación del vehículo"/>
-                <TextField fx:id="anho" promptText="ej:2008"/>
-            </VBox>
-            <VBox spacing="10">
-                <Label text="Introduzcca el modelo del vehículo"/>
-                <TextField fx:id="modelo" promptText = "ej: Corolla Sedan"/>
-            </VBox>
-        </VBox>
-    </HBox>
-    <HBox spacing="50" alignment="CENTER">
-        <Button fx:id="botonSeleccionarImg" text="Seleccionar imagen"
-                onAction="#seleccionarImagen"/>
-        <Label fx:id="nombreArchivoLabel" text="Sin imagen seleccionada" visible="false" managed="false" />
-        <ImageView fx:id="previewImagen" fitWidth="200" preserveRatio="true" visible="false" managed="false"/>
-    </HBox>
+    </ScrollPane>
+    <StackPane alignment="TOP_CENTER" styleClass="stackPaneTransparente">
+        <Button text="Registrar compra del vehículo" onAction="#registrarVehiculo" />
+    </StackPane>
+
 </VBox>
