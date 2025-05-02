@@ -1,14 +1,19 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -40,17 +45,26 @@ public class ConcesionarioController {
 
     private HBox crearHBox(VehiculoDto v) {
         HBox hbox = new HBox(20);
-        hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.setStyle("-fx-padding: 15; -fx-background-color: #f2f2f2; -fx-border-color: #ccc; " +
                 "-fx-border-radius: 10; -fx-background-radius: 10;");
         hbox.setPrefHeight(150);
+        hbox.setAlignment(Pos.CENTER_LEFT);
 
         ImageView imagen = crearImagenVehiculo(v);
-        VBox datos = crearVBoxDatosVehiculo(v);
-        Button boton = crearBotonSaberMas(v);
 
-        datos.getChildren().add(boton);
-        hbox.getChildren().addAll(imagen, datos);
+        // VBox para los datos principales
+        VBox datos = crearVBoxDatosVehiculo(v);
+        datos.setAlignment(Pos.CENTER_LEFT);
+
+        // VBox para el botón (alineado a la derecha)
+        VBox botonContainer = new VBox();
+        botonContainer.setAlignment(Pos.CENTER_RIGHT);
+        botonContainer.setPadding(new Insets(0, 0, 0, 50)); // Espacio a la izquierda
+        Button boton = crearBotonSaberMas(v);
+        botonContainer.getChildren().add(boton);
+
+        hbox.getChildren().addAll(imagen, datos, botonContainer);
+        HBox.setHgrow(datos, Priority.ALWAYS); // Hace que los datos ocupen el espacio disponible
 
         return hbox;
     }
@@ -76,25 +90,43 @@ public class ConcesionarioController {
     }
 
     private VBox crearVBoxDatosVehiculo(VehiculoDto v) {
-        VBox datosVehiculo = new VBox(10);
-        datosVehiculo.setPrefHeight(150);
+        VBox datosVehiculo = new VBox(8); // Menor espaciado
         datosVehiculo.setAlignment(Pos.CENTER_LEFT);
+
+        // Usar GridPane para alinear las etiquetas
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(5);
 
         Label marcaModelo = new Label(v.getMarca() + " " + v.getModelo());
         marcaModelo.setStyle("-fx-font-weight: bold; -fx-font-size: 16;");
 
-        Label kilometros = new Label("Kilómetros: " + v.getKm());
-        Label anio = new Label("Año: " + v.getAnio());
+        Label kilometros = new Label("Kilómetros:");
+        kilometros.setStyle("-fx-font-weight: bold;");
+        Label valorKm = new Label(String.format("%,.1f", v.getKm()));
 
-        datosVehiculo.getChildren().addAll(marcaModelo, kilometros, anio);
+        Label anio = new Label("Año:");
+        anio.setStyle("-fx-font-weight: bold;");
+        Label valorAnio = new Label(String.valueOf(v.getAnio()));
+
+        // Añadir al grid
+        grid.add(marcaModelo, 0, 0, 2, 1); // Ocupa 2 columnas
+
+        grid.add(kilometros, 0, 1);
+        grid.add(valorKm, 1, 1);
+
+        grid.add(anio, 0, 2);
+        grid.add(valorAnio, 1, 2);
+
+        datosVehiculo.getChildren().add(grid);
         return datosVehiculo;
     }
 
     private Button crearBotonSaberMas(VehiculoDto v) {
         Button boton = new Button("Saber más");
-        boton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 5;");
+        boton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; " +
+                "-fx-background-radius: 5; -fx-padding: 8 15;");
         boton.setOnAction(e -> {
-            // Acción del botón
             System.out.println("Ver más de: " + v.getMarca() + " " + v.getModelo());
         });
         return boton;
@@ -139,5 +171,10 @@ public class ConcesionarioController {
             e.printStackTrace();
         }
         return vehiculos;
+    }
+
+    public void cargarMenu(ActionEvent event) {
+        Scenes escena = new Scenes();
+        escena.goMenu(event);
     }
 }

@@ -18,3 +18,23 @@
 .textoBlanco {
     -fx-text-fill: white;
 }
+
+.boton-sidebar {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 20;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-font-weight: normal;
+    -fx-cursor: hand;
+}
+
+.boton-sidebar:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-font-weight: bold;
+}
