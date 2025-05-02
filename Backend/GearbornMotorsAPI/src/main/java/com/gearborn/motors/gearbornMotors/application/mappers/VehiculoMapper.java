@@ -9,7 +9,6 @@ public class VehiculoMapper {
     //Mapeamos de un VehiculoEntity a un VehiculoDto
     public static VehiculoDto toDto(VehiculoEntity vehiculo){
         VehiculoDto vehiculoDto = new VehiculoDto();
-        vehiculoDto.setMatricula(vehiculo.getMatricula());
         vehiculoDto.setTipo(vehiculo.getTipo());
         vehiculoDto.setMarca(vehiculo.getMarca());
         vehiculoDto.setModelo(vehiculo.getModelo());

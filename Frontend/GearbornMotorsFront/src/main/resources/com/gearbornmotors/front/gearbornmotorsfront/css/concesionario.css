@@ -1,0 +1,20 @@
+.fondoSolido{
+    -fx-background-color: #1B3A57;
+}
+
+.labelPrincipal {
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.labelSecundaria {
+    -fx-font-size: 20px;
+}
+
+.labelDescripcion {
+    -fx-font-size: 15px;
+}
+
+.textoBlanco {
+    -fx-text-fill: white;
+}

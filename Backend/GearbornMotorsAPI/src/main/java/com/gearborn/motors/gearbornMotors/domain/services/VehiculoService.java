@@ -33,8 +33,10 @@ public class VehiculoService {
         List<VehiculoDto> vehiculosDTO = new ArrayList<>();
 
         for(VehiculoEntity vehiculo : vehiculosEntity){
-            VehiculoDto dto = VehiculoMapper.toDto(vehiculo);
-            vehiculosDTO.add(dto);
+            if(vehiculo.getEstado().equals("Disponible")){ //Filtramos los vehiculos que estan disponibles
+                VehiculoDto dto = VehiculoMapper.toDto(vehiculo);
+                vehiculosDTO.add(dto);
+            }
         }
         return vehiculosDTO;    //Devolvemos el listado de vehiculos DTO
     }
