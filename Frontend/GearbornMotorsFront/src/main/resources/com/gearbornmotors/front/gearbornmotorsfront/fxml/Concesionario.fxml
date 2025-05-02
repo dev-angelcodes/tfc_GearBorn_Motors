@@ -3,11 +3,39 @@
 
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="70.0"
-      styleClass="background"
-      stylesheets="@../css/concesionario.css"
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<VBox stylesheets="@../css/concesionario.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.ConcesionarioController">
 
+    <HBox VBox.vgrow="ALWAYS">
+        <VBox spacing="60" alignment="TOP_CENTER" styleClass="fondoSolido" maxWidth="400">
+            <padding>
+                <Insets bottom="50.0" left="10.0" right="5.0" top="25.0"/>
+            </padding>
+
+            <Label text="Bienvenido User" styleClass="labelPrincipal, textoBlanco" wrapText="true"/>
+            <Label fx:id="descripcionConcesionario" styleClass="labelDescripcion, textoBlanco"/>
+            <Label alignment="BOTTOM_CENTER" text="¡Disfruta la experiencia de vivir!"
+                   styleClass="labelSecundaria, textoBlanco" wrapText="true"/>
+        </VBox>
+
+        <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" minWidth="900"
+                                spacing="60">
+            <padding>
+                <Insets bottom="50.0" left="5.0" right="20.0" top="60.0"/>
+            </padding>
+
+            <Label text="Vehiculos Disponibles" styleClass="labelPrincipal" wrapText="true"/>
+
+            <ScrollPane fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS" styleClass="ScrollPane">
+                <VBox fx:id="vehiculosContainer" spacing="10">
+
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
 </VBox>

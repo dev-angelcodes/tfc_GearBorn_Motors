@@ -113,7 +113,7 @@
                 </VBox>
             </HBox>
             <HBox spacing="50" alignment="CENTER">
-                <Button fx:id="botonSeleccionarImg" text="Seleccionar imagen del vehículo"
+                <Button fx:id="botonSeleccionarImg" text="Seleccionar imagen del vehículo" styleClass="cursorMano"
                         onAction="#seleccionarImagen"/>
                 <Label fx:id="nombreArchivoLabel" text="Sin imagen seleccionada" visible="false" managed="false" />
                 <ImageView fx:id="previewImagen" fitWidth="200" preserveRatio="true" visible="false" managed="false"/>
@@ -121,6 +121,6 @@
         </VBox>
     </ScrollPane>
     <StackPane alignment="TOP_CENTER" styleClass="stackPaneTransparente">
-        <Button text="Registrar compra del vehículo" onAction="#registrarVehiculo" />
+        <Button text="Registrar compra del vehículo" styleClass="cursorMano" onAction="#registrarVehiculo" />
     </StackPane>
 </VBox>
