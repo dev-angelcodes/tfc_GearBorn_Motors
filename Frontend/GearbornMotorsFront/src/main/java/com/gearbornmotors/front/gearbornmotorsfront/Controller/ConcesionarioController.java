@@ -41,7 +41,8 @@ public class ConcesionarioController {
     private HBox crearHBox(VehiculoDto v) {
         HBox hbox = new HBox(20);
         hbox.setAlignment(Pos.CENTER_LEFT);
-        hbox.setStyle("-fx-padding: 15; -fx-background-color: #f2f2f2; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-background-radius: 10;");
+        hbox.setStyle("-fx-padding: 15; -fx-background-color: #f2f2f2; -fx-border-color: #ccc; " +
+                "-fx-border-radius: 10; -fx-background-radius: 10;");
         hbox.setPrefHeight(150);
 
         ImageView imagen = crearImagenVehiculo(v);
