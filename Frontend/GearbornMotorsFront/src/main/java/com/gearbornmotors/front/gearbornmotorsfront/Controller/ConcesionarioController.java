@@ -60,6 +60,8 @@ public class ConcesionarioController {
 
     @FXML
     public void mostrarTodosLosVehiculos(ActionEvent event) {
+        buscarPorModelo.getItems().clear();
+
         buscarPorMarca.setText("Marcas");
         buscarPorModelo.setText("Modelos");
         vehiculosContainer.getChildren().clear();
@@ -145,31 +147,37 @@ public class ConcesionarioController {
 
     private void actualizarMenuButtonConMarcas(MenuButton buscarPorMarca, List<String> marcas) {
         buscarPorMarca.getItems().clear();
-        for(String marca : marcas){
+
+        for (String marca : marcas) {
             MenuItem item = new MenuItem(marca);
             item.setOnAction(e -> {
                 buscarPorMarca.setText(marca);
+                buscarPorModelo.setText("Modelos");
                 actualizarMenuButtonConModelos(marca);
+                obtenerVehiculosFiltradosDesdeApi(marca, null); //cargamos los vehiculos de esa marca
             });
             buscarPorMarca.getItems().add(item);
         }
     }
 
+
     private void actualizarMenuButtonConModelos(String marca) {
-        buscarPorModelo.setText("Modelos");
         buscarPorModelo.getItems().clear();
         obtenerModelosDesdeApi(marca).thenAccept(modelos -> {
             Platform.runLater(() -> {
-                for(String modelo : modelos){
+                for (String modelo : modelos) {
                     MenuItem item = new MenuItem(modelo);
                     item.setOnAction(e -> {
                         buscarPorModelo.setText(modelo);
+                        //Al seleccionar un modelo, filtramos automáticamente por marca + modelo
+                        obtenerVehiculosFiltradosDesdeApi(marca, modelo);
                     });
                     buscarPorModelo.getItems().add(item);
                 }
             });
         });
     }
+
 
 
     public CompletableFuture<List<String>> obtenerModelosDesdeApi(String marca) {
