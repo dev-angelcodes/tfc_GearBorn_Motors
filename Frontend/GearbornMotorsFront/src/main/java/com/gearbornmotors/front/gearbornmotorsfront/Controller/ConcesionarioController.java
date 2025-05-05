@@ -27,6 +27,7 @@ import java.util.List;
 public class ConcesionarioController {
     @FXML public Label descripcionConcesionario;
     @FXML public VBox vehiculosContainer;
+    @FXML public Button buscarVehiculo;
 
     @FXML
     public void initialize() {

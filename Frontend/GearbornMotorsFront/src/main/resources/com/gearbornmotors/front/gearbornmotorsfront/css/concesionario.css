@@ -38,3 +38,21 @@
     -fx-background-color: rgba(255, 255, 255, 0.1);
     -fx-font-weight: bold;
 }
+
+.botonBuscar{
+    -fx-pref-width: 50px;
+    -fx-pref-height: 50px;
+    -fx-background-image: url("../img/lupa.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 32px 32px;
+    -fx-background-color: transparent;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+}
+
+.botonBuscar:hover {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+    -fx-cursor: hand;
+}
