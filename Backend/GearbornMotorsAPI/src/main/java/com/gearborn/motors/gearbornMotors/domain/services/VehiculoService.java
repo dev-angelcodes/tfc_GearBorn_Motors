@@ -21,11 +21,6 @@ public class VehiculoService {
         this.vehiculoRepository = vehiculoRepository;
     }
 
-    //Consulta para saber el numero total de vehiculos
-    public int getTotalVehiculos() {
-        return this.vehiculoRepository.findAll().size();
-    }
-
     //Consulta para obtener una lista de todos los vehiculos
     public List<VehiculoDto> getAll(){
         List<VehiculoEntity> vehiculosEntity = vehiculoRepository.findAll();
@@ -33,15 +28,14 @@ public class VehiculoService {
         List<VehiculoDto> vehiculosDTO = new ArrayList<>();
 
         for(VehiculoEntity vehiculo : vehiculosEntity){
-            if(vehiculo.getEstado().equals("Disponible")){ //Filtramos los vehiculos que estan disponibles
+            if(vehiculo.getEstado().equals("Disponible")){
                 VehiculoDto dto = VehiculoMapper.toDto(vehiculo);
                 vehiculosDTO.add(dto);
             }
         }
-        return vehiculosDTO;    //Devolvemos el listado de vehiculos DTO
+        return vehiculosDTO;
     }
 
-    //Consulta para guaradar un vehiculo
     public void save (CompraVehiculoRequestDto compraVehiculoRequestDto) {
         VehiculoEntity vehiculo = VehiculoMapper.registerRequestToEntity(compraVehiculoRequestDto);
         if(vehiculo.getMatricula() != null && vehiculoRepository.findByMatricula(vehiculo.getMatricula()).isPresent()) {
@@ -53,5 +47,24 @@ public class VehiculoService {
 
     public Optional<Integer> getIdByMatricula(String matricula) {
         return vehiculoRepository.findByMatricula(matricula).map(VehiculoEntity::getId);
+    }
+
+    public List<String> getMarcasDisponibles() {
+        return vehiculoRepository.findMarcasDisponibles();
+    }
+
+    public List<String> getModelosDisponibles(String marca) {
+        return vehiculoRepository.findModelosDisponiblesPorMarca(marca);
+    }
+
+    public List<VehiculoDto> getVehiculosFiltrados(String marca, String modelo) {
+        List<VehiculoEntity> vehiculos = vehiculoRepository.findVehiculosFiltrados(marca, modelo);
+        List<VehiculoDto> vehiculosFiltrados = new ArrayList<>();
+
+        for(VehiculoEntity vehiculoEntity : vehiculos){
+            VehiculoDto vehiculoDto = VehiculoMapper.toDto(vehiculoEntity);
+            vehiculosFiltrados.add(vehiculoDto);
+        }
+        return vehiculosFiltrados;
     }
 }

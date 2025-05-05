@@ -41,4 +41,24 @@ public class VehiculoController {
     public ResponseEntity<List<VehiculoDto>> getAllVehiculos() {
         List<VehiculoDto> vehiculos = vehiculoService.getAll();
         return ResponseEntity.ok(vehiculos);
-    }}
+    }
+
+    @GetMapping("/getMarcas")
+    public ResponseEntity<List<String>> getMarcas() {
+        List<String> marcas = vehiculoService.getMarcasDisponibles();
+        return ResponseEntity.ok(marcas);
+    }
+
+    @GetMapping("/getModelos/{marca}")
+    public ResponseEntity<List<String>> getModelos(@PathVariable String marca) {
+        List<String> modelos = vehiculoService.getModelosDisponibles(marca);
+        return ResponseEntity.ok(modelos);
+    }
+
+    @GetMapping("/getVehiculosFiltrados")
+    public ResponseEntity<List<VehiculoDto>> getVehiculosFiltrados(@RequestParam String marca,
+                                                                   @RequestParam(required = false) String modelo) {
+        List<VehiculoDto> vehiculos = vehiculoService.getVehiculosFiltrados(marca, modelo);
+        return ResponseEntity.ok(vehiculos);
+    }
+}

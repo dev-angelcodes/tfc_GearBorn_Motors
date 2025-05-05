@@ -1,14 +1,19 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -18,22 +23,198 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ConcesionarioController {
     @FXML public Label descripcionConcesionario;
     @FXML public VBox vehiculosContainer;
-    @FXML public Button buscarVehiculo;
+    @FXML public MenuButton buscarPorMarca;
+    @FXML public MenuButton buscarPorModelo;
 
     @FXML
     public void initialize() {
         textoBienvenida();
         cargarVehiculos(vehiculos());
+        actualizarMarcasModelos();
     }
+
+    @FXML
+    public void mostrarVehiculosFiltrados(ActionEvent event) {
+        String marcaSeleccionada = obtenerMarcaSeleccionada();
+        String modeloSeleccionado = obtenerModeloSeleccionado();
+
+        if(marcaSeleccionada == null){
+            System.out.println("Error al filtrar. No se ha seleccionado ninguna marca.");
+        }else{
+            obtenerVehiculosFiltradosDesdeApi(marcaSeleccionada, modeloSeleccionado);
+        }
+    }
+
+    @FXML
+    public void mostrarTodosLosVehiculos(ActionEvent event) {
+        buscarPorMarca.setText("Marcas");
+        buscarPorModelo.setText("Modelos");
+        vehiculosContainer.getChildren().clear();
+
+        cargarVehiculos(vehiculos());
+    }
+
+    @FXML
+    public void cargarMenu(ActionEvent event) {
+        Scenes escena = new Scenes();
+        escena.goMenu(event);
+    }
+
+    public void obtenerVehiculosFiltradosDesdeApi(String marca, String modelo) {
+        try {
+            // Codificar los parámetros para que no den error en la URL
+            String url = "http://localhost:8080/gearBorn/api/vehiculo/getVehiculosFiltrados?marca=" +
+                    URLEncoder.encode(marca, StandardCharsets.UTF_8);
+
+            if (modelo != null && !modelo.isBlank()) {
+                url += "&modelo=" + URLEncoder.encode(modelo, StandardCharsets.UTF_8);
+            }
+
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .GET()
+                    .build();
+
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenApply(HttpResponse::body)
+                    .thenAccept(json -> {
+                        try {
+                            Gson gson = new Gson();
+                            VehiculoDto[] array = gson.fromJson(json, VehiculoDto[].class);
+                            List<VehiculoDto> filtrados = List.of(array);
+
+                            Platform.runLater(() -> {
+                                vehiculosContainer.getChildren().clear();
+                                cargarVehiculos(filtrados);
+
+                                if (filtrados.isEmpty()) {
+                                    System.out.println("No se encontraron vehículos con los filtros seleccionados.");
+                                    // Aquí puedes mostrar una alerta si quieres
+                                }
+                            });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error al codificar la URL");
+        }
+    }
+
+
+    private String obtenerModeloSeleccionado() {
+        if(buscarPorModelo.getText().equals("Modelos")) {
+            return null;
+        } else {
+            return buscarPorModelo.getText();
+        }
+    }
+
+    private String obtenerMarcaSeleccionada() {
+        if(buscarPorMarca.getText().equals("Marcas")) {
+            return null;
+        } else {
+            return buscarPorMarca.getText();
+        }
+    }
+
+
+    private void actualizarMarcasModelos() {
+        obtenerMarcasDesdeApi().thenAccept(marcas -> {
+            Platform.runLater(() -> {
+                actualizarMenuButtonConMarcas(buscarPorMarca, marcas);
+            });
+        });
+    }
+
+    private void actualizarMenuButtonConMarcas(MenuButton buscarPorMarca, List<String> marcas) {
+        buscarPorMarca.getItems().clear();
+        for(String marca : marcas){
+            MenuItem item = new MenuItem(marca);
+            item.setOnAction(e -> {
+                buscarPorMarca.setText(marca);
+                actualizarMenuButtonConModelos(marca);
+            });
+            buscarPorMarca.getItems().add(item);
+        }
+    }
+
+    private void actualizarMenuButtonConModelos(String marca) {
+        buscarPorModelo.setText("Modelos");
+        buscarPorModelo.getItems().clear();
+        obtenerModelosDesdeApi(marca).thenAccept(modelos -> {
+            Platform.runLater(() -> {
+                for(String modelo : modelos){
+                    MenuItem item = new MenuItem(modelo);
+                    item.setOnAction(e -> {
+                        buscarPorModelo.setText(modelo);
+                    });
+                    buscarPorModelo.getItems().add(item);
+                }
+            });
+        });
+    }
+
+
+    public CompletableFuture<List<String>> obtenerModelosDesdeApi(String marca) {
+        HttpClient client = HttpClient.newHttpClient();
+        String url = "http://localhost:8080/gearBorn/api/vehiculo/getModelos/" + marca;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(json -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        return mapper.readValue(json, new TypeReference<List<String>>() {});
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+    }
+
+
+    public CompletableFuture<List<String>> obtenerMarcasDesdeApi() {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/gearBorn/api/vehiculo/getMarcas"))
+                .GET()
+                .build();
+
+        return client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(json -> {
+                    try {
+                        ObjectMapper mapper = new ObjectMapper();
+                        return mapper.readValue(json, new TypeReference<List<String>>() {});
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        return Collections.emptyList();
+                    }
+                });
+    }
+
 
     private void cargarVehiculos(List<VehiculoDto> vehiculos) {
         List<VehiculoDto> vehiculosObtenidos = vehiculos;
@@ -174,8 +355,4 @@ public class ConcesionarioController {
         return vehiculos;
     }
 
-    public void cargarMenu(ActionEvent event) {
-        Scenes escena = new Scenes();
-        escena.goMenu(event);
-    }
 }

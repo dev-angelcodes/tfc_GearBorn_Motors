@@ -42,23 +42,28 @@
                 <Label text="Vehiculos Disponibles" styleClass="labelPrincipal" wrapText="true"/>
             </VBox>
 
+            <HBox alignment="TOP_CENTER">
+                <VBox spacing="30" alignment="CENTER">
+                    <HBox spacing="30" alignment="CENTER">
+                        <VBox spacing="5" alignment="TOP_CENTER">
+                            <Label text="Marcas de vehículos:"/>
+                            <MenuButton fx:id="buscarPorMarca" text="Marcas"/>
+                        </VBox>
+                        <VBox spacing="5" alignment="TOP_CENTER">
+                            <Label text="Modelos disponibles:"/>
+                            <MenuButton fx:id="buscarPorModelo" text="Modelos"/>
+                        </VBox>
+                        <Button onAction="#mostrarVehiculosFiltrados" styleClass="botonBuscar"/>
+                    </HBox>
+                    <Button onAction="#mostrarTodosLosVehiculos" text="Mostrar todos los vehículos"/>
+                </VBox>
+            </HBox>
+
             <ScrollPane fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS" styleClass="ScrollPane">
                 <VBox fx:id="vehiculosContainer" spacing="10">
 
                 </VBox>
             </ScrollPane>
-
-            <HBox spacing="30" alignment="CENTER">
-                <VBox spacing="5" alignment="TOP_CENTER">
-                    <Label text="Buscar vehiculo por Marca:"/>
-                    <MenuButton fx:id="buscarPorMarca" text="Marca"/>
-                </VBox>
-                <VBox spacing="5" alignment="TOP_CENTER">
-                    <Label text="Buscar vehiculo por Modelo:"/>
-                    <MenuButton fx:id="buscarPorModelo" text="Modelo"/>
-                </VBox>
-                <Button fx:id="buscarVehiculo" styleClass="botonBuscar"/>
-            </HBox>
         </VBox>
     </HBox>
 </VBox>
