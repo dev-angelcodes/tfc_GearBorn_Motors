@@ -2,6 +2,7 @@ package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
@@ -34,10 +35,22 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ConcesionarioController {
+
+    private ClienteDto cliente;
+
+
     @FXML public Label descripcionConcesionario;
     @FXML public VBox vehiculosContainer;
     @FXML public MenuButton buscarPorMarca;
     @FXML public MenuButton buscarPorModelo;
+
+
+    public void setCliente(ClienteDto cliente) {
+        this.cliente = cliente;
+        System.out.println("Cliente recibido: " + cliente.getNombre());
+    }
+
+
 
     @FXML
     public void initialize() {
@@ -45,6 +58,7 @@ public class ConcesionarioController {
         cargarVehiculos(vehiculos());
         actualizarMarcasModelos();
     }
+
     @FXML
     public void mostrarTodosLosVehiculos(ActionEvent event) {
         buscarPorModelo.getItems().clear();
@@ -103,23 +117,6 @@ public class ConcesionarioController {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al codificar la URL");
-        }
-    }
-
-
-    private String obtenerModeloSeleccionado() {
-        if(buscarPorModelo.getText().equals("Modelos")) {
-            return null;
-        } else {
-            return buscarPorModelo.getText();
-        }
-    }
-
-    private String obtenerMarcaSeleccionada() {
-        if(buscarPorMarca.getText().equals("Marcas")) {
-            return null;
-        } else {
-            return buscarPorMarca.getText();
         }
     }
 
@@ -304,6 +301,8 @@ public class ConcesionarioController {
         boton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; " +
                 "-fx-background-radius: 5; -fx-padding: 8 15;");
         boton.setOnAction(e -> {
+            Scenes escena = new Scenes();
+            escena.goVentaCliente(e, cliente);
             System.out.println("Ver más de: " + v.getMarca() + " " + v.getModelo());
         });
         return boton;
@@ -349,5 +348,6 @@ public class ConcesionarioController {
         }
         return vehiculos;
     }
+
 
 }

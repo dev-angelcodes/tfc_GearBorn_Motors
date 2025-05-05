@@ -1,17 +1,24 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.gearbornmotors.front.gearbornmotorsfront.Session;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.stream.Collectors;
 
 
 public class LoginController {
@@ -24,7 +31,6 @@ public class LoginController {
     @FXML public Label labelUsuario;
     @FXML public Button botonEmpleado;
     @FXML public Button botonCliente;
-
 
 
     public void initialize() {
@@ -49,16 +55,26 @@ public class LoginController {
         String email = this.usuario.getText();
         String contrasena = md5(this.contrasena.getText());
 
+        ClienteDto cliente = loginCliente(email, contrasena);
+
+        if (cliente != null) {
+            System.out.println(cliente);
+            Scenes escena = new Scenes();
+            escena.goConcesionario(event, cliente);
+        } else {
+            System.out.println("Error al iniciar sesión como cliente. Verifique sus credenciales.");
+        }
+    }
+
+    private ClienteDto loginCliente(String email, String contrasenaHasheada) {
         try {
             URL url = new URL("http://localhost:8080/gearBorn/api/cliente/login");
-
-
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
             con.setRequestProperty("Content-Type", "application/json");
             con.setDoOutput(true);
 
-            String jsonInput = String.format("{\"email\":\"%s\",\"contrasenaHasheada\":\"%s\"}", email, contrasena);
+            String jsonInput = String.format("{\"email\":\"%s\",\"contrasenaHasheada\":\"%s\"}", email, contrasenaHasheada);
 
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = jsonInput.getBytes("utf-8");
@@ -66,24 +82,24 @@ public class LoginController {
             }
 
             int status = con.getResponseCode();
-            con.disconnect();
 
             if (status == 200) {
-                // Solo si el login fue exitoso (200), se cambia la escena
-                Scenes escena = new Scenes();
-                escena.goConcesionario(event);
-            } else if (status == 401) {
-                System.out.println("Email o contraseña incorrectos");
-                // Mostrar alerta si querés
+                InputStream is = con.getInputStream();
+                String jsonResponse = new BufferedReader(new InputStreamReader(is, "utf-8"))
+                        .lines().collect(Collectors.joining("\n"));
+
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readValue(jsonResponse, ClienteDto.class);
+
             } else {
-                System.out.println("Error al conectar con el servidor");
+                return null;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
-
 
     public void InicioEmpleado(ActionEvent event) {
         try {

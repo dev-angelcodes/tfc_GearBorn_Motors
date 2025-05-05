@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<VBox stylesheets="@../css/ventaVehiculo.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.CompraClienteControler">
+
+    <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <VBox spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" minWidth="100" HBox.hgrow="ALWAYS">
+
+        </VBox>
+        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" maxWidth="500" minWidth="100">
+
+        </VBox>
+    </HBox>
+</VBox>
