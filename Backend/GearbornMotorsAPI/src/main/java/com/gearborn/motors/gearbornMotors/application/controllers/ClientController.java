@@ -46,7 +46,7 @@ public class ClientController {
         Optional<ClienteDto> cliente = clienteService.login(dto.getEmail(), dto.getContrasenaHasheada());
 
         if(cliente.isPresent()){
-            return ResponseEntity.ok("LoginExistoso");
+            return ResponseEntity.ok(cliente.get());
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales incorrectas");
         }
