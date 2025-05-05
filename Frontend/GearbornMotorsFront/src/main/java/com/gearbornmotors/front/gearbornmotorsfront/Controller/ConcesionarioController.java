@@ -45,19 +45,6 @@ public class ConcesionarioController {
         cargarVehiculos(vehiculos());
         actualizarMarcasModelos();
     }
-
-    @FXML
-    public void mostrarVehiculosFiltrados(ActionEvent event) {
-        String marcaSeleccionada = obtenerMarcaSeleccionada();
-        String modeloSeleccionado = obtenerModeloSeleccionado();
-
-        if(marcaSeleccionada == null){
-            System.out.println("Error al filtrar. No se ha seleccionado ninguna marca.");
-        }else{
-            obtenerVehiculosFiltradosDesdeApi(marcaSeleccionada, modeloSeleccionado);
-        }
-    }
-
     @FXML
     public void mostrarTodosLosVehiculos(ActionEvent event) {
         buscarPorModelo.getItems().clear();
