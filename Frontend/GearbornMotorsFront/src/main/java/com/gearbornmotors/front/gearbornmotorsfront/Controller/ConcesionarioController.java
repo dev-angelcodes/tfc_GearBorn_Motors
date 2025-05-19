@@ -38,7 +38,7 @@ public class ConcesionarioController {
 
     private ClienteDto cliente;
 
-
+    @FXML public Label nombreUserLabel;
     @FXML public Label descripcionConcesionario;
     @FXML public VBox vehiculosContainer;
     @FXML public MenuButton buscarPorMarca;
@@ -48,8 +48,8 @@ public class ConcesionarioController {
     public void setCliente(ClienteDto cliente) {
         this.cliente = cliente;
         System.out.println("Cliente recibido: " + cliente.getNombre());
+        nombreUserLabel.setText("Bienvenido " + cliente.getNombre() + "!!");
     }
-
 
 
     @FXML
@@ -296,14 +296,14 @@ public class ConcesionarioController {
         return datosVehiculo;
     }
 
-    private Button crearBotonSaberMas(VehiculoDto v) {
+    private Button crearBotonSaberMas(VehiculoDto vehiculo) {
         Button boton = new Button("Saber más");
         boton.setStyle("-fx-background-color: #007bff; -fx-text-fill: white; " +
                 "-fx-background-radius: 5; -fx-padding: 8 15;");
         boton.setOnAction(e -> {
             Scenes escena = new Scenes();
-            escena.goVentaCliente(e, cliente);
-            System.out.println("Ver más de: " + v.getMarca() + " " + v.getModelo());
+            escena.goVentaCliente(e, cliente, vehiculo);
+            System.out.println("Ver más de: " + vehiculo.getMarca() + " " + vehiculo.getModelo());
         });
         return boton;
     }
@@ -348,6 +348,4 @@ public class ConcesionarioController {
         }
         return vehiculos;
     }
-
-
 }

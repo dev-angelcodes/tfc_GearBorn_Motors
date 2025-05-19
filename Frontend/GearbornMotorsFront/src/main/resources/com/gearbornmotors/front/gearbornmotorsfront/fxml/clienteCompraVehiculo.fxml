@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ScrollPane?>
+<VBox stylesheets="@../css/clienteCompra.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.CompraClienteControler">
+
+    <HBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <VBox spacing="50" alignment="TOP_CENTER" VBox.vgrow="ALWAYS" minWidth="100" HBox.hgrow="ALWAYS">
+            <StackPane alignment="TOP_CENTER" styleClass="grisClaro">
+                <padding>
+                    <Insets bottom="25.0" left="20.0" right="20.0" top="25.0"/>
+                </padding>
+
+                <HBox alignment="CENTER_RIGHT" StackPane.alignment="TOP_RIGHT">
+                    <Button text="Atrás" onAction="#volverConcesionario" styleClass="Button-sidebar" />
+                </HBox>
+                <Label fx:id="tituloEscena" text="Compra de vehículo" styleClass="labelPrincipal" StackPane.alignment="CENTER"/>
+            </StackPane>
+
+            <Label text="Datos del vehículo"/>
+            <HBox spacing="5">
+                <ImageView fx:id="imgVehiculo"/>
+                <VBox spacing="10" >
+                    <Label text="Marca:"/>
+                    <Label text="Modelo:"/>
+                    <Label text="Precio:"/>
+                    <Label text="Descripción:"/>
+                </VBox>
+            </HBox>
+
+            <Label text="Datos de venta"/>
+            <VBox spacing="10" >
+                <Label text="Nombre Cliente:"/>
+                <Label text="Importe:"/>
+                <Label text="fecha compra:"/>
+            </VBox>
+
+
+
+
+        </VBox>
+        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" maxWidth="700" minWidth="500">
+            <Label fx:id="nombreCliente"/>
+
+            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
+                <Label text ="Empleados disponibles"/>
+                <VBox fx:id="EmpleadosContainer" spacing="10">
+
+                </VBox>
+            </ScrollPane>
+
+
+
+        </VBox>
+    </HBox>
+</VBox>

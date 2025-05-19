@@ -26,8 +26,8 @@
                         <Button text="Solicitudes de venta de vehiculo" styleClass="boton-sidebar"/>
                         <Button text="Solicitudes de compra de vehiculos" styleClass="boton-sidebar"/>
                         <Button text="Registrar nuevo gasto de un vehículo" styleClass="boton-sidebar"/>
-                        <Button text="Consultar el historial de ventas" styleClass="boton-sidebar"/>
-                        <Button text="Consultar historial de gastos de un vehículo" styleClass="boton-sidebar"/>
+                        <Button text="Consultar el historial de ventas" onAction="#mostrarGastos" styleClass="boton-sidebar"/>
+                        <Button text="Consultar historial de gastos de un vehículo"  styleClass="boton-sidebar"/>
                         <Button text="Suspender un empleado" styleClass="boton-sidebar"/>
                     </VBox>
                 </ScrollPane>

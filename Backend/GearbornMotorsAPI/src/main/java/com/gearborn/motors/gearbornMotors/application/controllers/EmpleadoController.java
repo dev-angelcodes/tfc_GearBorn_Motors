@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -48,5 +49,10 @@ public class EmpleadoController {
     @GetMapping("/getEmpleadoById/{idEmpleado}")
     public Optional<EmpleadoDto> getEmpleadoById(@PathVariable int idEmpleado){
         return empleadoService.getEmpleadoById(idEmpleado);
+    }
+
+    @GetMapping("/getComercialesVenta")
+    public List<EmpleadoDto> getComercialesVenta() {
+        return empleadoService.getAll();
     }
 }

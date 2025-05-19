@@ -2,12 +2,17 @@ package com.gearborn.motors.gearbornMotors.domain.services;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.EmpleadoMappper;
+import com.gearborn.motors.gearbornMotors.application.mappers.VehiculoMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
+import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +51,20 @@ public class EmpleadoService {
         Optional<EmpleadoEntity> empleado = empleadoRepository.findById(idEmpleado);
 
         return Optional.ofNullable(EmpleadoMappper.entityToDto(empleado));
+    }
+
+    //Obtener comerciales de venta disponibles
+    public List<EmpleadoDto> getAll(){
+        List<EmpleadoEntity> empleadosEntity = empleadoRepository.findAll();
+
+        List<EmpleadoDto> empleadosDto = new ArrayList<>();
+
+        for(EmpleadoEntity empleado : empleadosEntity){
+            if(empleado.getTipo().equals("Comercial de ventas") && !empleado.isSuspendido()){
+                EmpleadoDto dto = EmpleadoMappper.entityToDto(Optional.of(empleado));
+                empleadosDto.add(dto);
+            }
+        }
+        return empleadosDto;
     }
 }

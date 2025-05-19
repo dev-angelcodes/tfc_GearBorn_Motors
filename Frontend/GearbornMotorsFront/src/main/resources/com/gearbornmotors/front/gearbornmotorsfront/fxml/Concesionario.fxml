@@ -20,7 +20,7 @@
             </padding>
 
             <VBox alignment="TOP_CENTER" spacing="60" VBox.vgrow="ALWAYS">
-                <Label text="Bienvenido User" styleClass="labelPrincipal, textoBlanco" wrapText="true"/>
+                <Label fx:id="nombreUserLabel" styleClass="labelPrincipal, textoBlanco" wrapText="true"/>
                 <Label fx:id="descripcionConcesionario" styleClass="labelDescripcion, textoBlanco"/>
                 <Label alignment="BOTTOM_CENTER" text="¡Disfruta la experiencia de vivir!"
                        styleClass="labelSecundaria, textoBlanco" wrapText="true"/>

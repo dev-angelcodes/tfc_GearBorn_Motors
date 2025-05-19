@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.mappers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
 import com.gearborn.motors.gearbornMotors.domain.entities.GastoEntity;
 import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
@@ -29,5 +30,17 @@ public class GastoMapper {
         gastoEntity.setVehiculo(vehiculo);
 
         return gastoEntity;
+    }
+
+
+    public static GastoDto toDto(GastoEntity entity) {
+        GastoDto dto = new GastoDto();
+        dto.setImporte(entity.getImporte());
+        dto.setFecha(entity.getFecha());
+        dto.setCompra(entity.isCompra());
+        dto.setNombreProv(entity.getNombreProv());
+        dto.setDescripcion(entity.getDescripcion());
+
+        return dto;
     }
 }

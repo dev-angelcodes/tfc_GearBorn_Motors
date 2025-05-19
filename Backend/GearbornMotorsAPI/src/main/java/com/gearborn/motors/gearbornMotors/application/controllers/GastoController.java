@@ -1,16 +1,17 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
 import com.gearborn.motors.gearbornMotors.domain.services.GastoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/gasto")
 public class GastoController {
     private final GastoService gastoService;
@@ -28,5 +29,10 @@ public class GastoController {
         } catch (RuntimeException e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @GetMapping("/getGastos")
+    public List<GastoDto> getComercialesVenta() {
+        return gastoService.getAll();
     }
 }

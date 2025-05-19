@@ -3,6 +3,7 @@ package com.gearbornmotors.front.gearbornmotorsfront;
 import com.gearbornmotors.front.gearbornmotorsfront.Controller.CompraClienteControler;
 import com.gearbornmotors.front.gearbornmotorsfront.Controller.ConcesionarioController;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -72,14 +73,15 @@ public class Scenes {
         cambiarEscena("fxml/PanelControl.fxml", event);
     }
 
-    public void goVentaCliente(ActionEvent event, ClienteDto cliente) {
+    public void goVentaCliente(ActionEvent event, ClienteDto cliente, VehiculoDto vehiculo) {
         try {
-            FXMLLoader loader = new FXMLLoader(LauncherApp.class.getResource("fxml/compraClienteVehiculo.fxml"));
+            FXMLLoader loader = new FXMLLoader(LauncherApp.class.getResource("fxml/clienteCompraVehiculo.fxml"));
             Parent root = loader.load();
 
             // Obtener el controller y pasarle el cliente
             CompraClienteControler controller = loader.getController();
             controller.setCliente(cliente);
+            controller.setVehiculo(vehiculo);
 
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
