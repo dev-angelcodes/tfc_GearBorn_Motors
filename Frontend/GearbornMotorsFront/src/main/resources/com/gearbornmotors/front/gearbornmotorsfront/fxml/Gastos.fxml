@@ -24,4 +24,7 @@
     </ScrollPane>
 
 
+    <VBox alignment="TOP_CENTER">
+        <Label text="VENTAS DE LA EMPRESA: " />
+    </VBox>
 </VBox>

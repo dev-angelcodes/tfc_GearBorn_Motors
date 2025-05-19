@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class GastoDto {
     private Integer id;
     private Double importe;
-    private LocalDate fecha;
+    private String fecha;
     private boolean compra;
     private String nombreProv;
     private String descripcion;
@@ -17,8 +17,8 @@ public class GastoDto {
     public Double getImporte() { return importe; }
     public void setImporte(Double importe) { this.importe = importe; }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public String getFecha() { return fecha; }
+    public void setFecha(LocalDate fecha) { this.fecha = String.valueOf(fecha); }
 
     public boolean isCompra() { return compra; }
     public void setCompra(boolean compra) { this.compra = compra; }

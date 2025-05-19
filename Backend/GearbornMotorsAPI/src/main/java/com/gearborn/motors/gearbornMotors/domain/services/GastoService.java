@@ -38,4 +38,16 @@ public class GastoService {
 
         return  gastosDto;
     }
+
+    public List<GastoDto> getAllByMatricula(String matricula){
+        List<GastoEntity> gastosEntity = gastoRepository.findByVehiculoMatricula(matricula);
+
+        List<GastoDto> gastosDto = new ArrayList<>();
+
+        for(GastoEntity gasto : gastosEntity) {
+            GastoDto dto = GastoMapper.toDto(gasto);
+            gastosDto.add(dto);
+        }
+        return gastosDto;
+    }
 }

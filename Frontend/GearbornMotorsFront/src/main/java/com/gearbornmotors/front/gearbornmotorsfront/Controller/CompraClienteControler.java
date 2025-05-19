@@ -2,6 +2,7 @@ package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.google.gson.Gson;
@@ -10,12 +11,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -28,9 +34,11 @@ public class CompraClienteControler {
     private ClienteDto cliente;
     private VehiculoDto vehiculo;
 
+    @FXML
+    public ImageView imgVehiculo;
+    @FXML
+    public Label marca, importeCompra, fechaCompra, modelo, tipo, anho, km, tipoCombustible, tipoCambio, color, tituloEscena, nombreCliente;
     @FXML public VBox EmpleadosContainer;
-    @FXML public Label tituloEscena;
-    @FXML public Label nombreCliente;
 
 
     public void setCliente(ClienteDto cliente) {
@@ -38,12 +46,69 @@ public class CompraClienteControler {
         this.cliente = cliente;
     }
     public void setVehiculo(VehiculoDto vehiculo) {
-        tituloEscena.setText(vehiculo.getMarca() + " " + vehiculo.getModelo());
         this.vehiculo = vehiculo;
+
+        tituloEscena.setText(vehiculo.getMarca() + " " + vehiculo.getModelo());
+        marca.setText("Marca: " + vehiculo.getMarca());
+        modelo.setText("Modelo: " + vehiculo.getModelo());
+        tipo.setText("Tipo: " + vehiculo.getTipo());
+        anho.setText("Año: " + vehiculo.getAnio());
+        km.setText("Kilometros: " + vehiculo.getKm());
+        tipoCombustible.setText("Tipo de combustible: " + vehiculo.getTipoCombustible());
+        tipoCambio.setText("Tipo de cambio: " + vehiculo.getTipoCambio());
+        color.setText("Color: " + vehiculo.getColor());
+        importeCompra.setText("Precio: €" + calculoPrecio());
+
     }
 
+
     public void initialize() {
+        fechaCompra.setText("Fecha de la transacción: " + java.time.LocalDate.now());
         cargarEmpleados();
+    }
+
+    private double calculoPrecio() {
+        System.out.println("Matrícula recibida: " + vehiculo.getMatricula());
+
+        List<GastoDto> gastos = obtenerGastosPorMatricula(vehiculo.getMatricula());
+
+        double totalGastos = 0;
+        for (GastoDto gasto : gastos) {
+            System.out.println(gasto.getImporte());
+            totalGastos += gasto.getImporte();
+        }
+
+         return totalGastos;
+    }
+
+    private List<GastoDto> obtenerGastosPorMatricula(String matricula) {
+        List<GastoDto> lista = new ArrayList<>();
+        try {
+            String endpoint = "http://localhost:8080/gearBorn/api/gasto/getGastosByMatricula/" + matricula;
+            URL url = new URL(endpoint);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() == 200) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String json = reader.lines().reduce("", String::concat);
+
+                Gson gson = new Gson(); // Sin adaptadores especiales
+                Type tipoLista = new TypeToken<List<GastoDto>>() {}.getType();
+                lista = gson.fromJson(json, tipoLista);
+
+                reader.close();
+            } else {
+                System.out.println("Error al obtener gastos: " + conn.getResponseCode());
+            }
+
+            conn.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     private void cargarEmpleados() {

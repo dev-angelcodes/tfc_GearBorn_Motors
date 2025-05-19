@@ -1,6 +1,5 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
-import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
 import com.gearborn.motors.gearbornMotors.domain.services.GastoService;
@@ -34,5 +33,10 @@ public class GastoController {
     @GetMapping("/getGastos")
     public List<GastoDto> getComercialesVenta() {
         return gastoService.getAll();
+    }
+
+    @GetMapping("/getGastosByMatricula/{matricula}")
+    public List<GastoDto> getGastosByMatricula(@PathVariable String matricula) {
+        return gastoService.getAllByMatricula(matricula);
     }
 }

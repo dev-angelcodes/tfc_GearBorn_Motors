@@ -28,37 +28,35 @@
             <Label text="Datos del vehículo"/>
             <HBox spacing="5">
                 <ImageView fx:id="imgVehiculo"/>
-                <VBox spacing="10" >
-                    <Label text="Marca:"/>
-                    <Label text="Modelo:"/>
-                    <Label text="Precio:"/>
-                    <Label text="Descripción:"/>
+                <VBox spacing="10" alignment="TOP_CENTER">
+                    <Label fx:id="marca" />
+                    <Label fx:id="modelo" />
+                    <Label fx:id="tipo" />
+                    <Label fx:id="anho"/>
+                    <Label fx:id="km" />
+                    <Label fx:id="tipoCombustible" />
+                    <Label fx:id="tipoCambio" />
+                    <Label fx:id="color" />
                 </VBox>
             </HBox>
 
             <Label text="Datos de venta"/>
-            <VBox spacing="10" >
-                <Label text="Nombre Cliente:"/>
-                <Label text="Importe:"/>
-                <Label text="fecha compra:"/>
+            <VBox spacing="10" alignment="TOP_CENTER">
+                <Label fx:id="nombreCliente"/>
+                <Label fx:id="importeCompra" text="Importe:"/>
+                <Label fx:id="fechaCompra"/>
             </VBox>
-
-
 
 
         </VBox>
         <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" maxWidth="700" minWidth="500">
-            <Label fx:id="nombreCliente"/>
 
-            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
-                <Label text ="Empleados disponibles"/>
-                <VBox fx:id="EmpleadosContainer" spacing="10">
+            <Label text ="Empleados disponibles"/>
+            <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="EmpleadosContainer" spacing="10" styleClass="fondoSolido">
 
                 </VBox>
             </ScrollPane>
-
-
-
         </VBox>
     </HBox>
 </VBox>
