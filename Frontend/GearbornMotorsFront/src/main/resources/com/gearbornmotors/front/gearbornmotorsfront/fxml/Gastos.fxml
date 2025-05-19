@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<VBox stylesheets="@../css/gastos.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.GastosConcesionario">
+    <padding>
+        <Insets bottom="50.0" left="20.0" right="20.0" top="25.0"/>
+    </padding>
+
+    <VBox alignment="TOP_CENTER">
+        <Label text="GASTOS DE LA EMPRESA: " />
+    </VBox>
+    <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
+        <VBox fx:id="containerGastos" spacing="10">
+
+        </VBox>
+    </ScrollPane>
+
+
+</VBox>

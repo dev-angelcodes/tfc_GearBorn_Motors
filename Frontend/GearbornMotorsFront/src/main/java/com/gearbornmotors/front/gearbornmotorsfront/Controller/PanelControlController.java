@@ -43,6 +43,17 @@ public class PanelControlController {
     }
 
     @FXML
+    public void mostrarGastos(ActionEvent event) {
+        try {
+            Parent registroEmpleado = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/Gastos.fxml")));
+            contenidoControl.getChildren().setAll(registroEmpleado);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void cargarMenu(ActionEvent event) {
         Scenes scenes = new Scenes();
         scenes.goMenu(event);

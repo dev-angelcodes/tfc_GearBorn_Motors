@@ -58,7 +58,6 @@ public class LoginController {
         ClienteDto cliente = loginCliente(email, contrasena);
 
         if (cliente != null) {
-            System.out.println(cliente);
             Scenes escena = new Scenes();
             escena.goConcesionario(event, cliente);
         } else {
