@@ -26,7 +26,66 @@
     -fx-font-weight: bold;
 }
 
+.button-gris {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: #000000;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 8;
+}
+
+.button-gris:hover {
+    -fx-background-color: #b3b3b3;
+    -fx-cursor: hand;
+}
+
 .labelPrincipal {
     -fx-font-size: 35px;
     -fx-font-weight: bold;
+}
+
+.label-empleados{
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f1f1f1; /* Blanco ligeramente grisáceo */
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.label-subtitulo {
+    -fx-font-size: 16px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #c0d6f0; /* Azul claro suave */
+    -fx-padding: 0 0 10 0;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.label-titulo-seccion {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50; /* Azul oscuro elegante */
+}
+
+
+.label-negrita {
+    -fx-font-weight: bold;
+}
+
+
+.label-grande {
+    -fx-font-size: 16px;
+}
+
+.hbox-empleado {
+    -fx-padding: 10;
+    -fx-background-color: #e8f0fe;
+    -fx-border-color: #bbb;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.hbox-empleado:hover {
+    -fx-background-color: #d0e4ff;
+    -fx-cursor: hand;
 }

@@ -28,4 +28,13 @@ public class EmpleadoDto {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return "EmpleadoDto{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

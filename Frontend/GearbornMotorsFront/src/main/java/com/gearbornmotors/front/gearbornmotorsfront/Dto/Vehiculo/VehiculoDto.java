@@ -16,6 +16,7 @@ public class VehiculoDto {
     @Override
     public String toString() {
         return "VehiculoDto{" +
+                "matricula='" + matricula + '\'' +
                 ", tipo='" + tipo + '\'' +
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +

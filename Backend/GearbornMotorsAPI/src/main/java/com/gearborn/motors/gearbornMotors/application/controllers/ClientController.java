@@ -1,11 +1,13 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.IdClienteDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.RClientDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.RegisterRequestClientDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.ClienteMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 import com.gearborn.motors.gearbornMotors.domain.services.ClienteService;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

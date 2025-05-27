@@ -25,38 +25,84 @@
                 <Label fx:id="tituloEscena" text="Compra de vehículo" styleClass="labelPrincipal" StackPane.alignment="CENTER"/>
             </StackPane>
 
-            <Label text="Datos del vehículo"/>
-            <HBox spacing="5">
-                <ImageView fx:id="imgVehiculo"/>
-                <VBox spacing="10" alignment="TOP_CENTER">
-                    <Label fx:id="marca" />
-                    <Label fx:id="modelo" />
-                    <Label fx:id="tipo" />
-                    <Label fx:id="anho"/>
-                    <Label fx:id="km" />
-                    <Label fx:id="tipoCombustible" />
-                    <Label fx:id="tipoCambio" />
-                    <Label fx:id="color" />
+            <Label text="Datos del vehículo" styleClass="label-titulo-seccion"/>
+            <HBox spacing="70" alignment="CENTER">
+                <VBox spacing="20" alignment="CENTER">
+                    <HBox>
+                        <Label text="Marca del vehículo: " styleClass="label-negrita"/>
+                        <Label fx:id="marca" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Modelo del vehículo: " styleClass="label-negrita"/>
+                        <Label fx:id="modelo" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Tipo de vehículo: " styleClass="label-negrita"/>
+                        <Label fx:id="tipo" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Año de fabricación: " styleClass="label-negrita"/>
+                        <Label fx:id="anho" />
+                    </HBox>
+                </VBox>
+                <ImageView fx:id="imgVehiculo"
+                           fitWidth="250"
+                           fitHeight="180"
+                           preserveRatio="true" />
+                <VBox spacing="20" alignment="CENTER">
+                    <HBox>
+                        <Label text="Kilómetro del vehículo: " styleClass="label-negrita"/>
+                        <Label fx:id="km" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Tipo de combustible: " styleClass="label-negrita"/>
+                        <Label fx:id="tipoCombustible" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Tipo de cambio: " styleClass="label-negrita"/>
+                        <Label fx:id="tipoCambio" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Color del vehículo: " styleClass="label-negrita"/>
+                        <Label fx:id="color" />
+                    </HBox>
                 </VBox>
             </HBox>
 
-            <Label text="Datos de venta"/>
-            <VBox spacing="10" alignment="TOP_CENTER">
-                <Label fx:id="nombreCliente"/>
-                <Label fx:id="importeCompra" text="Importe:"/>
-                <Label fx:id="fechaCompra"/>
-            </VBox>
-
+            <Label text="Datos de venta" styleClass="label-titulo-seccion"/>
+            <HBox alignment="CENTER">
+                <VBox spacing="10" alignment="CENTER">
+                    <HBox>
+                        <Label text="Garantia hasta : " styleClass="label-negrita"/>
+                        <Label fx:id="garantia" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Importe total de la transacción: " styleClass="label-negrita"/>
+                        <Label fx:id="importeCompra" />
+                    </HBox>
+                    <HBox>
+                        <Label text="Fecha de compra: " styleClass="label-negrita"/>
+                        <Label fx:id="fechaCompra" />
+                    </HBox>
+                </VBox>
+            </HBox>
 
         </VBox>
-        <VBox styleClass="fondoSolido" spacing="50" alignment="TOP_CENTER" maxWidth="700" minWidth="500">
+        <VBox styleClass="fondoSolido" spacing="20" alignment="TOP_CENTER" maxWidth="700" minWidth="500" VBox.vgrow="ALWAYS">
 
-            <Label text ="Empleados disponibles"/>
+            <padding>
+                <Insets bottom="40.0" left="20.0" right="20.0" top="30.0"/>
+            </padding>
+
+            <Label text="Empleados disponibles" styleClass="label-empleados"/>
+
+            <Label text="Seleccione el empleado que le atenderá" styleClass="label-subtitulo"/>
+
             <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS">
-                <VBox fx:id="EmpleadosContainer" spacing="10" styleClass="fondoSolido">
-
-                </VBox>
+                <VBox fx:id="EmpleadosContainer" spacing="10" styleClass="fondoSolido" />
             </ScrollPane>
+            <Region minHeight="20" />
+            <Button text="Realizar Compra" onAction="#realizarCompra" styleClass="button-gris" />
         </VBox>
     </HBox>
 </VBox>

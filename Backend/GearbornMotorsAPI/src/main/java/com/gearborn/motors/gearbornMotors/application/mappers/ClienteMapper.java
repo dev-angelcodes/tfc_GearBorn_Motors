@@ -2,6 +2,7 @@ package com.gearborn.motors.gearbornMotors.application.mappers;
 
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.ClienteDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.IdClienteDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Cliente.RegisterRequestClientDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
 
