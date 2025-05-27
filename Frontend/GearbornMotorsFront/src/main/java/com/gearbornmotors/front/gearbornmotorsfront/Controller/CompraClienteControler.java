@@ -1,6 +1,7 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.IdClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.VehiculoDto;
@@ -11,12 +12,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -25,10 +28,12 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompraClienteControler {
+
 
     private EmpleadoDto comercialSeleccionado = null;
     private ClienteDto cliente;
@@ -37,33 +42,57 @@ public class CompraClienteControler {
     @FXML
     public ImageView imgVehiculo;
     @FXML
-    public Label marca, importeCompra, fechaCompra, modelo, tipo, anho, km, tipoCombustible, tipoCambio, color, tituloEscena, nombreCliente;
+    public Label garantia;
+    @FXML
+    public Label marca, importeCompra, fechaCompra, modelo, tipo, anho, km, tipoCombustible, tipoCambio, color, tituloEscena;
     @FXML public VBox EmpleadosContainer;
 
 
     public void setCliente(ClienteDto cliente) {
-        nombreCliente.setText(cliente.nombre);
         this.cliente = cliente;
     }
     public void setVehiculo(VehiculoDto vehiculo) {
         this.vehiculo = vehiculo;
 
         tituloEscena.setText(vehiculo.getMarca() + " " + vehiculo.getModelo());
-        marca.setText("Marca: " + vehiculo.getMarca());
-        modelo.setText("Modelo: " + vehiculo.getModelo());
-        tipo.setText("Tipo: " + vehiculo.getTipo());
-        anho.setText("Año: " + vehiculo.getAnio());
-        km.setText("Kilometros: " + vehiculo.getKm());
-        tipoCombustible.setText("Tipo de combustible: " + vehiculo.getTipoCombustible());
-        tipoCambio.setText("Tipo de cambio: " + vehiculo.getTipoCambio());
-        color.setText("Color: " + vehiculo.getColor());
-        importeCompra.setText("Precio: €" + calculoPrecio());
+        marca.setText(vehiculo.getMarca());
+        modelo.setText(vehiculo.getModelo());
+        tipo.setText(vehiculo.getTipo());
+        anho.setText(String.valueOf(vehiculo.getAnio()));
+        km.setText(String.valueOf(vehiculo.getKm()));
+        tipoCombustible.setText(vehiculo.getTipoCombustible());
+        tipoCambio.setText(vehiculo.getTipoCambio());
 
+        String colorHex = vehiculo.getColor();
+        String cssColor = "#" + colorHex.substring(2);
+        color.setStyle("-fx-background-color: " + cssColor + "; -fx-min-width: 50px; -fx-min-height: 20px;" +
+                            "-fx-border-color: black; -fx-border-radius: 4px;");
+
+        importeCompra.setText(calculoPrecio() + " €");
+
+        cargarImagenVehiculo(vehiculo.getImg());
+    }
+
+    private void cargarImagenVehiculo(String nombreImg) {
+        String path = "/com/gearbornmotors/front/gearbornmotorsfront/img/" + nombreImg;
+        InputStream imageStream = getClass().getResourceAsStream(path);
+
+        if (imageStream == null) {
+            System.err.println("Imagen no encontrada en: " + path + " — Usando imagen por defecto.");
+            imageStream = getClass().getResourceAsStream("/com/gearbornmotors/front/gearbornmotorsfront/img/imgDefaultVehiculo.png");
+        }
+
+        if (imageStream != null) {
+            imgVehiculo.setImage(new Image(imageStream));
+        } else {
+            System.err.println("No se pudo cargar ninguna imagen.");
+        }
     }
 
 
     public void initialize() {
-        fechaCompra.setText("Fecha de la transacción: " + java.time.LocalDate.now());
+        fechaCompra.setText(String.valueOf(java.time.LocalDate.now()));
+        garantia.setText(String.valueOf(LocalDate.now().plusYears(2)));
         cargarEmpleados();
     }
 
@@ -77,8 +106,24 @@ public class CompraClienteControler {
             System.out.println(gasto.getImporte());
             totalGastos += gasto.getImporte();
         }
-
+        totalGastos = anadirGastos(totalGastos);
          return totalGastos;
+    }
+
+    private Double anadirGastos(double totalGastos) {
+        double beneficio;
+
+        if (totalGastos < 10000) {
+            beneficio = totalGastos * 0.30;
+        } else if (totalGastos < 20000) {
+            beneficio = totalGastos * 0.25;
+        } else if (totalGastos < 40000) {
+            beneficio = totalGastos * 0.20;
+        } else {
+            beneficio = totalGastos * 0.15;
+        }
+
+        return totalGastos + beneficio;
     }
 
     private List<GastoDto> obtenerGastosPorMatricula(String matricula) {
@@ -123,8 +168,7 @@ public class CompraClienteControler {
 
     private HBox crearHBoxEmpleado(EmpleadoDto empleado) {
         HBox hbox = new HBox(15);
-        hbox.setStyle("-fx-padding: 10; -fx-background-color: #e8f0fe; -fx-border-color: #bbb; " +
-                "-fx-border-radius: 8; -fx-background-radius: 8;");
+        hbox.getStyleClass().add("hbox-empleado"); // Aplica el estilo CSS
         hbox.setAlignment(Pos.CENTER_LEFT);
         hbox.setPrefHeight(80);
 
@@ -139,7 +183,6 @@ public class CompraClienteControler {
 
         hbox.getChildren().add(datos);
 
-        // Evento de selección al hacer clic
         hbox.setOnMouseClicked(event -> {
             comercialSeleccionado = empleado;
             actualizarEstilosSeleccion(empleado);
@@ -204,5 +247,12 @@ public class CompraClienteControler {
             e.printStackTrace();
         }
         return empleados;
+    }
+
+    @FXML
+    public void realizarCompra(ActionEvent event) {
+        System.out.println(cliente.toString());
+        System.out.println(vehiculo.toString());
+        System.out.println(comercialSeleccionado.toString());
     }
 }

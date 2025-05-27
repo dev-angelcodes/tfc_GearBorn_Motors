@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.mappers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.IdEmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
 
@@ -35,5 +36,11 @@ public class EmpleadoMappper {
         }else{
             return null;
         }
+    }
+
+    public static IdEmpleadoDto toIdEmpleadoDto(EmpleadoEntity empleadoEntity) {
+        IdEmpleadoDto empleadoDto = new IdEmpleadoDto();
+        empleadoDto.setId(empleadoEntity.getId());
+        return empleadoDto;
     }
 }

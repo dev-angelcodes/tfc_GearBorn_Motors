@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.CompraVehiculoRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.IdVehiculoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.domain.services.VehiculoService;
 import org.springframework.beans.factory.annotation.Autowired;

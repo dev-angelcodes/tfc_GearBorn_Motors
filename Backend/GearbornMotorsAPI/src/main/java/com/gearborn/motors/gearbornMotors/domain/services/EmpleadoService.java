@@ -1,12 +1,10 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.IdEmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
-import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.EmpleadoMappper;
-import com.gearborn.motors.gearbornMotors.application.mappers.VehiculoMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
-import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.EmpleadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,4 +65,16 @@ public class EmpleadoService {
         }
         return empleadosDto;
     }
+
+    public Optional<IdEmpleadoDto> idEmpleadoDto(String email) {
+        Optional<EmpleadoEntity> empleado = empleadoRepository.findByEmail(email);
+
+        if (empleado.isPresent()) {
+            IdEmpleadoDto dto = EmpleadoMappper.toIdEmpleadoDto(empleado.get());
+            return Optional.of(dto);
+        } else {
+            return Optional.empty();
+        }
+    }
+
 }

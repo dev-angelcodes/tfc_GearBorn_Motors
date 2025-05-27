@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.EmpleadoDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.IdEmpleadoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.REmployeDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Empleado.RegisterRequestEmployeDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
@@ -54,5 +55,17 @@ public class EmpleadoController {
     @GetMapping("/getComercialesVenta")
     public List<EmpleadoDto> getComercialesVenta() {
         return empleadoService.getAll();
+    }
+
+    @PostMapping("/idEmpleado")
+    public ResponseEntity<?> idEmpleadoDto(@RequestBody String email) {
+        Optional<IdEmpleadoDto> empleado = empleadoService.idEmpleadoDto(email);
+
+        if (empleado.isPresent()) {
+            return ResponseEntity.ok(empleado.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Empleado no encontrado con email: " + email);
+        }
     }
 }

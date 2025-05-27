@@ -67,9 +67,15 @@ public class ClienteDto {
     @Override
     public String toString() {
         return "ClienteDto{" +
-                "email='" + email + '\'' +
+                ", email='" + email + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", contrasena='" + contrasena + '\'' +
+                ", dni='" + dni + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", numTelefono=" + numTelefono +
                 '}';
     }
 }

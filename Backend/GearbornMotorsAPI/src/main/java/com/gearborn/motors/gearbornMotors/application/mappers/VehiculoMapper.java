@@ -1,6 +1,7 @@
 package com.gearborn.motors.gearbornMotors.application.mappers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.CompraVehiculoRequestDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.IdVehiculoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Vehiculo.VehiculoDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
 
