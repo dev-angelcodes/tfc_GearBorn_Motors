@@ -14,8 +14,8 @@ public class VentaRequestDto {
     private Double importe;
     private LocalDateTime fecha;
 
-    private Integer idCliente;
-    private Integer idEmpleado;
-    private Integer idVehiculo;
+    private String emailCliente;
+    private String emailEmpleado;
+    private String matriculaVehiculo;
 }
 
