@@ -30,16 +30,24 @@ public class VentaService {
 
 
     public void save(VentaRequestDto dto) {
-        ClienteEntity cliente = clienteRepository.findById(dto.getIdCliente())
-                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+        ClienteEntity cliente = clienteRepository.findByEmail(dto.getEmailCliente())
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado con email: " + dto.getEmailCliente()));
 
-        EmpleadoEntity empleado = empleadoRepository.findById(dto.getIdEmpleado())
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+        EmpleadoEntity empleado = empleadoRepository.findByEmail(dto.getEmailEmpleado())
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con email: " + dto.getEmailEmpleado()));
 
-        VehiculoEntity vehiculo = vehiculoRepository.findById(dto.getIdVehiculo())
-                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado"));
+        VehiculoEntity vehiculo = vehiculoRepository.findByMatricula(dto.getMatriculaVehiculo())
+                .orElseThrow(() -> new RuntimeException("Vehículo no encontrado con matrícula: " + dto.getMatriculaVehiculo()));
+        cambiarEstadoVehiculo(vehiculo);
 
         VentaEntity venta = VentaMapper.ventaRequestDtoToEntity(dto, cliente, empleado, vehiculo);
         ventaRepository.save(venta);
+    }
+
+    private void cambiarEstadoVehiculo(VehiculoEntity vehiculo) {
+        if ("Vendido".equalsIgnoreCase(vehiculo.getEstado())) {
+            throw new IllegalStateException("El vehículo ya fue vendido y no puede revenderse.");
+        }
+        vehiculo.setEstado("Vendido");
     }
 }

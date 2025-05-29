@@ -17,10 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -28,9 +25,14 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CompraClienteControler {
 
@@ -96,9 +98,81 @@ public class CompraClienteControler {
         cargarEmpleados();
     }
 
-    private double calculoPrecio() {
-        System.out.println("Matrícula recibida: " + vehiculo.getMatricula());
+    @FXML
+    public void realizarCompra(ActionEvent event) {
+        System.out.println(cliente.toString());
+        System.out.println(vehiculo.toString());
+        System.out.println(comercialSeleccionado.toString());
 
+        String jsonVenta = crearJsonVenta();
+        enviarVenta(jsonVenta);
+    }
+
+    private void enviarVenta(String json) {
+        try {
+            URL url = new URL("http://localhost:8080/gearBorn/api/venta/crearVenta");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                byte[] input = json.getBytes(StandardCharsets.UTF_8);
+                os.write(input, 0, input.length);
+            }
+
+            int responseCode = conn.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+            leerRespuesta(conn);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void leerRespuesta(HttpURLConnection conn) {
+        try {
+            InputStream stream;
+            int responseCode = conn.getResponseCode();
+            if (responseCode >= 200 && responseCode < 300) {
+                stream = conn.getInputStream(); // éxito
+            } else {
+                stream = conn.getErrorStream(); // error
+            }
+
+            if (stream != null) {
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+                    StringBuilder response = new StringBuilder();
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        response.append(line.trim());
+                    }
+                    System.out.println("Respuesta del servidor: " + response.toString());
+                }
+            } else {
+                System.out.println("El servidor no devolvió contenido.");
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error al leer la respuesta del servidor:");
+            e.printStackTrace();
+        }
+    }
+
+    private String crearJsonVenta() {
+        Map<String, Object> jsonMap = new HashMap<>();
+        jsonMap.put("importe", calculoPrecio());
+        jsonMap.put("fecha", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        jsonMap.put("emailCliente", cliente.getEmail());
+        jsonMap.put("emailEmpleado", comercialSeleccionado.getEmail());
+        jsonMap.put("matriculaVehiculo", vehiculo.getMatricula());
+
+        Gson gson = new Gson();
+        return gson.toJson(jsonMap);
+    }
+
+    private double calculoPrecio() {
         List<GastoDto> gastos = obtenerGastosPorMatricula(vehiculo.getMatricula());
 
         double totalGastos = 0;
@@ -247,12 +321,5 @@ public class CompraClienteControler {
             e.printStackTrace();
         }
         return empleados;
-    }
-
-    @FXML
-    public void realizarCompra(ActionEvent event) {
-        System.out.println(cliente.toString());
-        System.out.println(vehiculo.toString());
-        System.out.println(comercialSeleccionado.toString());
     }
 }
