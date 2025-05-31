@@ -2,6 +2,7 @@ package com.gearborn.motors.gearbornMotors.application.controllers;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoFrontDto;
 import com.gearborn.motors.gearbornMotors.domain.services.GastoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class GastoController {
     }
 
     @GetMapping("/getGastos")
-    public List<GastoDto> getComercialesVenta() {
+    public List<GastoFrontDto> getComercialesVenta() {
         return gastoService.getAll();
     }
 

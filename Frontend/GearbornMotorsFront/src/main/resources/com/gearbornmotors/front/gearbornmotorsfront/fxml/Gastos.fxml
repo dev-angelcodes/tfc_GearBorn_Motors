@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.*?>
-
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.geometry.Insets?>
-<VBox stylesheets="@../css/gastos.css"
-      xmlns="http://javafx.com/javafx/17.0.12"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.GastosConcesionario">
+
+<GridPane xmlns="http://javafx.com/javafx/17.0.12"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.GastosConcesionario"
+          stylesheets="@../css/gastos.css">
+
     <padding>
-        <Insets bottom="50.0" left="20.0" right="20.0" top="25.0"/>
+        <Insets top="20.0" bottom="20.0" left="20.0" right="20.0"/>
     </padding>
 
-    <VBox alignment="TOP_CENTER">
-        <Label text="GASTOS DE LA EMPRESA: " />
+    <rowConstraints>
+        <RowConstraints percentHeight="50"/>
+        <RowConstraints percentHeight="50"/>
+    </rowConstraints>
+
+    <columnConstraints>
+        <ColumnConstraints percentWidth="100"/>
+    </columnConstraints>
+
+    <VBox GridPane.rowIndex="0" alignment="TOP_CENTER">
+        <Label text="GASTOS DE LA EMPRESA:" />
+        <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
+            <VBox fx:id="containerGastos" spacing="10"/>
+        </ScrollPane>
     </VBox>
-    <ScrollPane fitToHeight="true" fitToWidth="true" VBox.vgrow="ALWAYS" >
-        <VBox fx:id="containerGastos" spacing="10">
 
-        </VBox>
-    </ScrollPane>
-
-
-    <VBox alignment="TOP_CENTER">
-        <Label text="VENTAS DE LA EMPRESA: " />
+    <VBox GridPane.rowIndex="1" alignment="TOP_CENTER">
+        <Label text="VENTAS DE LA EMPRESA:" />
+        <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
+            <VBox fx:id="containerVentas" spacing="10"/>
+        </ScrollPane>
     </VBox>
-</VBox>
+</GridPane>

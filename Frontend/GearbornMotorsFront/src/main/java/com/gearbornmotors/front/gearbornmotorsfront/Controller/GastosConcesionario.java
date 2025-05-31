@@ -1,7 +1,9 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoCompraDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoDto;
+import com.gearbornmotors.front.gearbornmotorsfront.Dto.Venta.VentaDto;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,37 +26,112 @@ import java.util.List;
 public class GastosConcesionario {
 
     @FXML public VBox containerGastos;
+    @FXML public VBox containerVentas;
 
     @FXML
     public void initialize() {
         cargarGastos();
+        cargarVentas();
+    }
+
+    private void cargarVentas() {
+        List<VentaDto> ventas = obtenerVentas();
+        for (VentaDto venta : ventas) {
+            HBox ventaHBox = crearHBoxVenta(venta);
+            containerVentas.getChildren().add(ventaHBox);
+        }
+    }
+
+    private HBox crearHBoxVenta(VentaDto venta) {
+        HBox hbox = new HBox(15);
+        hbox.setStyle("-fx-padding: 12; -fx-background-color: #e0f7fa; -fx-border-color: #26a69a; -fx-border-radius: 6; -fx-background-radius: 6;");
+        hbox.setAlignment(Pos.TOP_LEFT);
+
+        Label fechaLabel = new Label("📅 Fecha: " + venta.getFecha().toLocalDate());
+        Label importeLabel = new Label("💰 Importe: " + venta.getImporte() + " €");
+        HBox linea1 = new HBox(20, fechaLabel, importeLabel);
+
+        Label clienteLabel = new Label("👤 Cliente: " + venta.getCliente());
+        Label empleadoLabel = new Label("🧑‍💼 Empleado: " + venta.getEmpleado());
+
+        Label descripcionVehiculo = new Label("🚗 Vehículo: " + venta.getDescripcionVehiculo());
+        descripcionVehiculo.setWrapText(true);
+
+        VBox datos = new VBox(5, linea1, clienteLabel, empleadoLabel, descripcionVehiculo);
+        hbox.getChildren().add(datos);
+        return hbox;
+    }
+
+
+
+    private List<VentaDto> obtenerVentas() {
+        List<VentaDto> lista = new ArrayList<>();
+        try {
+            URL url = new URL("http://localhost:8080/gearBorn/api/venta/getVentas");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
+
+            if (conn.getResponseCode() == 200) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String json = reader.lines().reduce("", String::concat);
+
+                Gson gson = createGsonConFechas();
+                Type tipoLista = new TypeToken<List<VentaDto>>() {}.getType();
+                lista = gson.fromJson(json, tipoLista);
+
+                reader.close();
+            } else {
+                System.out.println("Error al obtener ventas: " + conn.getResponseCode());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    private Gson createGsonConFechas() {
+        return new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>)
+                        (json, type, context) -> LocalDate.parse(json.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE))
+                .registerTypeAdapter(LocalDate.class, (JsonSerializer<LocalDate>)
+                        (src, typeOfSrc, context) -> new JsonPrimitive(src.toString()))
+                .registerTypeAdapter(LocalDateTime.class, (JsonDeserializer<LocalDateTime>)
+                        (json, type, context) -> LocalDateTime.parse(json.getAsString(), DateTimeFormatter.ISO_LOCAL_DATE_TIME))
+                .registerTypeAdapter(LocalDateTime.class, (JsonSerializer<LocalDateTime>)
+                        (src, typeOfSrc, context) -> new JsonPrimitive(src.toString()))
+                .create();
     }
 
     private void cargarGastos() {
-        List<GastoDto> gastos = obtenerGastos();
-        for (GastoDto gasto : gastos) {
+        List<GastoCompraDto> gastos = obtenerGastos();
+        for (GastoCompraDto gasto : gastos) {
             HBox gastoHBox = crearHBoxGasto(gasto);
             containerGastos.getChildren().add(gastoHBox);
         }
     }
 
-    private HBox crearHBoxGasto(GastoDto gasto) {
+    private HBox crearHBoxGasto(GastoCompraDto gasto) {
         HBox hbox = new HBox(15);
-        hbox.setStyle("-fx-padding: 10; -fx-background-color: #f0f0f0; -fx-border-color: #ccc; -fx-border-radius: 6; -fx-background-radius: 6;");
-        hbox.setAlignment(Pos.CENTER_LEFT);
+        hbox.setStyle("-fx-padding: 12; -fx-background-color: #f4f4f4; -fx-border-color: #ccc; -fx-border-radius: 6; -fx-background-radius: 6;");
+        hbox.setAlignment(Pos.TOP_LEFT);
 
-        Label fechaLabel = new Label("Fecha: " + gasto.getFecha());
-        Label importeLabel = new Label("Importe: " + gasto.getImporte() + " €");
-        Label proveedorLabel = new Label("Proveedor: " + gasto.getNombreProv());
-        Label descripcionLabel = new Label(gasto.getDescripcion());
+        Label fechaLabel = new Label("📅 Fecha: " + gasto.getFecha());
+        Label importeLabel = new Label("💰 Importe: " + gasto.getImporte() + " €");
+        HBox linea1 = new HBox(20, fechaLabel, importeLabel);
 
-        VBox datos = new VBox(5, fechaLabel, importeLabel, proveedorLabel, descripcionLabel);
+        Label proveedorLabel = new Label("🏢 Proveedor: " + gasto.getNombreProv());
+        Label vehiculoLabel = new Label("🚗 Vehículo: " + gasto.getVehiculo());
+        HBox linea2 = new HBox(20, proveedorLabel, vehiculoLabel);
+
+        VBox datos = new VBox(5, linea1, linea2);
         hbox.getChildren().add(datos);
         return hbox;
     }
 
-    private List<GastoDto> obtenerGastos() {
-        List<GastoDto> lista = new ArrayList<>();
+    private List<GastoCompraDto> obtenerGastos() {
+        List<GastoCompraDto> lista = new ArrayList<>();
         try {
             URL url = new URL("http://localhost:8080/gearBorn/api/gasto/getGastos");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -64,8 +142,8 @@ public class GastosConcesionario {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 String json = reader.lines().reduce("", String::concat);
 
-                Gson gson = createGsonConLocalDate();
-                Type tipoLista = new TypeToken<List<GastoDto>>() {}.getType();
+                Gson gson = createGsonConFechas(); // este ya lo tienes
+                Type tipoLista = new TypeToken<List<GastoCompraDto>>() {}.getType();
                 lista = gson.fromJson(json, tipoLista);
 
                 reader.close();
@@ -78,6 +156,7 @@ public class GastosConcesionario {
         }
         return lista;
     }
+
 
     // 👉 Adaptador para LocalDate
     private Gson createGsonConLocalDate() {

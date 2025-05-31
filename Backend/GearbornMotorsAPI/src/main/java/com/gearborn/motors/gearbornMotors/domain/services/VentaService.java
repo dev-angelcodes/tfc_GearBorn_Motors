@@ -1,5 +1,6 @@
 package com.gearborn.motors.gearbornMotors.domain.services;
 
+import com.gearborn.motors.gearbornMotors.application.dtos.Venta.VentaDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Venta.VentaRequestDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.VentaMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.ClienteEntity;
@@ -12,6 +13,9 @@ import com.gearborn.motors.gearbornMotors.infrastructure.repositories.VehiculoRe
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.VentaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -43,6 +47,20 @@ public class VentaService {
         VentaEntity venta = VentaMapper.ventaRequestDtoToEntity(dto, cliente, empleado, vehiculo);
         ventaRepository.save(venta);
     }
+
+    public List<VentaDto> getAll(){
+        List<VentaEntity> ventasEntity = ventaRepository.findAll();
+
+        List<VentaDto> ventasDto = new ArrayList<>();
+
+        for(VentaEntity venta : ventasEntity) {
+            VentaDto dto = VentaMapper.toDto(venta);
+            ventasDto.add(dto);
+        }
+
+        return ventasDto;
+    }
+
 
     private void cambiarEstadoVehiculo(VehiculoEntity vehiculo) {
         if ("Vendido".equalsIgnoreCase(vehiculo.getEstado())) {

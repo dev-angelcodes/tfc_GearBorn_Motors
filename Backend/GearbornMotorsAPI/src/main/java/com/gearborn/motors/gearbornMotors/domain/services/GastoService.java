@@ -2,6 +2,7 @@ package com.gearborn.motors.gearbornMotors.domain.services;
 
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoFrontDto;
 import com.gearborn.motors.gearbornMotors.application.mappers.GastoMapper;
 import com.gearborn.motors.gearbornMotors.domain.entities.GastoEntity;
 import com.gearborn.motors.gearbornMotors.infrastructure.repositories.GastoRepository;
@@ -26,13 +27,13 @@ public class GastoService {
         gastoRepository.save(gastoEntity);
     }
 
-    public List<GastoDto> getAll() {
+    public List<GastoFrontDto> getAll() {
         List<GastoEntity> gastosEntity = gastoRepository.findAll();
 
-        List<GastoDto> gastosDto = new ArrayList<>();
+        List<GastoFrontDto> gastosDto = new ArrayList<>();
 
         for(GastoEntity gasto : gastosEntity) {
-            GastoDto dto = GastoMapper.toDto(gasto);
+            GastoFrontDto dto = GastoMapper.gastoFrontDto(gasto);
             gastosDto.add(dto);
         }
 
