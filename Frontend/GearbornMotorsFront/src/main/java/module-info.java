@@ -15,6 +15,8 @@ module com.gearbornmotors.front.gearbornmotorsfront {
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado to com.google.gson, com.fasterxml.jackson.databind;
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo to com.google.gson, com.fasterxml.jackson.databind;
     opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos to com.google.gson, com.fasterxml.jackson.databind;
+    opens com.gearbornmotors.front.gearbornmotorsfront.Dto.Venta to com.google.gson;
+
 
     // Exportación de paquetes
     exports com.gearbornmotors.front.gearbornmotorsfront;

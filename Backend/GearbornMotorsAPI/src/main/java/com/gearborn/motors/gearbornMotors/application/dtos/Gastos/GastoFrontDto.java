@@ -11,12 +11,10 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GastoDto {
-    private Integer id;
+public class GastoFrontDto {
     private Double importe;
     private LocalDate fecha;
-    private boolean compra;
     private String nombreProv;
     private String descripcion;
-
+    private String vehiculo;
 }
