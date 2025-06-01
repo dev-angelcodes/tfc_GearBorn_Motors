@@ -3,6 +3,7 @@ package com.gearborn.motors.gearbornMotors.application.controllers;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoFrontDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoVehiculoRequestDto;
 import com.gearborn.motors.gearbornMotors.domain.services.GastoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,15 @@ public class GastoController {
     @GetMapping("/getGastosByMatricula/{matricula}")
     public List<GastoDto> getGastosByMatricula(@PathVariable String matricula) {
         return gastoService.getAllByMatricula(matricula);
+    }
+
+    @PostMapping("/registrarGastoMatricula")
+    public ResponseEntity<?> saveGastoByMatricula(@RequestBody GastoVehiculoRequestDto gasto){
+        try {
+            gastoService.saveByMatricula(gasto);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
