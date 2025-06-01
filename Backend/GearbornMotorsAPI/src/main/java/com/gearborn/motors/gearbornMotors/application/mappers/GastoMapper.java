@@ -3,13 +3,16 @@ package com.gearborn.motors.gearbornMotors.application.mappers;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.CompraGastoRequestDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoDto;
 import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoFrontDto;
+import com.gearborn.motors.gearbornMotors.application.dtos.Gastos.GastoVehiculoRequestDto;
 import com.gearborn.motors.gearbornMotors.domain.entities.EmpleadoEntity;
 import com.gearborn.motors.gearbornMotors.domain.entities.GastoEntity;
 import com.gearborn.motors.gearbornMotors.domain.entities.VehiculoEntity;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public class GastoMapper {
+
 
     //Mapeamos el objeto CompraGastoRequestDto a GastoEntity
     public static GastoEntity CompraGastoRequestDtoToEntity(CompraGastoRequestDto gasto) {
@@ -42,6 +45,7 @@ public class GastoMapper {
         dto.setVehiculo(entity.getVehiculo().getMarca() + ", "
                 + entity.getVehiculo().getModelo() + ", " + entity.getVehiculo().getAnio());
         dto.setDescripcion(entity.getDescripcion());
+        dto.setCompra(entity.isCompra());
 
         return dto;
     }
@@ -56,4 +60,15 @@ public class GastoMapper {
 
         return dto;
     }
+
+    public static GastoEntity gastoVehiculoRequestDtoToEntity(GastoVehiculoRequestDto gasto) {
+        return GastoEntity.builder()
+                .importe(gasto.getImporte())
+                .fecha(gasto.getFecha())
+                .compra(gasto.isCompra())
+                .nombreProv(gasto.getNombreProv())
+                .descripcion(gasto.getDescripcion())
+                .build();
+    }
+
 }

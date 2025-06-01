@@ -8,7 +8,16 @@ public class GastoCompraDto {
     private String nombreProv;
     private String descripcion;
     private String vehiculo;
+    private boolean compra;
 
+
+    public boolean isCompra() {
+        return compra;
+    }
+
+    public void setCompra(boolean compra) {
+        this.compra = compra;
+    }
 
     public Double getImporte() {
         return importe;

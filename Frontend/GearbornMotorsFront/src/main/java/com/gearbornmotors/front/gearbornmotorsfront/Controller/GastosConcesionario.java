@@ -2,7 +2,6 @@ package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoCompraDto;
-import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.GastoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Venta.VentaDto;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -125,10 +124,19 @@ public class GastosConcesionario {
         Label vehiculoLabel = new Label("🚗 Vehículo: " + gasto.getVehiculo());
         HBox linea2 = new HBox(20, proveedorLabel, vehiculoLabel);
 
-        VBox datos = new VBox(5, linea1, linea2);
+        VBox datos = new VBox(5);
+
+        if (gasto.isCompra()) {
+            Label descripcionLabel = new Label("🛒 Este gasto se corresponde con la compra del vehículo");
+            descripcionLabel.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+            datos.getChildren().add(descripcionLabel);
+        }
+
+        datos.getChildren().addAll(linea1, linea2);
         hbox.getChildren().add(datos);
         return hbox;
     }
+
 
     private List<GastoCompraDto> obtenerGastos() {
         List<GastoCompraDto> lista = new ArrayList<>();

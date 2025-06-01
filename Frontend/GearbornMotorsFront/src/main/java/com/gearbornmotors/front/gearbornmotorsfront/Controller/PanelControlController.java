@@ -71,6 +71,18 @@ public class PanelControlController {
     }
 
 
+    @FXML
+    public void registrarNuevoGastoVehiculo(ActionEvent event) {
+        try {
+            Parent registroEmpleado = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/GastoVehiculo.fxml")));
+            contenidoControl.getChildren().setAll(registroEmpleado);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     protected EmpleadoDto datosEmpleadoLogueado() throws IOException {
         int idEmpleado = Session.getInstance().getEmpleadoId();
 
@@ -94,4 +106,6 @@ public class PanelControlController {
             return null;
         }
     }
+
+
 }
