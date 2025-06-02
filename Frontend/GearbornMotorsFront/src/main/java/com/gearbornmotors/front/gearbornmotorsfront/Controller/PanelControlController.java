@@ -117,4 +117,15 @@ public class PanelControlController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void mostrarBajaEmpleados(ActionEvent event) {
+        try {
+            Parent verBajaEmpleado = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/BajaEmpleado.fxml")));
+            contenidoControl.getChildren().setAll(verBajaEmpleado);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
