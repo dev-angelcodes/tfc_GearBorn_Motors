@@ -129,10 +129,10 @@ public class RegistroEmpleadosController {
     }
 
     private boolean ValidarNombreApellidos(String nombreApellidos) {
-        if(nombreApellidos.length() >= 3 && nombreApellidos.matches("[a-zA-Z]+")){
+        if (nombreApellidos.length() >= 3 && nombreApellidos.matches("[a-zA-Z ]+")) {
             return true;
         } else {
-            System.out.println("El nombre debe tener al menos 3 caracteres y solo letras.");
+            System.out.println("El nombre debe tener al menos 3 caracteres y solo letras y espacios.");
             return false;
         }
     }

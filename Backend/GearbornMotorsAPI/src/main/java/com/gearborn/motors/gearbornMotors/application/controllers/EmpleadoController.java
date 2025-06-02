@@ -35,6 +35,17 @@ public class EmpleadoController {
         }
     }
 
+    @GetMapping("/suspenderEmpleado/{email}")
+    public ResponseEntity<?> suspenderEmpleado(@PathVariable String email) {
+        try {
+            empleadoService.suspenderEmpelado(email); // Llama al método del servicio
+            return ResponseEntity.ok("Empleado suspendido correctamente: " + email);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error al suspender el empleado: " + e.getMessage());
+        }
+    }
+
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody REmployeDto empleadoDto) {
 

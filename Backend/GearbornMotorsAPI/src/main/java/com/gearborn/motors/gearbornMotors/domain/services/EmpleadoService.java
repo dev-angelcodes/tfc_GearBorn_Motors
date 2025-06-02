@@ -77,4 +77,14 @@ public class EmpleadoService {
         }
     }
 
+    public void suspenderEmpelado(String email) {
+        Optional<EmpleadoEntity> empleado = empleadoRepository.findByEmail(email);
+
+        if (empleado.isPresent()) {
+            EmpleadoEntity empleadoEntity = empleado.get();
+            empleadoEntity.setSuspendido(true);
+            empleadoRepository.save(empleadoEntity);
+        }
+    }
+
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+
+<VBox spacing="30.0"
+      stylesheets="@../css/panelControl.css"
+      xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.BajaEmpleadoController">
+
+    <Label text="Seleccione el empleado que desea dar de baja"
+           style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <ScrollPane fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS" styleClass="ScrollPane">
+        <VBox fx:id="empleadosVBox" spacing="10.0" />
+    </ScrollPane>
+
+</VBox>
