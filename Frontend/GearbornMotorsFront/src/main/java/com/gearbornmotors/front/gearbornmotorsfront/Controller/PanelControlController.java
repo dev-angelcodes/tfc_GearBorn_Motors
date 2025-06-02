@@ -75,7 +75,7 @@ public class PanelControlController {
     public void registrarNuevoGastoVehiculo(ActionEvent event) {
         try {
             Parent registroEmpleado = FXMLLoader.load(Objects.requireNonNull(getClass()
-                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/GastoVehiculo.fxml")));
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/NuevoGastoVehiculo.fxml")));
             contenidoControl.getChildren().setAll(registroEmpleado);
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,4 +108,13 @@ public class PanelControlController {
     }
 
 
+    public void mostrarGastoByMatricula(ActionEvent event) {
+        try {
+            Parent verGastoVehiculo = FXMLLoader.load(Objects.requireNonNull(getClass()
+                    .getResource("/com/gearbornmotors/front/gearbornmotorsfront/fxml/VerGastoPorVehiculo.fxml")));
+            contenidoControl.getChildren().setAll(verGastoVehiculo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
