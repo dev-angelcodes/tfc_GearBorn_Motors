@@ -44,6 +44,12 @@ public class VehiculoController {
         return ResponseEntity.ok(vehiculos);
     }
 
+    @GetMapping("/AllVehiculos")
+    public ResponseEntity<List<VehiculoDto>> getAll() {
+        List<VehiculoDto> vehiculos = vehiculoService.getAllVehiculos();
+        return ResponseEntity.ok(vehiculos);
+    }
+
     @GetMapping("/getMarcas")
     public ResponseEntity<List<String>> getMarcas() {
         List<String> marcas = vehiculoService.getMarcasDisponibles();

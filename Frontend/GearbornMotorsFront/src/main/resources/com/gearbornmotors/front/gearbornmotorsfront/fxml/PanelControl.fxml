@@ -25,7 +25,7 @@
                         <Button text="Guardar la compra de un vehiculo" onAction="#registrarCompra" styleClass="boton-sidebar"/>
                         <Button text="Registrar nuevo gasto de un vehículo" onAction="#registrarNuevoGastoVehiculo" styleClass="boton-sidebar"/>
                         <Button text="Consultar el historial de transacciones" onAction="#mostrarGastos" styleClass="boton-sidebar"/>
-                        <Button text="Consultar historial de gastos de un vehículo"  styleClass="boton-sidebar"/>
+                        <Button text="Consultar historial de gastos de un vehículo" onAction="#mostrarGastoByMatricula"  styleClass="boton-sidebar"/>
                         <Button text="Suspender un empleado" styleClass="boton-sidebar"/>
                     </VBox>
                 </ScrollPane>

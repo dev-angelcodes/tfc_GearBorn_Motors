@@ -14,11 +14,9 @@
 
     <Label text="Lista de Vehículos" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-
     <ScrollPane fitToHeight="true" fitToWidth="true" HBox.hgrow="ALWAYS" styleClass="ScrollPane">
         <VBox fx:id="vehiculosContainer" spacing="10">
 
         </VBox>
     </ScrollPane>
-
 </VBox>

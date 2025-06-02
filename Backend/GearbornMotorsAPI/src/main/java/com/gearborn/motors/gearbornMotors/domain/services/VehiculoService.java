@@ -22,7 +22,7 @@ public class VehiculoService {
         this.vehiculoRepository = vehiculoRepository;
     }
 
-    //Consulta para obtener una lista de todos los vehiculos
+    //Consulta para obtener una lista de todos los vehiculos disponibles
     public List<VehiculoDto> getAll(){
         List<VehiculoEntity> vehiculosEntity = vehiculoRepository.findAll();
 
@@ -33,6 +33,18 @@ public class VehiculoService {
                 VehiculoDto dto = VehiculoMapper.toDto(vehiculo);
                 vehiculosDTO.add(dto);
             }
+        }
+        return vehiculosDTO;
+    }
+
+    public List<VehiculoDto> getAllVehiculos(){
+        List<VehiculoEntity> vehiculosEntity = vehiculoRepository.findAll();
+
+        List<VehiculoDto> vehiculosDTO = new ArrayList<>();
+
+        for(VehiculoEntity vehiculo : vehiculosEntity){
+            VehiculoDto dto = VehiculoMapper.toDto(vehiculo);
+            vehiculosDTO.add(dto);
         }
         return vehiculosDTO;
     }
