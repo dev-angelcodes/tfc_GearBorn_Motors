@@ -1,0 +1,47 @@
+.background {
+    -fx-background-color: linear-gradient(to bottom right, #f0f4f8, #dce9f1);
+    -fx-padding: 40px;
+    -fx-spacing: 30px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.titulo {
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-padding: 10 0 30 0;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 250px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+}
+
+.button {
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 1);
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+.boton-principal:hover {
+    -fx-background-color: #2980b9;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+.boton-secundario:hover {
+    -fx-background-color: #d0d3d4;
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
