@@ -86,5 +86,4 @@ public class EmpleadoService {
             empleadoRepository.save(empleadoEntity);
         }
     }
-
 }

@@ -1,61 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="70.0"
+<VBox alignment="CENTER" spacing="30.0"
       styleClass="background"
-      stylesheets="@../css/concesionario.css"
+      stylesheets="@../css/registroCliente.css"
       xmlns="http://javafx.com/javafx/17.0.12"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.gearbornmotors.front.gearbornmotorsfront.Controller.RegistroClienteController">
 
+    <Label text="Registro de Cliente" styleClass="titulo"/>
 
-    <VBox>
-        <HBox>
-            <Label text="🔸Email ►" />
-            <TextField fx:id="email" promptText="ej: Pepito@gmail.com" />
-        </HBox>
-        <VBox spacing="70">
-            <HBox>
-                <Label text="🔸Nombre ►" />
-                <TextField fx:id="nombre" promptText="ej: Pepito" />
-            </HBox>
-            <HBox>
-                <Label text="🔸DNI ►" />
-                <TextField fx:id="dni" promptText="ej: 12345678A" />
+    <GridPane hgap="15" vgap="20" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
 
-            </HBox>
-        </VBox>
+        <Label text="📧 Email:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="email" promptText="ej: Pepito@gmail.com" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-        <VBox spacing="70">
-            <HBox>
-                <Label text="Direccion ►" />
-                <TextField fx:id="direccion" promptText="ej: calleEjemplo" />
-            </HBox>
-            <HBox>
-                <Label text="🔸telefono ►" />
-                <TextField fx:id="telefono" promptText="ej: 123456789" />
-            </HBox>
-            <HBox>
-                <Label text="🔸apellidos ►" />
-                <TextField fx:id="apellidos" promptText="ej: 123456789" />
-            </HBox>
-            <HBox>
-                <Label text="🔸fechaNacimiento ►" />
-                <TextField fx:id="fechaNacimiento" promptText="ej: 123456789" />
-            </HBox>
-        </VBox>
-    </VBox>
-    <HBox>
-        <Label text="🔸contraseña ►" />
-        <PasswordField fx:id="contrasena" promptText="ej: Abc12%R" />
+        <Label text="🧑 Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="nombre" promptText="ej: Pepito" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="🪪 DNI:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="dni" promptText="ej: 12345678A" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="🏠 Dirección:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="direccion" promptText="ej: calleEjemplo" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="📞 Teléfono:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextField fx:id="telefono" promptText="ej: 123456789" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="👤 Apellidos:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <TextField fx:id="apellidos" promptText="ej: Pérez Gómez" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        <Label text="🎂 Fecha Nacimiento:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <TextField fx:id="fechaNacimiento" promptText="ej: 01/01/1990" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+        <Label text="🔒 Contraseña:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+        <PasswordField fx:id="contrasena" promptText="ej: Abc12%R" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="⟵ Volver" onAction="#Volver" styleClass="boton-secundario"/>
+        <Button text="Registrarse" onAction="#ValidarRegistro" styleClass="boton-principal"/>
     </HBox>
-
-    <Button text="Registrarse" onAction="#ValidarRegistro"/>
-    <Button text="⟵" onAction="#Volver"/>
 </VBox>
