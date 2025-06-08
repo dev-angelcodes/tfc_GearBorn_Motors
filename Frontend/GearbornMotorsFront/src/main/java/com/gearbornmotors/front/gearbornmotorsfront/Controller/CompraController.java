@@ -1,6 +1,7 @@
 
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Alerts.Alertas;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Gastos.CompraGastoRequestDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Vehiculo.CompraVehiculoRequestDto;
@@ -95,7 +96,8 @@ public class CompraController extends PanelControlController {
             guardarImg(imagenSeleccionada);
 
         }else{
-            System.out.println("Faltan campos por completar.");
+            Alertas.info( "Campos incompletos", "Faltan campos por completar",
+                    "Por favor, complete todos los campos requeridos antes de continuar.");
         }
     }
 
@@ -113,7 +115,8 @@ public class CompraController extends PanelControlController {
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 201) {
-                        System.out.println("Vehículo registrado correctamente.");
+                        Alertas.info( "Registro Exitoso", "Vehículo Registrado",
+                                "El vehículo ha sido registrado correctamente.");
                         try {
                             CompraGastoRequestDto gasto = registrarGasto();
                             enviarGastoApi(gasto);
@@ -121,6 +124,8 @@ public class CompraController extends PanelControlController {
                             throw new RuntimeException(e);
                         }
                     } else {
+                        Alertas.info( "Error al registrar vehículo", "Error de registro",
+                                "No se pudo registrar el vehículo. Por favor, intente nuevamente.");
                         System.err.println("Error: " + response.statusCode() + " - " + response.body());
                     }
                 })
@@ -159,6 +164,8 @@ public class CompraController extends PanelControlController {
                     return Integer.parseInt(idString);
                 }
             } else {
+                Alertas.info( "Error al obtener ID del vehículo", "Error de conexión",
+                        "No se pudo obtener el ID del vehículo. Por favor, intente nuevamente.");
                 System.out.println("Error al obtener ID del vehículo. Código: " + responseCode);
             }
         } catch (IOException e) {
@@ -183,8 +190,11 @@ public class CompraController extends PanelControlController {
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenAccept(response -> {
                     if (response.statusCode() == 201) {
-                        System.out.println("Gasto registrado correctamente.");
+                        Alertas.info( "Registro Exitoso", "Gasto Registrado",
+                                "El gasto ha sido registrado correctamente.");
                     } else {
+                        Alertas.error( "Error al registrar gasto", "Error de registro",
+                                "No se pudo registrar el gasto. Por favor, intente nuevamente.");
                         System.err.println("Error al registrar gasto. Código: " + response.statusCode());
                         System.err.println("Mensaje: " + response.body());
                     }
@@ -212,7 +222,8 @@ public class CompraController extends PanelControlController {
             v.setImg(matricula.getText() + "-" + marca.getText() + ".png");
             return v;
         }catch (NumberFormatException e){
-            System.out.println("El año de fabricación y los Kilometros del vehículo no pueden contener letras.");
+            Alertas.advertencia( "Año o Kilometraje inválido", "Error de formato",
+                    "Por favor, introduzca un año de fabricación y kilómetros válidos.");
             return null;
         }
     }

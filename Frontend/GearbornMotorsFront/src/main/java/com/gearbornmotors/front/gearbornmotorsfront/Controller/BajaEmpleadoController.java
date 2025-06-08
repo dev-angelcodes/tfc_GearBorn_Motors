@@ -1,5 +1,6 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Alerts.Alertas;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -79,7 +80,8 @@ public class BajaEmpleadoController {
             client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenAccept(response -> {
                         if (response.statusCode() == 200) {
-                            System.out.println("Empleado suspendido correctamente: " + email);
+                            Alertas.info( "Empleado Suspendido", "El empleado ha sido suspendido correctamente.",
+                                    "El empleado con correo " + email + " ha sido suspendido.");
                             Platform.runLater(() -> empleadosVBox.getChildren().remove(hbox));
                         } else {
                             System.err.println("Error al suspender empleado: " + response.statusCode());
@@ -90,7 +92,6 @@ public class BajaEmpleadoController {
                         return null;
                     });
         });
-
         return bajaBtn;
     }
 
@@ -115,10 +116,14 @@ public class BajaEmpleadoController {
                 Type tipoLista = new TypeToken<List<EmpleadoDto>>() {}.getType();
                 empleados = gson.fromJson(json, tipoLista);
             } else {
+                Alertas.error( "Error al obtener empleados", "No se pudieron cargar los empleados.",
+                        "Código de error: " + response.statusCode());
                 System.out.println("Error al obtener empleados: " + response.statusCode());
             }
 
         } catch (IOException | InterruptedException e) {
+            Alertas.error( "Error de conexión", "No se pudo conectar con el servidor.",
+                    "Por favor, inténtelo más tarde.");
             e.printStackTrace();
         }
         return empleados;

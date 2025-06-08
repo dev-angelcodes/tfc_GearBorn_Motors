@@ -98,6 +98,8 @@ public class LoginController {
             }
 
         } catch (Exception e) {
+            Alertas.error("Fallo de conexión", "No se pudo establecer comunicación con el servidor",
+                    "Verifique que el backend esté en ejecución.");
             e.printStackTrace();
             return null;
         }
@@ -147,6 +149,8 @@ public class LoginController {
                     "Por favor, introduzca un ID numérico válido.");
             System.out.println("ID inválido: " + e.getMessage());
         } catch (Exception e) {
+            Alertas.error("Fallo de conexión", "No se pudo establecer comunicación con el servidor",
+                    "Verifique que el backend esté en ejecución.");
             e.printStackTrace();
         }
     }
