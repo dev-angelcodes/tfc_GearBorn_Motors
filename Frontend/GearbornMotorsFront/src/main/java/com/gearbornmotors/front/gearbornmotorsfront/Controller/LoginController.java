@@ -3,6 +3,7 @@ package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gearbornmotors.front.gearbornmotorsfront.Alerts.Alertas;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Scenes;
 import com.gearbornmotors.front.gearbornmotorsfront.Session;
@@ -61,6 +62,8 @@ public class LoginController {
             Scenes escena = new Scenes();
             escena.goConcesionario(event, cliente);
         } else {
+            Alertas.error("Error de inicio de sesión","Credenciales incorrectas",
+                    "Por favor, verifique su email y contraseña e intente nuevamente.");
             System.out.println("Error al iniciar sesión como cliente. Verifique sus credenciales.");
         }
     }
@@ -95,6 +98,8 @@ public class LoginController {
             }
 
         } catch (Exception e) {
+            Alertas.error("Fallo de conexión", "No se pudo establecer comunicación con el servidor",
+                    "Verifique que el backend esté en ejecución.");
             e.printStackTrace();
             return null;
         }
@@ -129,15 +134,23 @@ public class LoginController {
                 Scenes escena = new Scenes();
                 escena.goPanelControl(event);
             } else if (status == 401) {
+                Alertas.error( "Error de inicio de sesión", "ID o contraseña incorrectos",
+                        "Por favor, verifique su ID y contraseña e intente nuevamente.");
                 System.out.println("ID o contraseña incorrectos");
                 // Acá podrías mostrar una alerta
             } else {
+                Alertas.error( "Error de conexión", "No se pudo conectar al servidor",
+                        "Por favor, intente más tarde.");
                 System.out.println("Error al conectar con el servidor. Código: " + status);
             }
 
         } catch (NumberFormatException e) {
+            Alertas.error( "Error de formato", "ID inválido",
+                    "Por favor, introduzca un ID numérico válido.");
             System.out.println("ID inválido: " + e.getMessage());
         } catch (Exception e) {
+            Alertas.error("Fallo de conexión", "No se pudo establecer comunicación con el servidor",
+                    "Verifique que el backend esté en ejecución.");
             e.printStackTrace();
         }
     }

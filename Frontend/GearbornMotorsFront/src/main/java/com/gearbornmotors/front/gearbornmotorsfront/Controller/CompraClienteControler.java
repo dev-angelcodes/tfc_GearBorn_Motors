@@ -1,5 +1,6 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Alerts.Alertas;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.ClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Cliente.IdClienteDto;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoDto;
@@ -102,11 +103,20 @@ public class CompraClienteControler {
     public void realizarCompra(ActionEvent event) {
         System.out.println(cliente.toString());
         System.out.println(vehiculo.toString());
-        System.out.println(comercialSeleccionado.toString());
+
+        if (comercialSeleccionado == null) {
+            Alertas.info("Comercial no seleccionado", "Falta de selección",
+                    "Debes seleccionar un comercial antes de continuar con la compra.");
+            System.out.println("⚠ No se ha seleccionado un comercial.");
+            return;
+        }
+
+        System.out.println("Comercial seleccionado: " + comercialSeleccionado.toString());
 
         String jsonVenta = crearJsonVenta();
         enviarVenta(jsonVenta);
     }
+
 
     private void enviarVenta(String json) {
         try {
