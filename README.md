@@ -2,75 +2,111 @@
 
 **Gearborn Motors** es un sistema de gestión para una concesionaria de vehículos. Este proyecto forma parte de un **Trabajo de Fin de Ciclo (TFC)** y permite el registro, visualización, compra y venta de vehículos desde una interfaz gráfica de escritorio.
 
-> ⚠️ **Estado del proyecto:** En desarrollo activo.  
-> Se siguen incorporando funcionalidades, validaciones y mejoras visuales.
+> ✅ **Estado del proyecto:** Funcional y en ejecución.  
+> 🔄 **Actualizaciones previstas:** Se añadirán nuevas funcionalidades descritas en la memoria del proyecto.
+
+---
+
+## 📂 Estructura del proyecto
+
+⚙️ **El sistema está dividido en dos módulos independientes:**
+
+- **🔙 Backend**: API REST desarrollada con Spring Boot y MySQL  
+- **💻 Frontend**: Aplicación de escritorio desarrollada con JavaFX
 
 ---
 
 ## 🧱 Tecnologías utilizadas
 
-### 🔙 Backend
+### Backend
 - Java 21
 - Spring Boot
 - Spring Data JPA (Hibernate)
 - MySQL
 - Maven
 
-### 💻 Frontend
+### Frontend
 - JavaFX (Interfaz de escritorio)
 - FXML
 - Gson (JSON)
 
-### 🧪 Complementarias
+### Complementarias
 - Lombok
 - Control de versiones: Git
 - Arquitectura: MVC + REST
 
 ---
 
-## ✨ Funcionalidades implementadas
+## ✨ Funcionalidades actuales
 
 ### 👤 Gestión de usuarios
-- Registro de nuevos clientes con validación de campos
-- Inicio de sesión con contraseña hasheada (MD5)
-- Gestión de roles diferenciados: clientes y empleados acceden a paneles distintos
+- Registro de clientes con validación de campos obligatorios
+- Inicio de sesión con contraseña cifrada (MD5)
+- Roles diferenciados: cliente y empleado con interfaces personalizadas
 
 ### 🚗 Gestión de vehículos
-- Consulta y listado de vehículos disponibles
-- Visualización en formato de tarjetas con imágenes y descripciones
-- Acceso a detalles ampliados del vehículo
-- Validación: vehículos ya vendidos no pueden ser comprados nuevamente
+- Visualización del catálogo de vehículos en tarjetas con imágenes
+- Detalles ampliados por vehículo
+- Validación para evitar la compra de vehículos ya vendidos
 
-### 💳 Ventas y compras
-- Realización de ventas desde el panel de empleados
-- Realización de compras desde el panel de clientes (flujo automatizado)
-- Panel de empleados con acceso a:
-  - Todas las ventas realizadas
-  - Todas las compras efectuadas por la empresa
+### 💳 Procesos de compra y venta
+- Compras automáticas desde el panel del cliente
+- Ventas gestionadas por empleados
+- Visualización de todas las ventas y compras desde el panel de empleados
 
 ### 💼 Administración
-- Registro de gastos asociados a vehículos (por ejemplo: reparaciones, pintura, etc.)
+- Registro de gastos empresariales por vehículo (reparaciones, mantenimiento, etc.)
 - Consulta del historial de gastos de la empresa
 
 ### 🧭 Navegación y estructura
-- Navegación fluida entre vistas: login, registro, catálogo, detalles, administración
-- Separación clara por capas: DTO ↔ Mapper ↔ Entity ↔ Repositorio
-- Comunicación entre frontend y backend mediante solicitudes HTTP (REST)
+- Interfaz fluida con navegación entre vistas: login, registro, catálogo, detalle, administración
+- Arquitectura por capas: DTO ↔ Mapper ↔ Entity ↔ Repository
+- Comunicación entre cliente y servidor vía HTTP REST
 
 ---
 
-## 🔮 Funcionalidades futuras
+## 🚀 Funcionalidades futuras (descritas en la memoria)
 
-### Para empleados
-- Aprobación de solicitudes de **venta de vehículos enviadas por clientes**
-- Aprobación de solicitudes de **compra de vehículos realizadas por clientes**
-- Registro manual de nuevos **gastos empresariales** asociados a vehículos
-- Consulta del historial de:
-  - Ventas de la empresa
-  - Gastos generales
-  - Gastos específicos por vehículo
-- Suspensión permanente de un cliente o empleado desde el panel administrativo
+Las siguientes mejoras se implementarán en futuras versiones del sistema:
 
-### Para clientes
-- Consulta de historial de compras personales (por implementar mediante consulta por ID de cliente)
-- Solicitud de venta de su propio vehículo (requiere aprobación del empleado)
+1. **🛡 Verificación de compras por empleados**  
+   Las solicitudes de compra pasarán por una validación manual en el panel del empleado antes de ser confirmadas. Se notificará por correo electrónico al cliente una vez validada.
+
+2. **📧 Integración de servicios de correo electrónico**  
+   El sistema enviará correos automáticos para:
+   - Confirmación de registro
+   - Cambios de contraseña
+   - Promociones o novedades
+   - Validación de compras y ventas  
+   También incluirá verificación de email durante el registro.
+
+3. **👤 Panel de usuario para gestión personal**  
+   Clientes y empleados podrán:
+   - Editar sus datos personales
+   - Cambiar su contraseña
+   - Subir foto de perfil
+   - Consultar historial de compras o acciones
+
+4. **📁 Módulo de gestión documental**  
+   Permite subir y asociar documentos como:
+   - Contratos de venta
+   - Documentos de identidad
+   - Fichas técnicas de vehículos
+   - Facturas y comprobantes
+
+5. **📊 Panel de estadísticas e informes**  
+   Vista para administración con gráficas e indicadores:
+   - Ventas por períodos
+   - Gasto total acumulado
+   - Vehículos más vendidos
+   - Rendimiento por empleado
+
+6. **🌐 Versión web y despliegue en la nube**  
+   Futuro desarrollo de una versión web (React/Angular) y despliegue del sistema como servicio en la nube (AWS, Azure, etc.), permitiendo acceso desde navegador y escalabilidad completa.
+
+---
+
+## 📌 Notas finales
+
+Este sistema está en funcionamiento y cumple con los objetivos del TFC.  
+Las funcionalidades futuras detalladas en la memoria serán añadidas progresivamente para ampliar las capacidades del sistema y profesionalizar su despliegue.
