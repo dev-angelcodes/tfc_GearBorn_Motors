@@ -106,6 +106,14 @@ Las siguientes mejoras se implementarán en futuras versiones del sistema:
 
 ---
 
+## 🗃️ Base de datos
+
+📎 **El archivo `.sql` necesario para crear la base de datos con todos los datos de ejemplo se encuentra en la carpeta de la memoria del proyecto.**
+
+Este archivo permite importar toda la estructura y contenido de las tablas en cualquier instalación de MySQL compatible.
+
+---
+
 ## 📌 Notas finales
 
 Este sistema está en funcionamiento y cumple con los objetivos del TFC.  
