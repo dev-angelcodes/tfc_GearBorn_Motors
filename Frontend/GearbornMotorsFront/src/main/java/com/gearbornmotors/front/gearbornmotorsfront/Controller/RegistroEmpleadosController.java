@@ -1,13 +1,11 @@
 package com.gearbornmotors.front.gearbornmotorsfront.Controller;
 
+import com.gearbornmotors.front.gearbornmotorsfront.Alerts.Alertas;
 import com.gearbornmotors.front.gearbornmotorsfront.Dto.Empleado.EmpleadoRegisterRequestDto;
 import com.google.gson.Gson;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -64,14 +62,18 @@ public class RegistroEmpleadosController {
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 if (response.statusCode() == 201) {
-                    System.out.println("Empleado registrado correctamente.");
+                    Alertas.info( "Registro Exitoso", "Empleado Registrado",
+                            "El empleado ha sido registrado correctamente.");
                 } else {
-                    System.out.println("Error al registrar empleado: " + response.body());
+                    Alertas.error( "Error de Registro", "Error al registrar empleado",
+                            "No se pudo registrar el empleado. Código de error: " + response.statusCode());
+                    System.out.println(response.body());
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("No se pudo conectar con el servidor.");
+                Alertas.error( "Error de Conexión", "Error al conectar con el servidor",
+                        "No se pudo conectar con el servidor. Por favor, inténtelo más tarde.");
             }
         }
     }
@@ -110,11 +112,13 @@ public class RegistroEmpleadosController {
             if(numeroTelefono.getText().length() == 9){
                 return true;
             } else {
-                System.out.println("El número de teléfono debe tener 9 dígitos.");
+                Alertas.info( "Número de Teléfono Inválido", "Formato de Teléfono Incorrecto",
+                        "El número de teléfono debe tener 9 dígitos.");
                 return false;
             }
         }catch (NumberFormatException e){
-            System.out.println("El número de teléfono no es válido.");
+            Alertas.info( "Número de Teléfono Inválido", "Formato de Teléfono Incorrecto",
+                    "El número de teléfono debe ser un número válido de 9 dígitos.");
             return false;
         }
     }
@@ -123,7 +127,8 @@ public class RegistroEmpleadosController {
         if(fecha.matches("\\d{4}-\\d{2}-\\d{2}")){
             return true;
         } else {
-            System.out.println("La fecha de nacimiento no es válida.");
+            Alertas.info( "Fecha Inválida", "Formato de Fecha Incorrecto",
+                    "La fecha debe estar en el formato YYYY-MM-DD.");
             return false;
         }
     }
@@ -132,7 +137,8 @@ public class RegistroEmpleadosController {
         if (nombreApellidos.length() >= 3 && nombreApellidos.matches("[a-zA-Z ]+")) {
             return true;
         } else {
-            System.out.println("El nombre debe tener al menos 3 caracteres y solo letras y espacios.");
+            Alertas.info( "Nombre Inválido", "Formato de Nombre Incorrecto",
+                    "El nombre Y los apellidos deben tener al menos 3 caracteres y solo contener letras y espacios.");
             return false;
         }
     }
@@ -142,7 +148,8 @@ public class RegistroEmpleadosController {
         if(email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")){
             return true;
         } else {
-            System.out.println("El email no es válido.");
+            Alertas.info( "El correo es inválido", "Formato del correo incorrecto",
+                    "");
             return false;
         }
     }
@@ -152,7 +159,8 @@ public class RegistroEmpleadosController {
         if(dniText.length() == 9 && dniText.matches("[0-9]{8}[A-Z]")){
             return true;
         } else {
-            System.out.println("El DNI debe tener 8 dígitos y una letra al final.");
+            Alertas.info( "El DNI es inválido", "Formato del DNI incorrecto",
+                    "El DNI debe tener 8 dígitos seguidos de una letra mayúscula al final.");
             return false;
         }
     }
@@ -162,7 +170,8 @@ public class RegistroEmpleadosController {
         if(contrasena.length() >= 8 && contrasena.matches(".*[A-Z].*") && contrasena.matches(".*[0-9].*")){
             return true;
         } else {
-            System.out.println("La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un número.");
+            Alertas.info( "Contraseña Inválida", "Formato de Contraseña Incorrecto",
+                    "La contraseña debe tener al menos 8 caracteres, una letra mayúscula y un número.");
             return false;
         }
     }
@@ -172,9 +181,10 @@ public class RegistroEmpleadosController {
         if(tipo.equals("Administrador") || tipo.equals("Comercial de ventas")){
             return true;
         } else {
+            Alertas.info( "Tipo de Empleado Inválido", "Selección de Tipo Incorrecta",
+                    "Por favor, selecciona 'Administrador' o 'Comercial de ventas'.");
             System.out.println("Por favor, selecciona un tipo de empleado válido.");
             return false;
         }
     }
-
 }
